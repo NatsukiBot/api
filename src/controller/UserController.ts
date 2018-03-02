@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
-import { User } from '@natsuki/db'
+import { User, UserLevel } from '@natsuki/db'
 
 export class UserController {
   // private userRepository = getRepository(User)
@@ -21,4 +21,7 @@ export class UserController {
     await User.removeById(request.params.id)
   }
 
+  async updateLevel (request: Request, response: Response, next: NextFunction) {
+    await UserLevel.updateById(request.params.id, request.body)
+  }
 }
