@@ -10,7 +10,7 @@
    "synchronize": true,
    "logging": false,
    "entities": [
-      "src/entity/**/*.ts"
+    "./node_modules/@natsuki/db/src/entity/**/*.ts"
    ],
    "migrations": [
       "src/migration/**/*.ts"

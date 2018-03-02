@@ -5,7 +5,6 @@ import { Request, Response, Application, NextFunction } from 'express'
 // tslint:disable-next-line:no-duplicate-imports
 import * as express from 'express'
 import { Routes } from './routes'
-import { User } from './entity/User'
 import * as path from 'path'
 import * as morgan from 'morgan'
 import { Logger } from './services'

@@ -1,25 +1,24 @@
 import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
-import { User } from '../entity/User'
+import { User } from '@natsuki/db'
 
 export class UserController {
-
-  private userRepository = getRepository(User)
+  // private userRepository = getRepository(User)
 
   async all (request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.find()
+    return User.find()
   }
 
   async one (request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.findOneById(request.params.id)
+    return User.findOneById(request.params.id)
   }
 
   async save (request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.save(request.body)
+    return User.save(request.body)
   }
 
   async remove (request: Request, response: Response, next: NextFunction) {
-    await this.userRepository.removeById(request.params.id)
+    await User.removeById(request.params.id)
   }
 
 }

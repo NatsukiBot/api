@@ -23,6 +23,7 @@
       "typescript": "2.5.2"
    },
    "dependencies": {
+      "@natsuki/db": "file:../db",
       "body-parser": "^1.18.1",
       "compression": "^1.7.2",
       "cors": "^2.8.4",
