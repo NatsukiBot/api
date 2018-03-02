@@ -1,0 +1,48 @@
+{
+   "name": "@natsuki/api",
+   "version": "0.0.1",
+   "description": "API for Natsuki Discord bot.",
+   "devDependencies": {
+      "@types/compression": "0.0.35",
+      "@types/cors": "^2.8.3",
+      "@types/errorhandler": "0.0.32",
+      "@types/express": "^4.11.1",
+      "@types/helmet": "0.0.37",
+      "@types/method-override": "0.0.31",
+      "@types/mocha": "^2.2.48",
+      "@types/morgan": "^1.7.35",
+      "@types/node": "^8.9.4",
+      "@types/winston": "^2.3.8",
+      "esdoc": "^1.0.4",
+      "esdoc-standard-plugin": "^1.0.0",
+      "standard": "^11.0.0",
+      "ts-node": "3.3.0",
+      "tslint": "^5.9.1",
+      "tslint-config-standard": "^7.0.0",
+      "typedoc": "^0.10.0",
+      "typescript": "2.5.2"
+   },
+   "dependencies": {
+      "body-parser": "^1.18.1",
+      "compression": "^1.7.2",
+      "cors": "^2.8.4",
+      "errorhandler": "^1.5.0",
+      "express": "^4.15.4",
+      "express-status-monitor": "^1.0.1",
+      "helmet": "^3.11.0",
+      "method-override": "^2.3.10",
+      "morgan": "^1.9.0",
+      "nodemon": "^1.17.1",
+      "pg": "^7.4.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.1.14",
+      "winston": "^2.4.0",
+      "winston-daily-rotate-file": "^1.7.2"
+   },
+   "scripts": {
+      "start": "npm run dev",
+      "dev": "nodemon --inspect --exec ts-node src/index.ts",
+      "prod": "cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
+      "clean": "npm cache clear && rimraf -- dist"
+   }
+}
