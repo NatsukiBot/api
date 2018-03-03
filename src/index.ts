@@ -5,7 +5,7 @@ const debug = require('debug')('express:server')
 
 export const server = Api.start().app
 const port = process.env.PORT || config.port
-server.listen(port, (err) => {
+server.listen(port, (err: Error) => {
   if (err) {
     throw err
   }
