@@ -32,7 +32,6 @@ export class Api {
   constructor () {
     this.app = express()
     this.routes()
-    this.config()
   }
 
   /**
@@ -44,15 +43,6 @@ export class Api {
    */
   static start (): Api {
     return new Api()
-  }
-
-  public config () {
-    this.app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-      err.status = 404
-      next(err)
-    })
-
-    this.app.use(errorHandler())
   }
 
   private routes () {
