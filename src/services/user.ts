@@ -16,8 +16,7 @@ export class UserService {
   }
 
   public create (user: User) {
-    const newUser = this.userRepository.create(user)
-    return this.userRepository.save(newUser)
+    return this.userRepository.save(user)
   }
 
   public update (id: string, user: User) {
