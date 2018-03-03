@@ -27,15 +27,15 @@ export class UserService {
     return this.userRepository.deleteById(id)
   }
 
-  public updateLevel (id: string, userLevel: UserLevel) {
-    return this.userRepository.findOneById(id).then(user => {
-      if (!user) {
-        return
-      }
+  public async updateLevel (id: string, userLevel: UserLevel) {
+    const user = await this.userRepository.findOneById(id)
 
-      user.level = userLevel
+    if (!user) {
+      return
+    }
 
-      this.userRepository.save(user)
-    })
+    user.level = userLevel
+
+    this.userRepository.save(user)
   }
 }
