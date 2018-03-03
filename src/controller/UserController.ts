@@ -14,7 +14,10 @@ export class UserController {
   }
 
   async save (request: Request, response: Response, next: NextFunction) {
-    return User.save(request.body)
+    const newUser = User.create(request.body)
+    await User.save(newUser)
+
+    response.send(newUser)
   }
 
   async remove (request: Request, response: Response, next: NextFunction) {
