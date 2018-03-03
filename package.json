@@ -42,8 +42,8 @@
    },
    "scripts": {
       "start": "npm run dev",
-      "dev": "nodemon --inspect --exec ts-node src/index.ts",
-      "prod": "cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
+      "dev": "nodemon --inspect --exec src/index.js",
+      "prod": "cross-env NODE_ENV=production nodemon --exec dist/index.js",
       "clean": "npm cache clear && rimraf -- dist"
    }
 }
