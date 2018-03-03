@@ -18,7 +18,7 @@ export class UserController {
     return this.userService.getUser(request.params.id)
   }
 
-  @httpPost('/:id')
+  @httpPost('/')
   async save (request: Request) {
     return this.userService.create(request.body)
   }
