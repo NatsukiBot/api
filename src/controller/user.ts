@@ -1,12 +1,9 @@
-import { getRepository } from 'typeorm'
-import { NextFunction, Request, Response } from 'express'
-import { User, UserLevel } from '@natsuki/db'
+import { Request } from 'express'
 import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
-import { injectable, inject } from 'inversify'
+import { inject } from 'inversify'
 import { TYPES } from '../constants'
 import { UserService } from '../services/user'
 
-@injectable()
 @controller('/api/users')
 export class UserController {
   constructor (@inject(TYPES.UserService) private userService: UserService) {}

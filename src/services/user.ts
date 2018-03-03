@@ -1,8 +1,9 @@
-import { injectable } from 'inversify'
 import { User, UserLevel } from '@natsuki/db'
 import { getRepository } from 'typeorm'
+import { provide } from '../ioc/ioc'
+import { TYPES } from '../constants'
 
-@injectable()
+@provide(TYPES.UserService)
 export class UserService {
   private userRepository = getRepository(User)
 

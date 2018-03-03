@@ -2,13 +2,12 @@ import { createConnection } from 'typeorm'
 import * as express from 'express'
 import * as path from 'path'
 import { Logger } from './utility'
-import { interfaces, InversifyExpressServer, TYPE } from 'inversify-express-utils'
-import { Container } from 'inversify'
-import { UserController } from './controller/user'
-import { TAGS, TYPES } from './constants'
-import { UserService } from './services/user'
+import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 import { config } from './config'
+import * as helmet from 'helmet'
+import { container } from './ioc/ioc'
+import './ioc/loader'
 
 /**
  * The API server
@@ -43,19 +42,16 @@ export class Api {
   }
 
   private startServer () {
-    const container = new Container()
-
-    container.bind<interfaces.Controller>(TYPE.Controller).to(UserController).whenTargetNamed(TAGS.UserController)
-    container.bind<UserService>(TYPES.UserService).to(UserService)
-
     const server = new InversifyExpressServer(container)
+
     server.setConfig((app) => {
       app.use(bodyParser.urlencoded({
         extended: true
       }))
       app.use(bodyParser.json())
+      app.use(helmet())
 
-      app.use(express.static(path.join(__dirname, '../../client')))
+      app.use(express.static(path.join(__dirname, '../public')))
     })
 
     const app = server.build()

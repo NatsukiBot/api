@@ -8,6 +8,9 @@
          "es7",
          "dom"
       ],
+      "types": [
+        "reflect-metadata"
+      ],
     "outDir": "dist",
     "rootDir": "src",
     "alwaysStrict": true,
