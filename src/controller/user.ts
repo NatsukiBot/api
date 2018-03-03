@@ -35,6 +35,6 @@ export class UserController {
 
   @httpPut('/:id/level')
   async updateLevel (request: Request) {
-    await this.userService.updateLevel(request.params.id, request.body)
+    return this.userService.updateLevel(request.params.id, request.body)
   }
 }

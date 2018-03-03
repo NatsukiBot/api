@@ -36,6 +36,6 @@ export class UserService {
 
     user.level = userLevel
 
-    this.userRepository.save(user)
+    return this.userRepository.save(user)
   }
 }
