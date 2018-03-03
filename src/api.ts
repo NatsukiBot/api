@@ -1,19 +1,14 @@
-import 'reflect-metadata'
-import { createConnection, Connection } from 'typeorm'
-import * as bodyParser from 'body-parser'
-import { Request, Response, Application, NextFunction } from 'express'
-// tslint:disable-next-line:no-duplicate-imports
+import { createConnection } from 'typeorm'
 import * as express from 'express'
-import { Routes } from './routes'
 import * as path from 'path'
-import * as morgan from 'morgan'
-import { Logger } from './services'
-import * as compression from 'compression'
-import * as helmet from 'helmet'
-import * as cors from 'cors'
-import * as methodOverride from 'method-override'
-import * as errorHandler from 'errorhandler'
-import * as expressStatusMonitor from 'express-status-monitor'
+import { Logger } from './utility'
+import { interfaces, InversifyExpressServer, TYPE } from 'inversify-express-utils'
+import { Container } from 'inversify'
+import { UserController } from './controller/user'
+import { TAGS, TYPES } from './constants'
+import { UserService } from './services/user'
+import * as bodyParser from 'body-parser'
+import { config } from './config'
 
 /**
  * The API server
@@ -22,16 +17,12 @@ import * as expressStatusMonitor from 'express-status-monitor'
  * @class Api
  */
 export class Api {
-  app: Application
-  connection: Connection
-
   /**
    * Creates an instance of the Api.
    * @memberof Api
    */
   constructor () {
-    this.app = express()
-    this.routes()
+    this.init()
   }
 
   /**
@@ -45,20 +36,32 @@ export class Api {
     return new Api()
   }
 
-  private routes () {
-    createConnection().then(async connection => {
-      // register express routes from defined application routes
-      Routes.forEach(route => {
-        (this.app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-          const result = (new (route.controller as any)())[route.action](req, res, next)
-          if (result instanceof Promise) {
-            result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
-
-          } else if (result !== null && result !== undefined) {
-            res.json(result)
-          }
-        })
-      })
+  private init () {
+    createConnection().then(async () => {
+      this.startServer()
     }).catch((err) => Logger.error(err))
+  }
+
+  private startServer () {
+    const container = new Container()
+
+    container.bind<interfaces.Controller>(TYPE.Controller).to(UserController).whenTargetNamed(TAGS.UserController)
+    container.bind<UserService>(TYPES.UserService).to(UserService)
+
+    const server = new InversifyExpressServer(container)
+    server.setConfig((app) => {
+      app.use(bodyParser.urlencoded({
+        extended: true
+      }))
+      app.use(bodyParser.json())
+
+      app.use(express.static(path.join(__dirname, '../../client')))
+    })
+
+    const app = server.build()
+    const port = process.env.PORT || config.port
+    app.listen(port)
+
+    console.log(`Express server listening on port ${port}`)
   }
 }

@@ -5,7 +5,8 @@
     "lib": [
          "es5",
          "es6",
-         "es7"
+         "es7",
+         "dom"
       ],
     "outDir": "dist",
     "rootDir": "src",
