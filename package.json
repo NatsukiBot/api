@@ -23,7 +23,7 @@
       "typescript": "^2.7.2"
    },
    "dependencies": {
-      "@natsuki/db": "file:../db",
+      "@natsuki/db": "github:NatsukiBot/db",
       "body-parser": "^1.18.1",
       "compression": "^1.7.2",
       "cors": "^2.8.4",
@@ -42,8 +42,8 @@
    },
    "scripts": {
       "start": "npm run dev",
-      "dev": "tsc && nodemon --inspect --exec ts-node src/index.ts",
-      "prod": "tsc && cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
+      "dev": "tsc && nodemon --inspect --exec node dist/index.js",
+      "prod": "tsc && cross-env NODE_ENV=production nodemon --exec node dist/index.js",
       "clean": "npm cache clear && rimraf -- dist"
    }
 }
