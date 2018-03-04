@@ -31,10 +31,12 @@ export class UserService {
   public async updateLevel (id: string, userLevel: UserLevel) {
     const { xp, level } = userLevel
 
-    return getConnection()
+    const result = await getConnection()
       .createQueryBuilder()
       .relation(User, 'level')
       .of(id)
-      .set({ level: { xp: userLevel.xp, level: userLevel.level } })
+      .set({ xp: userLevel.xp, level: userLevel.level })
+
+    return result
   }
 }
