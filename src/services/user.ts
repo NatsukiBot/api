@@ -2,6 +2,7 @@ import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { TYPES } from '../constants'
+import { Logger } from '../utility';
 
 @provide(TYPES.UserService)
 export class UserService {
@@ -30,6 +31,9 @@ export class UserService {
 
   public async updateLevel (id: string, userLevel: UserLevel) {
     // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades
+
+    Logger.info(userLevel.xp.toString())
+    Logger.info(userLevel.level.toString())
 
     const user = await this.userRepository.findOneById(id)
 
