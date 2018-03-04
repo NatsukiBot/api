@@ -32,7 +32,8 @@ export class UserService {
   public async updateLevel (id: string, userLevel: UserLevel) {
     // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades. This is slow as-is.
 
-    const user = await this.userRepository.createQueryBuilder()
+    const user = await this.userRepository
+      .createQueryBuilder('user')
       .leftJoinAndSelect('user.level', 'level')
       .where('user.id = :id', { id })
       .getOne()
