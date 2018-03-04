@@ -6,6 +6,7 @@ import { TYPES } from '../constants'
 @provide(TYPES.UserService)
 export class UserService {
   private userRepository = getRepository(User)
+  private userLevelRepository = getRepository(UserLevel)
 
   public getUsers () {
     return this.userRepository.find()
@@ -28,16 +29,6 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    const { xp, level } = userLevel
-    const user = await this.userRepository.findOneById(id)
-
-    if (!user) {
-      return
-    }
-
-    user.level.xp = xp
-    user.level.level = level
-
-    return this.userRepository.save(user)
+    return this.userLevelRepository.updateById(id, userLevel)
   }
 }
