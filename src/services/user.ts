@@ -35,6 +35,6 @@ export class UserService {
       .createQueryBuilder()
       .relation(User, 'level')
       .of({ userId: id })
-      .set({ xp: userLevel.xp, level: userLevel.level })
+      .set({ level: { xp: userLevel.xp, level: userLevel.level } })
   }
 }
