@@ -1,5 +1,5 @@
 import { User, UserLevel } from '@natsuki/db'
-import { getRepository } from 'typeorm'
+import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { TYPES } from '../constants'
 
@@ -29,11 +29,11 @@ export class UserService {
 
   public async updateLevel (id: string, userLevel: UserLevel) {
     const { xp, level } = userLevel
-    return this.userRepository.updateById(id, {
-      level: {
-        xp,
-        level
-      }
-    })
+    return getConnection()
+    .createQueryBuilder()
+    .update(UserLevel)
+    .set({ xp, level })
+    .where('userId = :userId', { userId: id })
+    .execute()
   }
 }
