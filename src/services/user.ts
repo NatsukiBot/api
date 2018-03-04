@@ -34,7 +34,7 @@ export class UserService {
     return getConnection()
       .createQueryBuilder()
       .relation(User, 'level')
-      .of({ userId: id })
+      .of(id)
       .set({ level: { xp: userLevel.xp, level: userLevel.level } })
   }
 }
