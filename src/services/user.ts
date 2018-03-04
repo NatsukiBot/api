@@ -16,7 +16,7 @@ export class UserService {
   public async getUser (id: string) {
     return this.userRepository
       .createQueryBuilder('user')
-      .innerJoinAndSelect('photo.level', 'level')
+      .innerJoinAndSelect('user.level', 'level')
       .getOne()
   }
 
