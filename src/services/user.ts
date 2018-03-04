@@ -29,11 +29,15 @@ export class UserService {
 
   public async updateLevel (id: string, userLevel: UserLevel) {
     const { xp, level } = userLevel
-    return getConnection()
-    .createQueryBuilder()
-    .update(UserLevel)
-    .set({ xp, level })
-    .where('userId = :userId', { userId: id })
-    .execute()
+    const user = await this.userRepository.findOneById(id)
+
+    if (!user) {
+      return
+    }
+
+    user.level.xp = xp
+    user.level.level = level
+
+    return this.userRepository.save(user)
   }
 }
