@@ -2,7 +2,7 @@ import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { TYPES } from '../constants'
-import { Logger } from '../utility';
+import { Logger } from '../utility'
 
 @provide(TYPES.UserService)
 export class UserService {
@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public create (user: User) {
-    this.userRepository.save(user)
+    return this.userRepository.save(user)
   }
 
   public update (id: string, user: User) {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades
+    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades. This is slow as-is.
 
     Logger.info(userLevel.xp.toString())
     Logger.info(userLevel.level.toString())
@@ -38,9 +38,20 @@ export class UserService {
     const user = await this.userRepository.findOneById(id)
 
     if (!user) {
+      Logger.info('User not found')
       return
     }
 
-    return this.userLevelRepository.update({ user }, { xp: userLevel.xp, level: userLevel.level })
+    const foundUserLevel = await this.userLevelRepository.findOne({ where: { user } })
+
+    if (!foundUserLevel) {
+      Logger.info('UserLevel not found')
+      return
+    }
+
+    foundUserLevel.xp = userLevel.xp
+    foundUserLevel.level = userLevel.xp
+
+    return this.userLevelRepository.save(foundUserLevel)
   }
 }
