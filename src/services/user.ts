@@ -42,6 +42,12 @@ export class UserService {
       return
     }
 
-    return this.userLevelRepository.updateById(user.level.id, { xp: userLevel.xp, level: userLevel.level })
+    const level = user.level
+    level.xp = userLevel.xp
+    level.level = userLevel.level
+
+    Logger.info(level.id.toString())
+
+    return this.userLevelRepository.save(level)
   }
 }
