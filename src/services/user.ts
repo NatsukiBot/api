@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public create (user: User) {
-    return this.userRepository.save(user)
+    this.userRepository.save(user)
   }
 
   public update (id: string, user: User) {
@@ -29,14 +29,15 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    const { xp, level } = userLevel
+    const foundUserLevel = await this.userLevelRepository.findOne({ where: { userId: id } })
 
-    const result = await getConnection()
-      .createQueryBuilder()
-      .relation(User, 'level')
-      .of(id)
-      .set({ xp: userLevel.xp, level: userLevel.level })
+    if (!foundUserLevel) {
+      return
+    }
 
-    return result
+    foundUserLevel.level = userLevel.level
+    foundUserLevel.xp = userLevel.xp
+
+    return this.userLevelRepository.save(foundUserLevel)
   }
 }
