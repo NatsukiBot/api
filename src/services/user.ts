@@ -42,9 +42,6 @@ export class UserService {
       return
     }
 
-    user.level.xp = userLevel.xp
-    user.level.level = userLevel.level
-
-    return this.userLevelRepository.save(user.level)
+    return this.userLevelRepository.updateById(user.level.id, { xp: userLevel.xp, level: userLevel.level })
   }
 }
