@@ -13,8 +13,11 @@ export class UserService {
     return this.userRepository.find()
   }
 
-  public getUser (id: string) {
-    return this.userRepository.findOneById(id)
+  public async getUser (id: string) {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .innerJoinAndSelect('photo.level', 'level')
+      .getOne()
   }
 
   public create (user: User) {
@@ -47,6 +50,6 @@ export class UserService {
     level.xp = userLevel.xp
     level.level = userLevel.level
 
-    this.userLevelRepository.save(level)
+    return this.userLevelRepository.save(level)
   }
 }
