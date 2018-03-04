@@ -29,15 +29,14 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    const foundUserLevel = await this.userLevelRepository.findOne({ where: { userId: id } })
+    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades
 
-    if (!foundUserLevel) {
+    const user = await this.userRepository.findOneById(id)
+
+    if (!user) {
       return
     }
 
-    foundUserLevel.level = userLevel.level
-    foundUserLevel.xp = userLevel.xp
-
-    return this.userLevelRepository.save(foundUserLevel)
+    return this.userLevelRepository.update({ user }, { xp: userLevel.xp, level: userLevel.level })
   }
 }
