@@ -28,6 +28,12 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    return this.userRepository.updateById(id, { level: userLevel })
+    const { xp, level } = userLevel
+    return this.userRepository.updateById(id, {
+      level: {
+        xp,
+        level
+      }
+    })
   }
 }
