@@ -33,8 +33,8 @@ export class UserService {
 
     return getConnection()
       .createQueryBuilder()
-      .update(UserLevel)
-      .set({ xp, level })
-      .where('userId = :id', { id })
+      .relation(User, 'level')
+      .of({ userId: id })
+      .set({ xp: userLevel.xp, level: userLevel.level })
   }
 }
