@@ -42,16 +42,9 @@ export class UserService {
       return
     }
 
-    const foundUserLevel = await this.userLevelRepository.findOne({ where: { user } })
+    user.level.xp = userLevel.xp
+    user.level.level = userLevel.level
 
-    if (!foundUserLevel) {
-      Logger.info('UserLevel not found')
-      return
-    }
-
-    foundUserLevel.xp = userLevel.xp
-    foundUserLevel.level = userLevel.xp
-
-    return this.userLevelRepository.save(foundUserLevel)
+    return this.userLevelRepository.save(user.level)
   }
 }
