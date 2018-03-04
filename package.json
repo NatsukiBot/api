@@ -39,7 +39,7 @@
       "nodemon": "^1.17.1",
       "pg": "^7.4.1",
       "reflect-metadata": "^0.1.10",
-      "typeorm": "0.1.14",
+      "typeorm": "^0.2.0-alpha.25",
       "winston": "^2.4.0",
       "winston-daily-rotate-file": "^1.7.2"
    },
