@@ -6,8 +6,12 @@ import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 import { config } from './config'
 import * as helmet from 'helmet'
+import * as morgan from 'morgan'
 import { container } from './ioc/ioc'
 import * as cors from 'cors'
+import * as compression from 'compression'
+import * as expressStatusMonitor from 'express-status-monitor'
+import * as errorHandler from 'errorhandler'
 import './ioc/loader'
 
 /**
@@ -52,7 +56,22 @@ export class Api {
       app.use(bodyParser.json())
       app.use(helmet())
       app.use(cors())
+      app.use(compression())
+      app.use(expressStatusMonitor())
+      app.use(morgan('tiny', {
+        stream: {
+          write: message => Logger.info(message.trim())
+        }
+      }))
+
       app.use(express.static(path.join(__dirname, '../public')))
+
+      app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+        err.status = 404
+        next(err)
+      })
+
+      app.use(errorHandler())
     })
 
     const app = server.build()
