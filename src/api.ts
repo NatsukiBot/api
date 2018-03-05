@@ -12,7 +12,9 @@ import * as cors from 'cors'
 import * as compression from 'compression'
 import * as expressStatusMonitor from 'express-status-monitor'
 import * as errorHandler from 'errorhandler'
+import * as jwt from 'express-jwt'
 import './ioc/loader'
+const { secret } = require('./token.json')
 
 /**
  * The API server
@@ -50,6 +52,7 @@ export class Api {
     const server = new InversifyExpressServer(container)
 
     server.setConfig((app) => {
+      app.use(expressStatusMonitor())
       app.use(bodyParser.urlencoded({
         extended: true
       }))
@@ -57,10 +60,18 @@ export class Api {
       app.use(helmet())
       app.use(cors())
       app.use(compression())
-      app.use(expressStatusMonitor())
       app.use(morgan('tiny', {
         stream: {
           write: message => Logger.info(message.trim())
+        }
+      }))
+      app.use(jwt({
+        secret,
+        getToken: (req) => {
+          if (req.query && req.query.token) {
+            return req.query.token
+          }
+          return null
         }
       }))
 
