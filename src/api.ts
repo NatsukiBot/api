@@ -7,10 +7,8 @@ import * as bodyParser from 'body-parser'
 import { config } from './config'
 import * as helmet from 'helmet'
 import { container } from './ioc/ioc'
-import * as swaggerUi from 'swagger-ui-express'
 import * as cors from 'cors'
 import './ioc/loader'
-const swaggerDocument = require('../swagger.json')
 
 /**
  * The API server
@@ -54,7 +52,6 @@ export class Api {
       app.use(bodyParser.json())
       app.use(helmet())
       app.use(cors())
-      app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
       app.use(express.static(path.join(__dirname, '../public')))
     })
 
