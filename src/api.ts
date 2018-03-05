@@ -14,7 +14,7 @@ import * as expressStatusMonitor from 'express-status-monitor'
 import * as errorHandler from 'errorhandler'
 import * as jwt from 'express-jwt'
 import './ioc/loader'
-const { secret } = require('./token.json')
+const { secret } = require('../token.json')
 
 /**
  * The API server
