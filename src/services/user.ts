@@ -17,6 +17,7 @@ export class UserService {
     return this.userRepository
       .createQueryBuilder('user')
       .innerJoinAndSelect('user.level', 'level')
+      .where('user.id = :id', { id })
       .getOne()
   }
 
