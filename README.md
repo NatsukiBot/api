@@ -10,9 +10,9 @@
 
 ## Usage
 
-In the client application, any request to hit the database will need to include a `token` query string which includes the value of the `secret` you generated earlier.
-
-Example using `axios`:
+In the client application, any request to hit the database will need to include a JWT token generated using the `secret` you made.
+Then you can use it as a query string:
 ```ts
-axios.post(`${apiRoute}/users?token=${apiToken}`, user).catch(Logger.error)
+axios.get(`${apiRoute}/users?token=${apiToken}`)
 ```
+
