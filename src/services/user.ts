@@ -16,7 +16,7 @@ export class UserService {
   public async getUser (id: string) {
     return this.userRepository
       .createQueryBuilder('user')
-      .leftJoinAndSelect('user.level', 'level')
+      .innerJoinAndSelect('user.level', 'level')
       .where('user.id = :id', { id })
       .getOne()
   }
@@ -44,7 +44,7 @@ export class UserService {
 
     if (!user) {
       Logger.info('User not found')
-      return
+      return null
     }
 
     const level = user.level

@@ -10,7 +10,7 @@
 
 ## Usage
 
-In the client application, any request to hit the database will need to include a JWT token generated using the `secret` you made.
+In the client application, any request to hit the API will need to include a JWT token generated using the `secret` you made.
 Then you can use it as a query string:
 ```ts
 axios.get(`${apiRoute}/users?token=${apiToken}`)
