@@ -20,7 +20,6 @@ const { secret } = require('../token.json')
 /**
  * The API server
  *
- * @export
  * @class Api
  */
 export class Api {

@@ -4,6 +4,12 @@ import { provide } from '../ioc/ioc'
 import { TYPES } from '../constants'
 import { Logger } from '../utility'
 
+/**
+ * User service that handles storing and modifying user data.
+ *
+ * @export
+ * @class UserService
+ */
 @provide(TYPES.UserService)
 export class UserService {
   private userRepository = getRepository(User)
