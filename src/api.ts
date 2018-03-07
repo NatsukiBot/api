@@ -83,7 +83,7 @@ export class Api {
         }
       }))
 
-      app.use('/docs', express.static(path.join(__dirname, '../public')))
+      app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
         err.status = 404
