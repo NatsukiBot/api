@@ -56,7 +56,7 @@ export class Api {
       windowMs: 60 * 60 * 1000, // One hour
       max: 100,
       delayMs: 0,
-      skip: (request) => {
+      skip: (request, response) => {
         Logger.info(request.ip)
         return false
       }
