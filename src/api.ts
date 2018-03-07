@@ -53,12 +53,17 @@ export class Api {
     const server = new InversifyExpressServer(container)
 
     const limiter = new RateLimit({
-      windowMs: 15 * 60 * 1000,
+      windowMs: 60 * 60 * 1000, // One hour
       max: 100,
-      delayMs: 0
+      delayMs: 0,
+      skip: (request) => {
+        Logger.info(request.ip)
+        return false
+      }
     })
 
     server.setConfig((app) => {
+      app.enable('trust proxy')
       app.use(bodyParser.urlencoded({
         extended: true
       }))
