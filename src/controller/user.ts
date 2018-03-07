@@ -23,7 +23,7 @@ export class UserController {
    */
   @httpGet('/')
   async find (request: Request, response: Response) {
-    const users = await this.userService.getUsers()
+    return this.userService.getUsers()
   }
 
   /**
@@ -36,7 +36,7 @@ export class UserController {
    */
   @httpGet('/:id')
   async findById (request: Request, response: Response) {
-    const user = await this.userService.getUser(request.params.id)
+    return this.userService.getUser(request.params.id)
   }
 
   /**
