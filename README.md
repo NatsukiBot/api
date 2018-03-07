@@ -8,11 +8,16 @@ Generated documentation can be found here: https://natsuki.tk/api/docs/
 
 ## Data Policy
 
-All data stored by the API is publicly available and accesible under reasonable limit. 
+All data stored by the API is publicly available and accesible under reasonable limit.
+
 Any person has the ability to view the data, but can not modify, create, or delete data from the server.
+
 Data used from the API can be used to create websites, analytics, and metrics.
+
 The API itself complies with the Discord TOS; usage of the data must also comply. 
+
 Rate limits do apply. See **Security > Rate Limiting** for more information.
+
 
 If you access data from the production API, at https://natsuki.tk/api, you agree that:
  * Your usage of the data will be compliant with the [Discord Developer Terms of Service](https://discordapp.com/developers/docs/legal).
@@ -28,19 +33,27 @@ If you access data from the production API, at https://natsuki.tk/api, you agree
 ## Security
 
 This API does not store any personal information, but it is designed to be as secure as an API that does.
+
 To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.
+
 The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!
 
 ### JWT
 The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.
+
 HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.
+
 JWTs are generated using a secure `secret` which must only be available to the trusted client applications.
+
 This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: https://natsuki.tk/api/users
 
 ### Rate Limiting
 Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.
+
 To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.
+
 The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.
+
 The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API to cache the data on their end to reduce the number of requests made.
 
 ## Installation
@@ -48,11 +61,12 @@ The API will cache data, and only request new data at intervals. It is recommend
 1. Run `npm i`
 2. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
 3. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
-3. Run `npm start`
+4. Run `npm start`
 
 ## Usage
 
 In the client application, any request to hit the API will need to include a JWT token generated using the `secret` you made.
+
 There are two ways you can send the token to the API:
  * The token can be included in the request's query string:
 ```ts
@@ -65,7 +79,9 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
  ## Contribute
 
  Any developer is allowed to contribute. Fork the repo, make some changes (e.g. add features, fix bugs, etc.) and make a Pull Request to the **develop** branch.
- If approved, we will merge your changes, and you will be added as a contributor! We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.
+ If approved, we will merge your changes, and you will be added as a contributor! 
+ 
+ We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.
 
  ## Support
 

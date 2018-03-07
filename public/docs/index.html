@@ -69,11 +69,11 @@
 				<h2 id="documentation">Documentation</h2>
 				<p>Generated documentation can be found here: <a href="https://natsuki.tk/api/docs/">https://natsuki.tk/api/docs/</a></p>
 				<h2 id="data-policy">Data Policy</h2>
-				<p>All data stored by the API is publicly available and accesible under reasonable limit.
-					Any person has the ability to view the data, but can not modify, create, or delete data from the server.
-					Data used from the API can be used to create websites, analytics, and metrics.
-					The API itself complies with the Discord TOS; usage of the data must also comply.
-				Rate limits do apply. See <strong>Security &gt; Rate Limiting</strong> for more information.</p>
+				<p>All data stored by the API is publicly available and accesible under reasonable limit.</p>
+				<p>Any person has the ability to view the data, but can not modify, create, or delete data from the server.</p>
+				<p>Data used from the API can be used to create websites, analytics, and metrics.</p>
+				<p>The API itself complies with the Discord TOS; usage of the data must also comply. </p>
+				<p>Rate limits do apply. See <strong>Security &gt; Rate Limiting</strong> for more information.</p>
 				<p>If you access data from the production API, at <a href="https://natsuki.tk/api">https://natsuki.tk/api</a>, you agree that:</p>
 				<ul>
 					<li>Your usage of the data will be compliant with the <a href="https://discordapp.com/developers/docs/legal">Discord Developer Terms of Service</a>.</li>
@@ -91,19 +91,19 @@
 					</li>
 				</ul>
 				<h2 id="security">Security</h2>
-				<p>This API does not store any personal information, but it is designed to be as secure as an API that does.
-					To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.
-				The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!</p>
+				<p>This API does not store any personal information, but it is designed to be as secure as an API that does.</p>
+				<p>To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.</p>
+				<p>The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!</p>
 				<h3 id="jwt">JWT</h3>
-				<p>The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.
-					HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.
-					JWTs are generated using a secure <code>secret</code> which must only be available to the trusted client applications.
-				This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://natsuki.tk/api/users">https://natsuki.tk/api/users</a></p>
+				<p>The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.</p>
+				<p>HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.</p>
+				<p>JWTs are generated using a secure <code>secret</code> which must only be available to the trusted client applications.</p>
+				<p>This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://natsuki.tk/api/users">https://natsuki.tk/api/users</a></p>
 				<h3 id="rate-limiting">Rate Limiting</h3>
-				<p>Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.
-					To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.
-					The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.
-				The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API to cache the data on their end to reduce the number of requests made.</p>
+				<p>Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.</p>
+				<p>To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.</p>
+				<p>The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.</p>
+				<p>The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API to cache the data on their end to reduce the number of requests made.</p>
 				<h2 id="installation">Installation</h2>
 				<ol>
 					<li>Run <code>npm i</code></li>
@@ -112,8 +112,8 @@
 					<li>Run <code>npm start</code></li>
 				</ol>
 				<h2 id="usage">Usage</h2>
-				<p>In the client application, any request to hit the API will need to include a JWT token generated using the <code>secret</code> you made.
-				There are two ways you can send the token to the API:</p>
+				<p>In the client application, any request to hit the API will need to include a JWT token generated using the <code>secret</code> you made.</p>
+				<p>There are two ways you can send the token to the API:</p>
 				<ul>
 					<li>The token can be included in the request&#39;s query string:<pre><code class="lang-ts">axios.get(<span class="hljs-string">`<span class="hljs-subst">${apiRoute}</span>/users?token=<span class="hljs-subst">${apiToken}</span>`</span>)
 </code></pre>
@@ -122,7 +122,8 @@
 						<p>To view the available endpoints for the API, view the generated documentation. See <strong>Documentation</strong>.</p>
 						<h2 id="contribute">Contribute</h2>
 						<p>Any developer is allowed to contribute. Fork the repo, make some changes (e.g. add features, fix bugs, etc.) and make a Pull Request to the <strong>develop</strong> branch.
-						If approved, we will merge your changes, and you will be added as a contributor! We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.</p>
+						If approved, we will merge your changes, and you will be added as a contributor! </p>
+						<p>We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.</p>
 						<h2 id="support">Support</h2>
 						<p>If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. <a href="https://github.com/NatsukiBot/api/issues">https://github.com/NatsukiBot/api/issues</a></p>
 						<h2 id="donate">Donate</h2>
