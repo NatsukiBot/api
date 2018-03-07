@@ -1,5 +1,8 @@
 # Natsuki API
 > API for the Natsuki Discord bot and web interface.
+
+## Documentation
+Generated documentation can be found here: https://natsuki.tk/api/docs/
         
 ## Installation
 
