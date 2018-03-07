@@ -16,7 +16,7 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import './ioc/loader'
-const { secret, apiServerIp } = require('../token.json')
+const { secret, apiServerIp } = require('../api.json')
 
 /**
  * The API server
