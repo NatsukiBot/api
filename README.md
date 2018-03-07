@@ -12,7 +12,7 @@ All data stored by the API is publicly available and accesible under reasonable 
 
 Any person has the ability to view the data, but can not modify, create, or delete data from the server.
 
-Data used from the API can be used to create websites, analytics, and metrics.
+Data used from the API can be used to create websites, analytics, metrics, etc.
 
 The API itself complies with the Discord TOS; usage of the data must also comply. 
 
