@@ -4,6 +4,11 @@ import { inject } from 'inversify'
 import { TYPES } from '../constants'
 import { UserService } from '../services/user'
 
+/**
+ * The user controller. Contains all endpoints for handling users and user data.
+ *
+ * @class UserController
+ */
 @controller('/api/users')
 export class UserController {
   constructor (@inject(TYPES.UserService) private userService: UserService) {}
