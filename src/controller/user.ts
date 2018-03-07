@@ -7,6 +7,7 @@ import { UserService } from '../services/user'
 /**
  * The user controller. Contains all endpoints for handling users and user data.
  *
+ * /api/users
  * @class UserController
  */
 @controller('/api/users')
@@ -16,6 +17,7 @@ export class UserController {
   /**
    * Gets all users from the database, excluding most user information.
    *
+   * GET /
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<User[]>
@@ -29,6 +31,7 @@ export class UserController {
   /**
    * Gets a user by their ID, including all user information.
    *
+   * GET /:id
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<User>
@@ -42,6 +45,7 @@ export class UserController {
   /**
    * Creates a user.
    *
+   * POST /
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<User>
@@ -55,6 +59,7 @@ export class UserController {
   /**
    * Hard deletes a user.
    *
+   * DELETE /:id
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<void>
@@ -68,6 +73,7 @@ export class UserController {
   /**
    * Updates a user by ID.
    *
+   * PUT /:id
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<void>
@@ -81,6 +87,7 @@ export class UserController {
   /**
    * Updates a user's level by ID.
    *
+   * PUT /:id/level
    * @param {Request} request
    * @param {Response} response
    * @returns Promise<void>

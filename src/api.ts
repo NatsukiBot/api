@@ -14,6 +14,7 @@ import * as expressStatusMonitor from 'express-status-monitor'
 import * as errorHandler from 'errorhandler'
 import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
+import * as RateLimit from 'express-rate-limit'
 import './ioc/loader'
 const { secret } = require('../token.json')
 
@@ -50,6 +51,12 @@ export class Api {
 
   private startServer () {
     const server = new InversifyExpressServer(container)
+
+    const limiter = new RateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: 100,
+      delayMs: 0
+    })
 
     server.setConfig((app) => {
       app.use(bodyParser.urlencoded({
@@ -96,6 +103,6 @@ export class Api {
     const port = process.env.PORT || config.port
     app.listen(port)
 
-    console.log(`Express server listening on port ${port}`)
+    Logger.info(`Express server listening on port ${port}`)
   }
 }
