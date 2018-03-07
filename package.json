@@ -55,11 +55,7 @@
       "dev": "tsc && nodemon --inspect --exec ts-node src/index.ts",
       "prod": "tsc && cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
       "clean": "npm cache clear && rimraf -- dist",
-      "docs": "cross-env typedoc --out public/docs src --name \"Natsuki API\" --excludeExternals --mode file --theme public/theme"
-   },
-   "husky": {
-     "hooks": {
-       "pre-push": "npm run docs"
-     }
+      "docs": "cross-env typedoc --out public/docs src --name \"Natsuki API\" --excludeExternals --mode file --theme public/theme",
+      "prepush": "npm run docs && git add public/docs && git commit \"Generate docs for latest changes\" && git push"
    }
 }
