@@ -34,7 +34,7 @@ export class UserService {
   }
 
   public async updateLevel (id: string, userLevel: UserLevel) {
-    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades. This is slow as-is.
+    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
 
     const user = await this.userRepository
       .createQueryBuilder('user')
@@ -43,14 +43,13 @@ export class UserService {
       .getOne()
 
     if (!user) {
-      Logger.info('User not found')
-      return null
+      return
     }
 
     const level = user.level
     level.xp = userLevel.xp
     level.level = userLevel.level
 
-    return this.userLevelRepository.save(level)
+    return this.userLevelRepository.updateById(level.id, level)
   }
 }

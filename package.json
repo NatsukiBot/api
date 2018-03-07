@@ -15,7 +15,6 @@
       "@types/morgan": "^1.7.35",
       "@types/node": "^8.9.4",
       "@types/winston": "^2.3.8",
-      "esdoc": "^1.0.4",
       "esdoc-standard-plugin": "^1.0.0",
       "standard": "^11.0.0",
       "ts-node": "3.3.0",

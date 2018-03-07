@@ -1,4 +1,4 @@
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { TYPES } from '../constants'
@@ -8,33 +8,81 @@ import { UserService } from '../services/user'
 export class UserController {
   constructor (@inject(TYPES.UserService) private userService: UserService) {}
 
+  /**
+   * Gets all users from the database, excluding most user information.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<User[]>
+   * @memberof UserController
+   */
   @httpGet('/')
-  async all (request: Request) {
-    return this.userService.getUsers()
+  async find (request: Request, response: Response) {
+    const users = await this.userService.getUsers()
   }
 
+  /**
+   * Gets a user by their ID, including all user information.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<User>
+   * @memberof UserController
+   */
   @httpGet('/:id')
-  async one (request: Request) {
-    return this.userService.getUser(request.params.id)
+  async findById (request: Request, response: Response) {
+    const user = await this.userService.getUser(request.params.id)
   }
 
+  /**
+   * Creates a user.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<User>
+   * @memberof UserController
+   */
   @httpPost('/')
-  async save (request: Request) {
+  async create (request: Request, response: Response) {
     return this.userService.create(request.body)
   }
 
+  /**
+   * Hard deletes a user.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
   @httpDelete('/:id')
-  async remove (request: Request) {
+  async remove (request: Request, response: Response) {
     return this.userService.delete(request.params.id)
   }
 
+  /**
+   * Updates a user by ID.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
   @httpPut('/:id')
-  async update (request: Request) {
+  async update (request: Request, response: Response) {
     return this.userService.update(request.params.id, request.body)
   }
 
+  /**
+   * Updates a user's level by ID.
+   *
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
   @httpPut('/:id/level')
-  async updateLevel (request: Request) {
+  async updateLevel (request: Request, response: Response) {
     return this.userService.updateLevel(request.params.id, request.body)
   }
 }
