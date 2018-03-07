@@ -6,4 +6,4 @@ tmp/
 temp/
 ormconfig.json
 logs/
-token.json
+api.json

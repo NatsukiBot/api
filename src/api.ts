@@ -16,7 +16,7 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import './ioc/loader'
-const { secret } = require('../token.json')
+const { secret, apiServerIp } = require('../token.json')
 
 /**
  * The API server
@@ -57,7 +57,10 @@ export class Api {
       max: 100,
       delayMs: 0,
       skip: (request, response) => {
-        Logger.info(request.ip)
+        if (apiServerIp === request.ip) {
+          return true
+        }
+
         return false
       }
     })
