@@ -64,6 +64,7 @@ export class Api {
 
     server.setConfig((app) => {
       app.enable('trust proxy')
+      app.use(limiter)
       app.use(bodyParser.urlencoded({
         extended: true
       }))
