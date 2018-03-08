@@ -22,5 +22,7 @@
     "migrationsDir": "src/migration",
     "subscribersDir": "src/subscriber"
   },
-  "cache": true
+  "cache": {
+    "duration": 60000
+  }
 }
