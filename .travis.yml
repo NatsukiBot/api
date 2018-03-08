@@ -9,7 +9,7 @@ after_success:
   - npm run semantic-release --skip-ci
   - npm run docs
   - git add .
-  - git commit -m "build(documentation): Generated documentation for latest changes."
+  - git commit -m "Generated documentation for latest changes."
   - git push
 branches:
   except:
