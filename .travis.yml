@@ -6,11 +6,12 @@ notifications:
   email: false
 node_js: 8
 after_success:
+  - git checkout master
   - npm run semantic-release --skip-ci
   - npm run docs
   - git add .
   - git commit -m "Generated documentation for latest changes."
-  - git push
+  - git push origin/master
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
