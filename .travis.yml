@@ -11,7 +11,8 @@ after_success:
   - npm run docs
   - git add .
   - git commit -m "Generated documentation for latest changes."
-  - git push origin/master
+  - git remote add origin-master https://${GH_TOKEN}@github.com/NatsukiBot/api.git > /dev/null 2>&1
+  - git push --quiet --set-upstream origin-master master
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
