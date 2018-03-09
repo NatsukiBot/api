@@ -11,10 +11,8 @@ before_deploy:
 after_success:
   - git checkout master
   - npm run release
-  - git add .
-  - git commit -m "Bump version."
-  - git remote add origin-master https://${GH_TOKEN}@github.com/NatsukiBot/api.git > /dev/null 2>&1
-  - git push --quiet --set-upstream origin-master master
+  - git push --follow-tags origin master
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+    - master
