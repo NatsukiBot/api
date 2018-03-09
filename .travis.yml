@@ -5,12 +5,14 @@ cache:
 notifications:
   email: false
 node_js: 8
+before_deploy:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
 after_success:
   - git checkout master
-  - npm run semantic-release --skip-ci
-  - npm run docs
+  - npm run release
   - git add .
-  - git commit -m "Generated documentation for latest changes."
+  - git commit -m "Bump version."
   - git remote add origin-master https://${GH_TOKEN}@github.com/NatsukiBot/api.git > /dev/null 2>&1
   - git push --quiet --set-upstream origin-master master
 branches:

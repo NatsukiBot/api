@@ -1,6 +1,6 @@
 {
   "name": "@natsuki/api",
-  "version": "0.0.0-development",
+  "version": "0.1.1",
   "description": "API for Natsuki Discord bot.",
   "devDependencies": {
     "@types/compression": "0.0.35",
@@ -20,15 +20,12 @@
     "cz-conventional-changelog": "^2.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "husky": "^0.14.3",
-    "semantic-release": "^15.0.2",
     "standard": "^11.0.0",
-    "travis-deploy-once": "^4.4.0",
+    "standard-version": "^4.3.0",
     "ts-node": "3.3.0",
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
     "typedoc": "^0.10.0",
-    "typedoc-clarity-theme": "^1.1.0",
-    "typedoc-dash-theme": "^1.1.0",
     "typescript": "^2.7.2"
   },
   "dependencies": {
@@ -61,8 +58,7 @@
     "prod": "tsc && cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
     "clean": "npm cache clear && rimraf -- dist",
     "docs": "cross-env typedoc --out public/docs src --name \"Natsuki API\" --excludeExternals --mode file --theme public/theme",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
