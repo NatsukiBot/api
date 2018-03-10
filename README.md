@@ -91,4 +91,4 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
 
  ## Donate
 
- This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on [Patreon](https://www.patreon.com/natsukibot)
+ This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on [Patreon](https://www.patreon.com/natsukibot).
