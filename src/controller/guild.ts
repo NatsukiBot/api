@@ -13,4 +13,5 @@ import { UserService } from '../services/user'
 @controller('/api/guild')
 export class GuildController {
   constructor (@inject(TYPES.GuildService) private GuildService: GuildService) {}
+  // TODO: Replace with Guild models
 }
