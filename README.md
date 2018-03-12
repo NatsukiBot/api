@@ -51,7 +51,7 @@ There are two ways you can send the token to the API:
 ```ts
 axios.get(`${apiRoute}/users?token=${apiToken}`)
 ```
- * The token can be incldued in the request's **Authorization** header using the **Bearer** schema.
+ * The token can be included in the request's **Authorization** header using the **Bearer** schema.
 
  To view the available endpoints for the API, view the generated documentation. See **Documentation**.
 
