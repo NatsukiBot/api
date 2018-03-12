@@ -2,7 +2,7 @@
 import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
-import { TYPES } from '../constants'
+import { Types } from '../constants'
 import { Logger } from '../utility'
 
 /**
@@ -10,7 +10,7 @@ import { Logger } from '../utility'
  *
  * @class GuildService
  */
-@provide(TYPES.GuildService)
+@provide(Types.GuildService)
 export class GuildService {
   
 }

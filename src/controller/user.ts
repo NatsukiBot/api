@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
 import { inject } from 'inversify'
-import { TYPES } from '../constants'
+import { Types } from '../constants'
 import { UserService } from '../services/user'
 
 /**
@@ -12,7 +12,7 @@ import { UserService } from '../services/user'
  */
 @controller('/api/users')
 export class UserController {
-  constructor (@inject(TYPES.UserService) private userService: UserService) {}
+  constructor (@inject(Types.UserService) private userService: UserService) {}
 
   /**
    * Gets all users from the database, excluding most user information.

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
 import { inject } from 'inversify'
-import { TYPES } from '../constants'
+import { Types } from '../constants'
 import { GuildService } from '../services/guild'
 
 /**
@@ -12,6 +12,6 @@ import { GuildService } from '../services/guild'
  */
 @controller('/api/guild')
 export class GuildController {
-  constructor (@inject(TYPES.GuildService) private guildService: GuildService) {}
+  constructor (@inject(Types.GuildService) private guildService: GuildService) {}
   // TODO: Replace with Guild models
 }
