@@ -1,3 +1,4 @@
+// TODO: Replace with Guild models
 import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
@@ -11,5 +12,5 @@ import { Logger } from '../utility'
  */
 @provide(TYPES.GuildService)
 export class GuildService {
-  // TODO: Replace with Guild models
+  
 }
