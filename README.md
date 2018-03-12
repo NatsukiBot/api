@@ -8,30 +8,6 @@
 
 Generated documentation can be found here: https://natsuki.tk/api/docs/
 
-## Data Policy
-
-All data stored by the API is publicly available and accesible under reasonable limit.
-
-Any person has the ability to view the data, but can not modify, create, or delete data from the server.
-
-Data used from the API can be used to create websites, analytics, metrics, etc.
-
-The API itself complies with the Discord TOS; usage of the data must also comply. 
-
-Rate limits do apply. See **Security > Rate Limiting** for more information.
-
-
-If you access data from the production API, at https://natsuki.tk/api, you agree that:
- * Your usage of the data will be compliant with the [Discord Developer Terms of Service](https://discordapp.com/developers/docs/legal).
- * You will not use the data for commercial purposes.
- * The application or service that uses this API's data must be provided free of charge and the implementation of the API and/or API data must be open-source.
- * Credit will be given to the Natsuki API project. The project's GitHub and production API URL must be linked where the API data is used.
-    - GitHub: https://github.com/NatsukiBot/api
-    - Production API: https://natsuki.tk/api
- * You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.
-    - It is recommended to cache the data you receive to reduce the number of requests made.
-    - The API caches most data automatically, but certain request limit packages can be purchased to always get the latest data.
-
 ## Security
 
 This API does not store any personal information, but it is designed to be as secure as an API that does.
@@ -60,10 +36,11 @@ The API will cache data, and only request new data at intervals. It is recommend
 
 ## Installation
 
-1. Run `npm i`
-2. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
-3. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
-4. Run `npm start`
+1. Clone the repo: `git clone https://github.com/NatsukiBot/api.git`
+2. Run `npm i`
+3. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
+4. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
+5. Run `npm start` to start the API on port 5000. You can do `npm run prod` to start the API in production mode on port 3001.
 
 ## Usage
 
@@ -77,6 +54,31 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
  * The token can be incldued in the request's **Authorization** header using the **Bearer** schema.
 
  To view the available endpoints for the API, view the generated documentation. See **Documentation**.
+
+ ## Data Policy
+
+All data stored by the API is publicly available and accesible under reasonable limit.
+
+Any person has the ability to view the data, but can not modify, create, or delete data from the server.
+
+Data used from the API can be used to create websites, analytics, metrics, etc.
+
+The API itself complies with the Discord TOS; usage of the data must also comply. 
+
+Rate limits do apply. See **Security > Rate Limiting** for more information.
+
+
+If you access data from the production API, at https://natsuki.tk/api, you agree that:
+ * Your usage of the data will be compliant with the [Discord Developer Terms of Service](https://discordapp.com/developers/docs/legal).
+ * You will not use the data for commercial purposes.
+ * The application or service that uses this API's data must be provided free of charge and the implementation of the API and/or API data must be open-source.
+ * Credit will be given to the Natsuki API project. The project's GitHub and production API URL must be linked where the API data is used.
+    - GitHub: https://github.com/NatsukiBot/api
+    - Production API: https://natsuki.tk/api
+ * You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.
+    - It is recommended to cache the data you receive to reduce the number of requests made.
+    - The API caches most data automatically, but certain request limit packages can be purchased to always get the latest data.
+
 
  ## Contribute
 
