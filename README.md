@@ -32,7 +32,7 @@ To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses I
 
 The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.
 
-The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API to cache the data on their end to reduce the number of requests made.
+The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API caches the data on their end to reduce the number of requests made.
 
 ## Installation
 
