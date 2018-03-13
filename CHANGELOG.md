@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/NatsukiBot/api/compare/v0.1.5...v0.2.0) (2018-03-13)
+
+
+### Features
+
+* **controllers:** Added Socket.io to add Real-time updates for certain events, specifically any upd ([e5ca63c](https://github.com/NatsukiBot/api/commit/e5ca63c)), closes [#21](https://github.com/NatsukiBot/api/issues/21) [#22](https://github.com/NatsukiBot/api/issues/22)
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/NatsukiBot/api/compare/v0.1.4...v0.1.5) (2018-03-13)
 
