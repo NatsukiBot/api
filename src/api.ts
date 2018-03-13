@@ -18,6 +18,7 @@ import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
 import './ioc/loader'
 import { UserService } from './services/user'
+import * as http from 'http'
 const { secret, apiServerIp } = require('../api.json')
 
 /**
@@ -114,7 +115,10 @@ export class Api {
     const port = process.env.PORT || config.port
     const instance = app.listen(port)
 
-    const io = socketIo.listen(`${apiServerIp}:3003`)
+    const httpServer = http.createServer()
+    httpServer.listen(8080, '0.0.0.0')
+
+    const io = socketIo.listen(httpServer)
     init(io)
 
     Logger.info(`Express server listening on port ${port}`)
