@@ -10,5 +10,6 @@ export const Events = {
     created: 'guildCreated',
     deleted: 'guildDeleted',
     updated: 'guildUpdated'
-  }
+  },
+  info: 'info'
 }
