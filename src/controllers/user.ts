@@ -102,7 +102,7 @@ export class UserController {
   async update (request: Request, response: Response) {
     const updateResponse = this.userService.update(request.params.id, request.body)
     await updateResponse.then(() => {
-      this.socketService.send(Events.user.updated, request.params.id, request.body)
+      this.socketService.send(Events.user.updated, request.body)
     }).catch((err: any) => {
       Logger.error(err)
     })
@@ -123,7 +123,7 @@ export class UserController {
   async updateLevel (request: Request, response: Response) {
     const levelResponse = this.userService.updateLevel(request.params.id, request.body)
     await levelResponse.then(() => {
-      this.socketService.send(Events.user.levelUpdated, request.params.id, request.body)
+      this.socketService.send(Events.user.levelUpdated, request.body)
     }).catch((err: any) => {
       Logger.error(err)
     })
