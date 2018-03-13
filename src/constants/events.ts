@@ -1,14 +1,14 @@
 export const Events = {
   user: {
-    created: Symbol('userCreated'),
-    deleted: Symbol('userDeleted'),
-    updated: Symbol('userUpdated'),
-    levelUpdated: Symbol('userLevelUpdated'),
-    levelIncreased: Symbol('userLevelIncreased')
+    created: 'userCreated',
+    deleted: 'userDeleted',
+    updated: 'userUpdated',
+    levelUpdated: 'userLevelUpdated',
+    levelIncreased: 'userLevelIncreased'
   },
   guild: {
-    created: Symbol('guildCreated'),
-    deleted: Symbol('guildDeleted'),
-    updated: Symbol('guildUpdated')
+    created: 'guildCreated',
+    deleted: 'guildDeleted',
+    updated: 'guildUpdated'
   }
 }

@@ -1,11 +1,15 @@
 import * as socketIo from 'socket.io'
 
-let server: SocketIO.Server
+let io: SocketIO.Server
 
-export function init (io: SocketIO.Server) {
-  server = io
+export function init (server: SocketIO.Server) {
+  io = server
+
+  io.on('connection', (client) => {
+    client.emit('debug', 'Successfully connected to the API')
+  })
 }
 
 export function getSocketServer () {
-  return server
+  return io
 }

@@ -10,12 +10,7 @@ import { getSocketServer } from '../utilities'
  */
 @provide(Types.SocketService)
 export class SocketService {
-  private socket: SocketIO.Server
-  constructor () {
-    this.socket = getSocketServer()
-  }
-
-  public send (event: symbol, ...content: any[]) {
-    this.socket.sockets.emit(event, ...content)
+  public send (event: string, content: any) {
+    getSocketServer().emit(event, content)
   }
 }
