@@ -126,8 +126,8 @@ export class UserController {
   async updateLevel (request: Request, response: Response) {
     const levelResponse = this.userService.updateLevel(request.params.id, request.body)
     await levelResponse.then(() => {
-      const returnObject: UserLevel = request.body
-      returnObject.user.id = request.params.id
+      const returnObject: any = request.body
+      returnObject.userId = request.params.id
       this.socketService.send(Events.user.levelUpdated, returnObject)
     }).catch((err: any) => {
       Logger.error(err)
