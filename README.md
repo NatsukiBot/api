@@ -53,15 +53,15 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
 ```
  * The token can be included in the request's **Authorization** header using the **Bearer** schema.
 
- To view the available endpoints for the API, view the generated documentation. See **Documentation**.
+To view the available endpoints for the API, view the generated documentation. See **Documentation**.
 
- ## Real-time Updates
+## Real-time Updates
 
- If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
+If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
 
- This is perfect for a Discord bot that updates the API, and you want to use the new data immediately in a web interface without having to send another request to the API. The API will just send you the data automatically.
+This is perfect for a Discord bot that updates the API, and you want to use the new data immediately in a web interface without having to send another request to the API. The API will just send you the data automatically.
 
- ## Data Policy
+## Data Policy
 
 All data stored by the API is publicly available and accesible under reasonable limit.
 
@@ -85,18 +85,17 @@ If you access data from the production API, at https://natsuki.tk/api, you agree
     - It is recommended to cache the data you receive to reduce the number of requests made.
     - The API caches most data automatically, but certain request limit packages can be purchased to always get the latest data.
 
-
- ## Contribute
+## Contribute
 
  Any developer is allowed to contribute. Fork the repo, make some changes (e.g. add features, fix bugs, etc.) and make a Pull Request to the **develop** branch.
  If approved, we will merge your changes, and you will be added as a contributor! 
  
  We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.
 
- ## Support
+## Support
 
  If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. https://github.com/NatsukiBot/api/issues
 
- ## Donate
+## Donate
 
  This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on [Patreon](https://www.patreon.com/natsukibot).
