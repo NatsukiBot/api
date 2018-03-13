@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm'
 import * as express from 'express'
 import * as path from 'path'
-import { Logger } from './utilities'
+import { Logger, init } from './utilities'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 import { config } from './config'
@@ -15,7 +15,9 @@ import * as errorHandler from 'errorhandler'
 import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
+import * as socketIo from 'socket.io'
 import './ioc/loader'
+import { UserService } from './services/user'
 const { secret, apiServerIp } = require('../api.json')
 
 /**
@@ -110,7 +112,10 @@ export class Api {
 
     const app = server.build()
     const port = process.env.PORT || config.port
-    app.listen(port)
+    const instance = app.listen(port)
+
+    const io = socketIo.listen(instance)
+    init(io)
 
     Logger.info(`Express server listening on port ${port}`)
   }
