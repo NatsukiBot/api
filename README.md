@@ -53,15 +53,15 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
 ```
  * The token can be included in the request's **Authorization** header using the **Bearer** schema.
 
- To view the available endpoints for the API, view the generated documentation. See **Documentation**.
+To view the available endpoints for the API, view the generated documentation. See **Documentation**.
 
- ## Real-time Updates
+## Real-time Updates
 
- If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
+If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
 
- This is perfect for a Discord bot that updates the API, and you want to use the new data immediately in a web interface without having to send another request to the API. The API will just send you the data automatically.
+This is perfect for a Discord bot that updates the API, and you want to use the new data immediately in a web interface without having to send another request to the API. The API will just send you the data automatically.
 
- ## Data Policy
+## Data Policy
 
 All data stored by the API is publicly available and accesible under reasonable limit.
 
