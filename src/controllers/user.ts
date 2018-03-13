@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
 import { inject } from 'inversify'
-import { TYPES } from '../constants'
+import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
+import { SocketService } from '../services/socket'
+import { Logger } from '../utilities'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.
@@ -12,7 +14,10 @@ import { UserService } from '../services/user'
  */
 @controller('/api/users')
 export class UserController {
-  constructor (@inject(TYPES.UserService) private userService: UserService) {}
+  constructor (
+    @inject(Types.UserService) private userService: UserService,
+    @inject(Types.SocketService) private socketService: SocketService
+  ) {}
 
   /**
    * Gets all users from the database, excluding most user information.
@@ -53,7 +58,14 @@ export class UserController {
    */
   @httpPost('/')
   async create (request: Request, response: Response) {
-    return this.userService.create(request.body)
+    const userResponse = this.userService.create(request.body)
+    await userResponse.then(user => {
+      this.socketService.send(Events.user.created, user)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return userResponse
   }
 
   /**
@@ -67,7 +79,14 @@ export class UserController {
    */
   @httpDelete('/:id')
   async remove (request: Request, response: Response) {
-    return this.userService.delete(request.params.id)
+    const deleteResponse = this.userService.delete(request.params.id)
+    await deleteResponse.then(() => {
+      this.socketService.send(Events.user.deleted, request.params.id)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return deleteResponse
   }
 
   /**
@@ -81,7 +100,14 @@ export class UserController {
    */
   @httpPut('/:id')
   async update (request: Request, response: Response) {
-    return this.userService.update(request.params.id, request.body)
+    const updateResponse = this.userService.update(request.params.id, request.body)
+    await updateResponse.then(() => {
+      this.socketService.send(Events.user.updated, request.params.id, request.body)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return updateResponse
   }
 
   /**
@@ -95,6 +121,13 @@ export class UserController {
    */
   @httpPut('/:id/level')
   async updateLevel (request: Request, response: Response) {
-    return this.userService.updateLevel(request.params.id, request.body)
+    const levelResponse = this.userService.updateLevel(request.params.id, request.body)
+    await levelResponse.then(() => {
+      this.socketService.send(Events.user.levelUpdated, request.params.id, request.body)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return levelResponse
   }
 }

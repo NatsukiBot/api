@@ -1,8 +1,8 @@
 import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
-import { TYPES } from '../constants'
-import { Logger } from '../utility'
+import { Types } from '../constants'
+import { Logger } from '../utilities'
 
 /**
  * User service that handles storing and modifying user data.
@@ -10,7 +10,7 @@ import { Logger } from '../utility'
  * @export
  * @class UserService
  */
-@provide(TYPES.UserService)
+@provide(Types.UserService)
 export class UserService {
   private userRepository = getRepository(User)
   private userLevelRepository = getRepository(UserLevel)
