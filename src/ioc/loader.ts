@@ -1,4 +1,4 @@
-import '../controller/user'
+import '../controllers/user'
 import '../services/user'
-import '../controller/guild'
+import '../controllers/guild'
 import '../services/guild'

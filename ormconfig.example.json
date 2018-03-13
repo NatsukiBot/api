@@ -12,15 +12,15 @@
     "./node_modules/@natsuki/db/dist/entity/**/*.js"
   ],
   "migrations": [
-    "src/migration/**/*.ts"
+    "src/migrations/**/*.ts"
   ],
   "subscribers": [
-    "src/subscriber/**/*.ts"
+    "src/subscribers/**/*.ts"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
+    "entitiesDir": "src/entities",
+    "migrationsDir": "src/migrations",
+    "subscribersDir": "src/subscribers"
   },
   "cache": {
     "duration": 60000

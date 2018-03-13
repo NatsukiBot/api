@@ -2,7 +2,7 @@ import { User, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
-import { Logger } from '../utility'
+import { Logger } from '../utilities'
 
 /**
  * User service that handles storing and modifying user data.

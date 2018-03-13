@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm'
 import * as express from 'express'
 import * as path from 'path'
-import { Logger } from './utility'
+import { Logger } from './utilities'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 import { config } from './config'
