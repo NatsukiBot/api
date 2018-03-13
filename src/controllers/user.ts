@@ -5,6 +5,7 @@ import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
 import { Logger } from '../utilities'
+import { UserLevel, User } from '@natsuki/db'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.
@@ -102,7 +103,9 @@ export class UserController {
   async update (request: Request, response: Response) {
     const updateResponse = this.userService.update(request.params.id, request.body)
     await updateResponse.then(() => {
-      this.socketService.send(Events.user.updated, request.body)
+      const returnObject: User = request.body
+      returnObject.id = request.params.id
+      this.socketService.send(Events.user.updated, returnObject)
     }).catch((err: any) => {
       Logger.error(err)
     })
@@ -123,7 +126,9 @@ export class UserController {
   async updateLevel (request: Request, response: Response) {
     const levelResponse = this.userService.updateLevel(request.params.id, request.body)
     await levelResponse.then(() => {
-      this.socketService.send(Events.user.levelUpdated, request.body)
+      const returnObject: UserLevel = request.body
+      returnObject.user.id = request.params.id
+      this.socketService.send(Events.user.levelUpdated, returnObject)
     }).catch((err: any) => {
       Logger.error(err)
     })
