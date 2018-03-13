@@ -114,7 +114,7 @@ export class Api {
     const port = process.env.PORT || config.port
     const instance = app.listen(port)
 
-    const io = socketIo.listen(instance)
+    const io = socketIo.listen(`${apiServerIp}:3003`)
     init(io)
 
     Logger.info(`Express server listening on port ${port}`)
