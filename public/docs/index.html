@@ -66,10 +66,43 @@
 				<blockquote>
 					<p>API for the Natsuki Discord bot and web interface. Secure, fast, and developer-friendly!</p>
 				</blockquote>
-				<p><a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
+				<p><a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg" alt="Conventional Commits"></a></p>
 				<h2 id="documentation">Documentation</h2>
 				<p>Generated documentation can be found here: <a href="https://natsuki.tk/api/docs/">https://natsuki.tk/api/docs/</a></p>
-				<h2 id="data-policy">Data Policy</h2>
+				<h2 id="security">Security</h2>
+				<p>This API does not store any personal information, but it is designed to be as secure as an API that does.</p>
+				<p>To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.</p>
+				<p>The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!</p>
+				<h3 id="jwt">JWT</h3>
+				<p>The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.</p>
+				<p>HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.</p>
+				<p>JWTs are generated using a secure <code>secret</code> which must only be available to the trusted client applications.</p>
+				<p>This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://natsuki.tk/api/users">https://natsuki.tk/api/users</a></p>
+				<h3 id="rate-limiting">Rate Limiting</h3>
+				<p>Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.</p>
+				<p>To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.</p>
+				<p>The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.</p>
+				<p>The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API caches the data on their end to reduce the number of requests made.</p>
+				<h2 id="installation">Installation</h2>
+				<ol>
+					<li>Clone the repo: <code>git clone https://github.com/NatsukiBot/api.git</code></li>
+					<li>Run <code>npm i</code></li>
+					<li>Rename the <code>ormconfig.example.json</code> to <code>ormconfig.json</code> and modify the database settings.</li>
+					<li>Rename the <code>api.example.json</code> to <code>api.json</code> and generate a <strong>secure</strong> secret. Use an online password generator if you don&#39;t know how. Also fill in the <code>apiServerIp</code> with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.</li>
+					<li>Run <code>npm start</code> to start the API on port 5000. You can do <code>npm run prod</code> to start the API in production mode on port 3001.</li>
+				</ol>
+				<h2 id="usage">Usage</h2>
+				<p>In the client application, any request to hit the API will need to include a JWT token generated using the <code>secret</code> you made.</p>
+				<p>There are two ways you can send the token to the API:</p>
+				<ul>
+					<li>The token can be included in the request&#39;s query string:<pre><code class="lang-ts">axios.get(<span class="hljs-string">`<span class="hljs-subst">${apiRoute}</span>/users?token=<span class="hljs-subst">${apiToken}</span>`</span>)
+</code></pre>
+					</li>
+					<li><p>The token can be included in the request&#39;s <strong>Authorization</strong> header using the <strong>Bearer</strong> schema.</p>
+						<p>To view the available endpoints for the API, view the generated documentation. See <strong>Documentation</strong>.</p>
+						<h2 id="data-policy">Data Policy</h2>
+					</li>
+				</ul>
 				<p>All data stored by the API is publicly available and accesible under reasonable limit.</p>
 				<p>Any person has the ability to view the data, but can not modify, create, or delete data from the server.</p>
 				<p>Data used from the API can be used to create websites, analytics, metrics, etc.</p>
@@ -91,46 +124,14 @@
 						</ul>
 					</li>
 				</ul>
-				<h2 id="security">Security</h2>
-				<p>This API does not store any personal information, but it is designed to be as secure as an API that does.</p>
-				<p>To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.</p>
-				<p>The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!</p>
-				<h3 id="jwt">JWT</h3>
-				<p>The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.</p>
-				<p>HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.</p>
-				<p>JWTs are generated using a secure <code>secret</code> which must only be available to the trusted client applications.</p>
-				<p>This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://natsuki.tk/api/users">https://natsuki.tk/api/users</a></p>
-				<h3 id="rate-limiting">Rate Limiting</h3>
-				<p>Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.</p>
-				<p>To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.</p>
-				<p>The current limit is 100 requests per hour. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.</p>
-				<p>The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API to cache the data on their end to reduce the number of requests made.</p>
-				<h2 id="installation">Installation</h2>
-				<ol>
-					<li>Run <code>npm i</code></li>
-					<li>Rename the <code>ormconfig.example.json</code> to <code>ormconfig.json</code> and modify the database settings.</li>
-					<li>Rename the <code>api.example.json</code> to <code>api.json</code> and generate a <strong>secure</strong> secret. Use an online password generator if you don&#39;t know how. Also fill in the <code>apiServerIp</code> with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.</li>
-					<li>Run <code>npm start</code></li>
-				</ol>
-				<h2 id="usage">Usage</h2>
-				<p>In the client application, any request to hit the API will need to include a JWT token generated using the <code>secret</code> you made.</p>
-				<p>There are two ways you can send the token to the API:</p>
-				<ul>
-					<li>The token can be included in the request&#39;s query string:<pre><code class="lang-ts">axios.get(<span class="hljs-string">`<span class="hljs-subst">${apiRoute}</span>/users?token=<span class="hljs-subst">${apiToken}</span>`</span>)
-</code></pre>
-					</li>
-					<li><p>The token can be incldued in the request&#39;s <strong>Authorization</strong> header using the <strong>Bearer</strong> schema.</p>
-						<p>To view the available endpoints for the API, view the generated documentation. See <strong>Documentation</strong>.</p>
-						<h2 id="contribute">Contribute</h2>
-						<p>Any developer is allowed to contribute. Fork the repo, make some changes (e.g. add features, fix bugs, etc.) and make a Pull Request to the <strong>develop</strong> branch.
-						If approved, we will merge your changes, and you will be added as a contributor! </p>
-						<p>We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.</p>
-						<h2 id="support">Support</h2>
-						<p>If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. <a href="https://github.com/NatsukiBot/api/issues">https://github.com/NatsukiBot/api/issues</a></p>
-						<h2 id="donate">Donate</h2>
-						<p>This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on <a href="https://www.patreon.com/natsukibot">Patreon</a></p>
-					</li>
-				</ul>
+				<h2 id="contribute">Contribute</h2>
+				<p> Any developer is allowed to contribute. Fork the repo, make some changes (e.g. add features, fix bugs, etc.) and make a Pull Request to the <strong>develop</strong> branch.
+				If approved, we will merge your changes, and you will be added as a contributor! </p>
+				<p> We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.</p>
+				<h2 id="support">Support</h2>
+				<p> If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. <a href="https://github.com/NatsukiBot/api/issues">https://github.com/NatsukiBot/api/issues</a></p>
+				<h2 id="donate">Donate</h2>
+				<p> This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on <a href="https://www.patreon.com/natsukibot">Patreon</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -145,6 +146,12 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
 						<a href="classes/api.html" class="tsd-kind-icon">Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/guildcontroller.html" class="tsd-kind-icon">Guild<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/guildservice.html" class="tsd-kind-icon">Guild<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/usercontroller.html" class="tsd-kind-icon">User<wbr>Controller</a>
@@ -195,10 +202,7 @@
 						<a href="globals.html#providenamed" class="tsd-kind-icon">provide<wbr>Named</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#tags" class="tsd-kind-icon">TAGS</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#types" class="tsd-kind-icon">TYPES</a>
+						<a href="globals.html#types" class="tsd-kind-icon">Types</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#config" class="tsd-kind-icon">config</a>
