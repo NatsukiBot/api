@@ -1,6 +1,6 @@
 # Natsuki API
 
-> Real-time API for the Natsuki Discord bot and web interface. Secure, fast, and developer-friendly!
+> Realtime API for the Natsuki Discord bot and web interface. Secure, fast, and developer-friendly!
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
@@ -55,7 +55,7 @@ axios.get(`${apiRoute}/users?token=${apiToken}`)
 
 To view the available endpoints for the API, view the generated documentation. See **Documentation**.
 
-## Real-time Updates
+## Realtime Updates
 
 If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
 
