@@ -17,7 +17,6 @@ import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
 import './ioc/loader'
-import { UserService } from './services/user'
 const { secret, apiServerIp } = require('../api.json')
 
 /**
