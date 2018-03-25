@@ -6,5 +6,4 @@ export interface BaseService<T> {
   create: (model: T) => Promise<T>
   updateById: (id: string, model: T) => Promise<void>
   deleteById: (id: string | number) => Promise<void>
-
 }
