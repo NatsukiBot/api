@@ -3,23 +3,23 @@ import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { Logger } from '../utilities'
+import { BaseService } from '../interfaces/BaseService'
 
 /**
  * User service that handles storing and modifying user data.
  *
- * @export
  * @class UserService
  */
 @provide(Types.UserService)
-export class UserService {
+export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
   private userLevelRepository = getRepository(UserLevel)
 
-  public getUsers () {
+  public getAll () {
     return this.userRepository.find()
   }
 
-  public async getUser (id: string) {
+  public async findById (id: string | number) {
     return this.userRepository
       .createQueryBuilder('user')
       .innerJoinAndSelect('user.level', 'level')
@@ -31,11 +31,11 @@ export class UserService {
     return this.userRepository.save(user)
   }
 
-  public update (id: string, user: User) {
+  public updateById (id: string | number, user: User) {
     return this.userRepository.updateById(id, user)
   }
 
-  public delete (id: string) {
+  public deleteById (id: string | number) {
     return this.userRepository.deleteById(id)
   }
 
@@ -55,6 +55,7 @@ export class UserService {
     const level = user.level
     level.xp = userLevel.xp
     level.level = userLevel.level
+    level.timestamp = new Date()
 
     return this.userLevelRepository.updateById(level.id, level)
   }

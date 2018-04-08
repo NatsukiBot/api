@@ -5,7 +5,6 @@ import { getSocketServer } from '../utilities'
 /**
  * Socket service for emitting live updates to clients.
  *
- * @export
  * @class SocketService
  */
 @provide(Types.SocketService)

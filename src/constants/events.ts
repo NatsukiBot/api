@@ -11,5 +11,10 @@ export const Events = {
     deleted: 'guildDeleted',
     updated: 'guildUpdated'
   },
+  referral: {
+    created: 'referralCreated',
+    deleted: 'referralDeleted',
+    updated: 'referralUpdated'
+  },
   info: 'info'
 }

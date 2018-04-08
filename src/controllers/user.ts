@@ -6,6 +6,7 @@ import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
 import { Logger } from '../utilities'
 import { UserLevel, User } from '@natsuki/db'
+import { BaseController } from '../interfaces/BaseController'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.
@@ -14,7 +15,7 @@ import { UserLevel, User } from '@natsuki/db'
  * @class UserController
  */
 @controller('/api/users')
-export class UserController {
+export class UserController implements BaseController<User> {
   constructor (
     @inject(Types.UserService) private userService: UserService,
     @inject(Types.SocketService) private socketService: SocketService
@@ -30,8 +31,8 @@ export class UserController {
    * @memberof UserController
    */
   @httpGet('/')
-  async find (request: Request, response: Response) {
-    return this.userService.getUsers()
+  async getAll (request: Request, response: Response) {
+    return this.userService.getAll()
   }
 
   /**
@@ -45,7 +46,7 @@ export class UserController {
    */
   @httpGet('/:id')
   async findById (request: Request, response: Response) {
-    return this.userService.getUser(request.params.id)
+    return this.userService.findById(request.params.id)
   }
 
   /**
@@ -79,8 +80,8 @@ export class UserController {
    * @memberof UserController
    */
   @httpDelete('/:id')
-  async remove (request: Request, response: Response) {
-    const deleteResponse = this.userService.delete(request.params.id)
+  async deleteById (request: Request, response: Response) {
+    const deleteResponse = this.userService.deleteById(request.params.id)
     await deleteResponse.then(() => {
       this.socketService.send(Events.user.deleted, request.params.id)
     }).catch((err: any) => {
@@ -100,8 +101,8 @@ export class UserController {
    * @memberof UserController
    */
   @httpPut('/:id')
-  async update (request: Request, response: Response) {
-    const updateResponse = this.userService.update(request.params.id, request.body)
+  async updateById (request: Request, response: Response) {
+    const updateResponse = this.userService.updateById(request.params.id, request.body)
     await updateResponse.then(() => {
       const returnObject: User = request.body
       returnObject.id = request.params.id

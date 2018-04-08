@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { User, UserLevel } from '@natsuki/db'
+import { Guild } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -12,4 +12,9 @@ import { Logger } from '../utilities'
  */
 @provide(Types.GuildService)
 export class GuildService {
+  private guildRepository = getRepository(Guild)
+
+  public getGuilds () {
+    return this.guildRepository.find()
+  }
 }
