@@ -55,6 +55,7 @@ export class UserService implements BaseService<User> {
     const level = user.level
     level.xp = userLevel.xp
     level.level = userLevel.level
+    level.timestamp = new Date()
 
     return this.userLevelRepository.updateById(level.id, level)
   }
