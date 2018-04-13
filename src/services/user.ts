@@ -23,6 +23,7 @@ export class UserService implements BaseService<User> {
     return this.userRepository
       .createQueryBuilder('user')
       .innerJoinAndSelect('user.level', 'level')
+      .innerJoinAndSelect('user.settings', 'settings')
       .where('user.id = :id', { id })
       .getOne()
   }
