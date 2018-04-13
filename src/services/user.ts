@@ -28,6 +28,7 @@ export class UserService implements BaseService<User> {
   }
 
   public create (user: User) {
+    user.dateCreated = new Date()
     return this.userRepository.save(user)
   }
 
