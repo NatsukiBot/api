@@ -1,6 +1,6 @@
 {
   "name": "@natsuki/api",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "API for Natsuki Discord bot.",
   "devDependencies": {
     "@types/compression": "0.0.35",
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@natsuki/db": "github:NatsukiBot/db",
+    "@natsuki/util": "github:NatsukiBot/util",
     "body-parser": "^1.18.1",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
