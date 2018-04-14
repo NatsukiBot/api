@@ -136,4 +136,27 @@ export class UserController implements BaseController<User> {
 
     return levelResponse
   }
+
+  /**
+   * Updates a user's balance by ID.
+   *
+   * PUT /:id/balance
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
+  @httpPut('/:id/balance')
+  async updateBalance (request: Request, response: Response) {
+    const balanceResponse = this.userService.updateBalance(request.params.id, request.body)
+    await balanceResponse.then(() => {
+      const returnObject: any = request.body
+      returnObject.userId = request.params.id
+      this.socketService.send(Events.user.balanceUpdated, returnObject)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return balanceResponse
+  }
 }

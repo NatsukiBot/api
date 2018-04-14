@@ -4,7 +4,7 @@ export const Events = {
     deleted: 'userDeleted',
     updated: 'userUpdated',
     levelUpdated: 'userLevelUpdated',
-    levelIncreased: 'userLevelIncreased'
+    balanceUpdated: 'userBalanceUpdated'
   },
   guild: {
     created: 'guildCreated',

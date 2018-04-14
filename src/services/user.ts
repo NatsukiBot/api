@@ -1,4 +1,4 @@
-import { User, UserLevel } from '@natsuki/db'
+import { User, UserBalance, UserLevel } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -14,6 +14,7 @@ import { BaseService } from '../interfaces/BaseService'
 export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
   private userLevelRepository = getRepository(UserLevel)
+  private userBalanceRepository = getRepository(UserBalance)
 
   public getAll () {
     return this.userRepository.find()
@@ -24,6 +25,7 @@ export class UserService implements BaseService<User> {
       .createQueryBuilder('user')
       .innerJoinAndSelect('user.level', 'level')
       .innerJoinAndSelect('user.settings', 'settings')
+      .innerJoinAndSelect('user.balance', 'balance')
       .where('user.id = :id', { id })
       .getOne()
   }
@@ -41,12 +43,13 @@ export class UserService implements BaseService<User> {
     return this.userRepository.deleteById(id)
   }
 
-  public async updateLevel (id: string, userLevel: UserLevel) {
+  public async updateLevel (id: string, userLevel: UserLevel, userBalance?: UserBalance) {
     // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
 
     const user = await this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.level', 'level')
+      .leftJoinAndSelect('user.balance', 'balance')
       .where('user.id = :id', { id })
       .getOne()
 
@@ -59,6 +62,36 @@ export class UserService implements BaseService<User> {
     level.level = userLevel.level
     level.timestamp = new Date()
 
+    const balance = user.balance
+
+    if (userBalance) {
+      balance.balance = userBalance.balance
+      balance.netWorth = userBalance.netWorth
+    }
+
+    this.userBalanceRepository.updateById(balance.id, balance)
     return this.userLevelRepository.updateById(level.id, level)
+  }
+
+  public async updateBalance (id: string, userBalance: UserBalance) {
+    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
+
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.balance', 'balance')
+      .where('user.id = :id', { id })
+      .getOne()
+
+    if (!user) {
+      return
+    }
+
+    const balance = user.balance
+
+    balance.balance = userBalance.balance
+    balance.netWorth = userBalance.netWorth
+    balance.dateLastClaimedDailies = userBalance.dateLastClaimedDailies
+
+    return this.userBalanceRepository.updateById(balance.id, balance)
   }
 }
