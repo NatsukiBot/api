@@ -14,7 +14,7 @@ import { Logger } from '@natsuki/util'
  * /api/guilds
  * @class GuildController
  */
-@controller('/api/guild')
+@controller('/api/guilds')
 export class GuildController implements BaseController<Guild> {
   constructor (
     @inject(Types.GuildService) private guildService: GuildService,
