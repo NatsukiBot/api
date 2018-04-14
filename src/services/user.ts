@@ -4,6 +4,7 @@ import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { Logger } from '../utilities'
 import { BaseService } from '../interfaces/BaseService'
+import { UserLevelBalance } from '../models/userLevelBalance.model'
 
 /**
  * User service that handles storing and modifying user data.
@@ -43,7 +44,7 @@ export class UserService implements BaseService<User> {
     return this.userRepository.deleteById(id)
   }
 
-  public async updateLevel (id: string, userLevel: UserLevel, userBalance?: UserBalance) {
+  public async updateLevel (id: string, userLevelBalance: UserLevelBalance) {
     // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
 
     const user = await this.userRepository
@@ -56,6 +57,9 @@ export class UserService implements BaseService<User> {
     if (!user) {
       return
     }
+
+    const userLevel = userLevelBalance.level
+    const userBalance = userLevelBalance.balance
 
     const level = user.level
     level.xp = userLevel.xp
