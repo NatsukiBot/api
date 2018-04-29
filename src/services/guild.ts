@@ -43,12 +43,12 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getSuggestions (id: string) {
-    return this.guildRepository.createQueryBuilder('guildSuggestion')
-      .where('guildSuggestion.guildId = :id', { id })
+    return this.suggestionRepository.createQueryBuilder('suggestion')
+      .where('suggestion.guildId = :id', { id })
       .getMany()
   }
 
-  public getSuggestionById (id: string, suggestionId: string) {
+  public getSuggestionById (id: string, suggestionId: number) {
     return this.suggestionRepository.findOneById(suggestionId)
   }
 
@@ -57,7 +57,7 @@ export class GuildService implements BaseService<Guild> {
     return this.suggestionRepository.save(suggestion)
   }
 
-  public deleteSuggestion (id: string, suggestionId: string) {
+  public deleteSuggestion (id: string, suggestionId: number) {
     return this.suggestionRepository.deleteById(suggestionId)
   }
 
