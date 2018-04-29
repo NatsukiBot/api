@@ -23,21 +23,10 @@ export class GuildService implements BaseService<Guild> {
   public async findById (id: string | number) {
     return this.guildRepository
       .createQueryBuilder('guild')
-      .innerJoinAndSelect('guild.settings', 'settings')
+      .leftJoinAndSelect('guild.settings', 'settings')
+      .leftJoinAndSelect('guild.suggestions', 'suggestions')
       .where('guild.id = :id', { id })
-      .getOne().then(async g => {
-        if (!g) {
-          return
-        }
-
-        const suggestions = await this.suggestionRepository.createQueryBuilder('suggestion')
-          .where('suggestion.guildId = :id', { id })
-          .execute()
-
-        g.suggestions = (suggestions as GuildSuggestion[]) || []
-
-        return g
-      })
+      .getOne()
   }
 
   public create (guild: Guild) {
@@ -56,7 +45,7 @@ export class GuildService implements BaseService<Guild> {
   public getSuggestions (id: string) {
     return this.guildRepository.createQueryBuilder('guildSuggestion')
       .where('guildSuggestion.guildId = :id', { id })
-      .execute()
+      .getMany()
   }
 
   public getSuggestionById (id: string, suggestionId: string) {
