@@ -159,7 +159,7 @@ export class GuildController implements BaseController<Guild> {
 
   /**
    * Updates a Guild suggestion by ID.
-   * 
+   *
    * PUT /:id/suggestions/:suggestionId
    * @param request
    * @param response
