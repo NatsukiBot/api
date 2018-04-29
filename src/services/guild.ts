@@ -23,7 +23,7 @@ export class GuildService implements BaseService<Guild> {
   public async findById (id: string | number) {
     return this.guildRepository
       .createQueryBuilder('guild')
-      .leftJoinAndSelect('guild.settings', 'settings')
+      .innerJoinAndSelect('guild.settings', 'settings')
       .leftJoinAndSelect('guild.suggestions', 'suggestions')
       .where('guild.id = :id', { id })
       .getOne()
