@@ -30,7 +30,7 @@ export class GuildService implements BaseService<Guild> {
           return
         }
 
-        const suggestions = await this.suggestionRepository.createQueryBuilder('suggestions')
+        const suggestions = await this.suggestionRepository.createQueryBuilder('suggestion')
           .where('suggestion.guildId = :id', { id })
           .execute()
 
