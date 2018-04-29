@@ -24,6 +24,7 @@ export class GuildService implements BaseService<Guild> {
     return this.guildRepository
       .createQueryBuilder('guild')
       .innerJoinAndSelect('guild.settings', 'settings')
+      .innerJoinAndSelect('guild.suggestions', 'suggestions')
       .where('guild.id = :id', { id })
       .getOne()
   }

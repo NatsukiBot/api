@@ -1,6 +1,6 @@
 {
   "name": "@natsuki/api",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "API for Natsuki Discord bot.",
   "devDependencies": {
     "@types/compression": "0.0.35",
