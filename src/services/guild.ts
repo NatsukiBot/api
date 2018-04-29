@@ -24,9 +24,20 @@ export class GuildService implements BaseService<Guild> {
     return this.guildRepository
       .createQueryBuilder('guild')
       .innerJoinAndSelect('guild.settings', 'settings')
-      .innerJoinAndSelect('guild.suggestions', 'suggestions')
       .where('guild.id = :id', { id })
-      .getOne()
+      .getOne().then(async g => {
+        if (!g) {
+          return
+        }
+
+        const suggestions = await this.suggestionRepository.createQueryBuilder('suggestions')
+          .where('suggestion.guildId = :id', { id })
+          .execute()
+
+        g.suggestions = (suggestions as GuildSuggestion[]) || []
+
+        return g
+      })
   }
 
   public create (guild: Guild) {
