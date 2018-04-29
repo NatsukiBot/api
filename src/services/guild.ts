@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { Guild } from '@natsuki/db'
+import { Guild, GuildSuggestion } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -14,6 +14,7 @@ import { BaseService } from '../interfaces/BaseService'
 @provide(Types.GuildService)
 export class GuildService implements BaseService<Guild> {
   private guildRepository = getRepository(Guild)
+  private suggestionRepository = getRepository(GuildSuggestion)
 
   public getAll () {
     return this.guildRepository.find()
@@ -38,5 +39,28 @@ export class GuildService implements BaseService<Guild> {
 
   public deleteById (id: string | number) {
     return this.guildRepository.deleteById(id)
+  }
+
+  public getSuggestions (id: string) {
+    return this.guildRepository.createQueryBuilder('guildSuggestion')
+      .where('guildSuggestion.guildId = :id', { id })
+      .execute()
+  }
+
+  public getSuggestionById (id: string, suggestionId: string) {
+    return this.suggestionRepository.findOneById(suggestionId)
+  }
+
+  public createSuggestion (id: string, suggestion: GuildSuggestion) {
+    suggestion.dateCreated = new Date()
+    return this.suggestionRepository.save(suggestion)
+  }
+
+  public deleteSuggestion (id: string, suggestionId: string) {
+    return this.suggestionRepository.deleteById(suggestionId)
+  }
+
+  public updateSuggestion (id: string, suggestion: GuildSuggestion) {
+    return this.suggestionRepository.updateById(suggestion.id, suggestion)
   }
 }

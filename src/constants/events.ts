@@ -9,7 +9,12 @@ export const Events = {
   guild: {
     created: 'guildCreated',
     deleted: 'guildDeleted',
-    updated: 'guildUpdated'
+    updated: 'guildUpdated',
+    suggestion: {
+      created: 'guildSuggestionCreated',
+      updated: 'guildSuggestionUpdated',
+      deleted: 'guildSuggestionDeleted'
+    }
   },
   referral: {
     created: 'referralCreated',
