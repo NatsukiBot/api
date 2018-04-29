@@ -113,4 +113,87 @@ export class GuildController implements BaseController<Guild> {
 
     return updateResponse
   }
+
+  /**
+   * Gets all suggestions in a Guild
+   *
+   * GET /:id/suggestions
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/suggestions')
+  async getSuggestions (request: Request, response: Response) {
+    return this.guildService.getSuggestions(request.params.id)
+  }
+
+  /**
+   * Gets a Guild suggestion by ID.
+   *
+   * GET /:id/suggestions/:suggestionId
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/suggestions/:suggestionId')
+  async getSuggestionById (request: Request, response: Response) {
+    return this.guildService.getSuggestionById(request.params.id, request.body)
+  }
+
+  /**
+   * Creates a suggestion in a Guild
+   *
+   * POST /:id/suggestions
+   * @param request
+   * @param response
+   */
+  @httpPost('/:id/suggestions')
+  async createSuggestion (request: Request, response: Response) {
+    const postResponse = this.guildService.createSuggestion(request.params.id, request.body)
+    await postResponse.then(item => {
+      this.socketService.send(Events.guild.suggestion.created, item)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return postResponse
+  }
+
+  /**
+   * Updates a Guild suggestion by ID.
+   * 
+   * PUT /:id/suggestions/:suggestionId
+   * @param request
+   * @param response
+   */
+  @httpPut('/:id/suggestions/:suggestionId')
+  async updateSuggestionById (request: Request, response: Response) {
+    const updateResponse = this.guildService.updateSuggestion(request.params.id, request.body)
+    await updateResponse.then(() => {
+      const returnObject: Guild = request.body
+      returnObject.id = request.params.id
+      this.socketService.send(Events.guild.suggestion.updated, returnObject)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return updateResponse
+  }
+
+  /**
+   * Deletes a Guild suggestion by ID.
+   *
+   * DELETE /:id/suggestions/:suggestionId
+   * @param request
+   * @param response
+   */
+  @httpDelete('/:id/suggestions/:suggestionId')
+  async deleteSuggestionById (request: Request, response: Response) {
+    const deleteResponse = this.guildService.deleteSuggestion(request.params.id, request.body)
+    await deleteResponse.then(() => {
+      this.socketService.send(Events.guild.suggestion.deleted, { guildId: request.params.id, suggestionId: request.body })
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return deleteResponse
+  }
 }
