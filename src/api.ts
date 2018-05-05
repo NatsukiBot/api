@@ -54,8 +54,8 @@ export class Api {
     const server = new InversifyExpressServer(container)
 
     const limiter = new RateLimit({
-      windowMs: 60 * 60 * 1000, // One hour
-      max: 100,
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 150,
       delayMs: 0,
       skip: (request, response) => {
         if (apiServerIp === request.ip) {
@@ -85,7 +85,13 @@ export class Api {
       app.use(jwt({
         secret,
         getToken: (req) => {
-          if (req.method.toLowerCase() === 'get') {
+          // Special routes I don't want the average user to see :)
+          // TODO: Create route-based authentication, decorators would be nice.
+          const blacklistedRoutes = [
+            'keys'
+          ]
+
+          if (req.method.toLowerCase() === 'get' && !blacklistedRoutes.some(route => req.route.toLowerCase().includes(route))) {
             // *Hacky* approach to bypass request validation for GET requests, since I want anyone to be able to see the data.
             return jsonwebtoken.sign('GET', secret)
           }

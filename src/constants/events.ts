@@ -16,6 +16,11 @@ export const Events = {
       deleted: 'guildSuggestionDeleted'
     }
   },
+  giveaway: {
+    created: 'giveawayCreated',
+    deleted: 'giveawayCreated',
+    updated: 'giveawayCreated'
+  },
   referral: {
     created: 'referralCreated',
     deleted: 'referralDeleted',
