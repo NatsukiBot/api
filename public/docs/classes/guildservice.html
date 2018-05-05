@@ -98,16 +98,22 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="guildservice.html#guildrepository" class="tsd-kind-icon">guild<wbr>Repository</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="guildservice.html#suggestionrepository" class="tsd-kind-icon">suggestion<wbr>Repository</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#createsuggestion" class="tsd-kind-icon">create<wbr>Suggestion</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#deletesuggestion" class="tsd-kind-icon">delete<wbr>Suggestion</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#getsuggestionbyid" class="tsd-kind-icon">get<wbr>Suggestion<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#getsuggestions" class="tsd-kind-icon">get<wbr>Suggestions</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="guildservice.html#updatesuggestion" class="tsd-kind-icon">update<wbr>Suggestion</a></li>
 							</ul>
 						</section>
 					</div>
@@ -121,7 +127,17 @@
 					<div class="tsd-signature tsd-kind-icon">guild<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Guild</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(Guild)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L16">services/guild.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L16">services/guild.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="suggestionrepository" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> suggestion<wbr>Repository</h3>
+					<div class="tsd-signature tsd-kind-icon">suggestion<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(GuildSuggestion)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L17">services/guild.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -138,7 +154,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L30">services/guild.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L32">services/guild.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -152,6 +168,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createsuggestion" class="tsd-anchor"></a>
+					<h3>create<wbr>Suggestion</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Suggestion<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, suggestion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L55">services/guild.ts:55</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>suggestion: <span class="tsd-signature-type">GuildSuggestion</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="deletebyid" class="tsd-anchor"></a>
 					<h3>delete<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -161,13 +203,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L39">services/guild.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L41">services/guild.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deletesuggestion" class="tsd-anchor"></a>
+					<h3>delete<wbr>Suggestion</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Suggestion<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, suggestionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L60">services/guild.ts:60</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>suggestionId: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -184,7 +252,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L22">services/guild.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L23">services/guild.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -207,10 +275,59 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L18">services/guild.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L19">services/guild.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Guild</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsuggestionbyid" class="tsd-anchor"></a>
+					<h3>get<wbr>Suggestion<wbr>ById</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Suggestion<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, suggestionId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L51">services/guild.ts:51</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>suggestionId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsuggestions" class="tsd-anchor"></a>
+					<h3>get<wbr>Suggestions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Suggestions<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L45">services/guild.ts:45</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -224,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/4707237/src/services/guild.ts#L35">services/guild.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L37">services/guild.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -234,6 +351,32 @@
 								</li>
 								<li>
 									<h5>guild: <span class="tsd-signature-type">Guild</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updatesuggestion" class="tsd-anchor"></a>
+					<h3>update<wbr>Suggestion</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Suggestion<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, suggestion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">GuildSuggestion</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/guild.ts#L64">services/guild.ts:64</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>suggestion: <span class="tsd-signature-type">GuildSuggestion</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -256,6 +399,12 @@
 						<a href="api.html" class="tsd-kind-icon">Api</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="giveawaycontroller.html" class="tsd-kind-icon">Giveaway<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="giveawayservice.html" class="tsd-kind-icon">Giveaway<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="guildcontroller.html" class="tsd-kind-icon">Guild<wbr>Controller</a>
 					</li>
 				</ul>
@@ -266,11 +415,20 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="guildservice.html#guildrepository" class="tsd-kind-icon">guild<wbr>Repository</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="guildservice.html#suggestionrepository" class="tsd-kind-icon">suggestion<wbr>Repository</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="guildservice.html#create" class="tsd-kind-icon">create</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="guildservice.html#createsuggestion" class="tsd-kind-icon">create<wbr>Suggestion</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="guildservice.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="guildservice.html#deletesuggestion" class="tsd-kind-icon">delete<wbr>Suggestion</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="guildservice.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a>
@@ -279,7 +437,16 @@
 								<a href="guildservice.html#getall" class="tsd-kind-icon">get<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="guildservice.html#getsuggestionbyid" class="tsd-kind-icon">get<wbr>Suggestion<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="guildservice.html#getsuggestions" class="tsd-kind-icon">get<wbr>Suggestions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="guildservice.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="guildservice.html#updatesuggestion" class="tsd-kind-icon">update<wbr>Suggestion</a>
 							</li>
 						</ul>
 					</li>

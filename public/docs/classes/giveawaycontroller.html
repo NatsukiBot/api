@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UserService | Natsuki API</title>
+	<title>GiveawayController | Natsuki API</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="userservice.html">UserService</a>
+					<a href="giveawaycontroller.html">GiveawayController</a>
 				</li>
 			</ul>
-			<h1>Class UserService</h1>
+			<h1>Class GiveawayController</h1>
 		</div>
 	</div>
 </header>
@@ -67,11 +67,12 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>User service that handles storing and modifying user data.</p>
+						<p>The Giveaway controller. Contains all endpoints for handling Giveaways.</p>
 					</div>
+					<p>/api/giveaways</p>
 					<dl class="tsd-comment-tags">
 						<dt>class</dt>
-						<dd><p>UserService</p>
+						<dd><p>GiveawayController</p>
 						</dd>
 					</dl>
 				</div>
@@ -80,72 +81,95 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">UserService</span>
+						<span class="target">GiveawayController</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/baseservice.html" class="tsd-signature-type">BaseService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><a href="../interfaces/basecontroller.html" class="tsd-signature-type">BaseController</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="giveawaycontroller.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userbalancerepository" class="tsd-kind-icon">user<wbr>Balance<wbr>Repository</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userlevelrepository" class="tsd-kind-icon">user<wbr>Level<wbr>Repository</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userrepository" class="tsd-kind-icon">user<wbr>Repository</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="giveawaycontroller.html#giveawayservice" class="tsd-kind-icon">giveaway<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="giveawaycontroller.html#socketservice" class="tsd-kind-icon">socket<wbr>Service</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#create" class="tsd-kind-icon">create</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatebalance" class="tsd-kind-icon">update<wbr>Balance</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatelevel" class="tsd-kind-icon">update<wbr>Level</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="giveawaycontroller.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="giveawaycontroller.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="giveawaycontroller.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="giveawaycontroller.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="giveawaycontroller.html#redactkey" class="tsd-kind-icon">redact<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="giveawaycontroller.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Giveaway<wbr>Controller<span class="tsd-signature-symbol">(</span>giveawayService<span class="tsd-signature-symbol">: </span><a href="giveawayservice.html" class="tsd-signature-type">GiveawayService</a>, socketService<span class="tsd-signature-symbol">: </span><a href="socketservice.html" class="tsd-signature-type">SocketService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="giveawaycontroller.html" class="tsd-signature-type">GiveawayController</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L18">controllers/giveaway.ts:18</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>giveawayService: <a href="giveawayservice.html" class="tsd-signature-type">GiveawayService</a></h5>
+								</li>
+								<li>
+									<h5>socketService: <a href="socketservice.html" class="tsd-signature-type">SocketService</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="giveawaycontroller.html" class="tsd-signature-type">GiveawayController</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="userbalancerepository" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Balance<wbr>Repository</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Balance<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserBalance</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserBalance)</span></div>
+					<a name="giveawayservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> giveaway<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">giveaway<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="giveawayservice.html" class="tsd-signature-type">GiveawayService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L18">services/user.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L20">controllers/giveaway.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="userlevelrepository" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Level<wbr>Repository</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Level<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserLevel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserLevel)</span></div>
+					<a name="socketservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> socket<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">socket<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="socketservice.html" class="tsd-signature-type">SocketService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L17">services/user.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="userrepository" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Repository</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(User)</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L16">services/user.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L21">controllers/giveaway.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,22 +180,37 @@
 					<a name="create" class="tsd-anchor"></a>
 					<h3>create</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>user<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L34">services/user.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L62">controllers/giveaway.ts:62</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a giveaway.</p>
+								</div>
+								<p>POST /</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>GiveawayController</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>user: <span class="tsd-signature-type">User</span></h5>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+								<li>
+									<h5>response: <span class="tsd-signature-type">Response</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<Giveaway></p>
 						</li>
 					</ul>
 				</section>
@@ -179,22 +218,37 @@
 					<a name="deletebyid" class="tsd-anchor"></a>
 					<h3>delete<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">delete<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>ById<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L43">services/user.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L84">controllers/giveaway.ts:84</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Hard deletes a giveaway.</p>
+								</div>
+								<p>DELETE /:id</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>GiveawayController</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+								<li>
+									<h5>response: <span class="tsd-signature-type">Response</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<void></p>
 						</li>
 					</ul>
 				</section>
@@ -202,22 +256,37 @@
 					<a name="findbyid" class="tsd-anchor"></a>
 					<h3>find<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">find<wbr>ById<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L24">services/user.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L48">controllers/giveaway.ts:48</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a giveaway by their ID.</p>
+								</div>
+								<p>GET /:id</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>GiveawayController</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+								<li>
+									<h5>response: <span class="tsd-signature-type">Response</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<Giveaway></p>
 						</li>
 					</ul>
 				</section>
@@ -225,42 +294,60 @@
 					<a name="getall" class="tsd-anchor"></a>
 					<h3>get<wbr>All</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>All<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L20">services/user.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L34">controllers/giveaway.ts:34</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all giveaways from the database.</p>
+								</div>
+								<p>GET /</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>GiveawayController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+								<li>
+									<h5>response: <span class="tsd-signature-type">Response</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise&lt;Giveaway[]&gt;</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="updatebalance" class="tsd-anchor"></a>
-					<h3>update<wbr>Balance</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Balance<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, userBalance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UserBalance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="redactkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> redact<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">redact<wbr>Key<span class="tsd-signature-symbol">(</span>giveaway<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Giveaway</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Giveaway</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L80">services/user.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L118">controllers/giveaway.ts:118</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>userBalance: <span class="tsd-signature-type">UserBalance</span></h5>
+									<h5>giveaway: <span class="tsd-signature-type">Giveaway</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Giveaway</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -268,51 +355,37 @@
 					<a name="updatebyid" class="tsd-anchor"></a>
 					<h3>update<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, user<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">update<wbr>ById<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L39">services/user.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/controllers/giveaway.ts#L105">controllers/giveaway.ts:105</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates a giveaway by ID.</p>
+								</div>
+								<p>PUT /:id</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>GiveawayController</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
 								</li>
 								<li>
-									<h5>user: <span class="tsd-signature-type">User</span></h5>
+									<h5>response: <span class="tsd-signature-type">Response</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="updatelevel" class="tsd-anchor"></a>
-					<h3>update<wbr>Level</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Level<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, userLevelBalance<span class="tsd-signature-symbol">: </span><a href="../interfaces/userlevelbalance.html" class="tsd-signature-type">UserLevelBalance</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/NatsukiBot/api/blob/91eeaa8/src/services/user.ts#L47">services/user.ts:47</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>userLevelBalance: <a href="../interfaces/userlevelbalance.html" class="tsd-signature-type">UserLevelBalance</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<void></p>
 						</li>
 					</ul>
 				</section>
@@ -331,9 +404,42 @@
 					<li class=" tsd-kind-class">
 						<a href="api.html" class="tsd-kind-icon">Api</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="giveawaycontroller.html" class="tsd-kind-icon">Giveaway<wbr>Controller</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="giveawaycontroller.html#giveawayservice" class="tsd-kind-icon">giveaway<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="giveawaycontroller.html#socketservice" class="tsd-kind-icon">socket<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#create" class="tsd-kind-icon">create</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#getall" class="tsd-kind-icon">get<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="giveawaycontroller.html#redactkey" class="tsd-kind-icon">redact<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="giveawaycontroller.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="giveawayservice.html" class="tsd-kind-icon">Giveaway<wbr>Service</a>
 					</li>
@@ -355,45 +461,9 @@
 					<li class=" tsd-kind-class">
 						<a href="usercontroller.html" class="tsd-kind-icon">User<wbr>Controller</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="userservice.html" class="tsd-kind-icon">User<wbr>Service</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="userservice.html#userbalancerepository" class="tsd-kind-icon">user<wbr>Balance<wbr>Repository</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="userservice.html#userlevelrepository" class="tsd-kind-icon">user<wbr>Level<wbr>Repository</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="userservice.html#userrepository" class="tsd-kind-icon">user<wbr>Repository</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#create" class="tsd-kind-icon">create</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#getall" class="tsd-kind-icon">get<wbr>All</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#updatebalance" class="tsd-kind-icon">update<wbr>Balance</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="userservice.html#updatelevel" class="tsd-kind-icon">update<wbr>Level</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/basecontroller.html" class="tsd-kind-icon">Base<wbr>Controller</a>
 					</li>
