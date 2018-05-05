@@ -91,7 +91,7 @@ export class Api {
             'keys'
           ]
 
-          if (req.method.toLowerCase() === 'get' && !blacklistedRoutes.some(route => req.route.toLowerCase().includes(route))) {
+          if (req.method.toLowerCase() === 'get' && !blacklistedRoutes.some(route => req.path.toLowerCase().includes(route))) {
             // *Hacky* approach to bypass request validation for GET requests, since I want anyone to be able to see the data.
             return jsonwebtoken.sign('GET', secret)
           }
