@@ -22,14 +22,7 @@ export class UserService implements BaseService<User> {
   }
 
   public async findById (id: string | number) {
-    return this.userRepository
-      .createQueryBuilder('user')
-      .innerJoinAndSelect('user.level', 'level')
-      .innerJoinAndSelect('user.settings', 'settings')
-      .innerJoinAndSelect('user.balance', 'balance')
-      .innerJoinAndSelect('user.profile', 'profile')
-      .where('user.id = :id', { id })
-      .getOne()
+    return this.userRepository.findOne(id, { relations: ['level', 'settings', 'balance', 'profile'] })
   }
 
   public create (user: User) {

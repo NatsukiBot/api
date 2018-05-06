@@ -22,12 +22,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async findById (id: string | number) {
-    return this.guildRepository
-      .createQueryBuilder('guild')
-      .innerJoinAndSelect('guild.settings', 'settings')
-      .leftJoinAndSelect('guild.suggestions', 'suggestions')
-      .where('guild.id = :id', { id })
-      .getOne()
+    return this.guildRepository.findOne(id, { relations: ['settings', 'suggestions', 'supportTickets'] })
   }
 
   public create (guild: Guild) {
@@ -50,9 +45,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getSuggestions (id: string) {
-    return this.suggestionRepository.createQueryBuilder('suggestion')
-      .where('suggestion.guildId = :id', { id })
-      .getMany()
+    return this.suggestionRepository.find({ where: { 'guildId': id } })
   }
 
   public getSuggestionById (id: string, suggestionId: number) {
@@ -79,9 +72,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getSupportTickets (id: string) {
-    return this.supportTicketRepository.createQueryBuilder('ticket')
-      .where('ticket.guildId = :id', { id })
-      .getMany()
+    return this.supportTicketRepository.find({ where: { 'guildId': id } })
   }
 
   public getSupportTicketById (id: string, ticketId: number) {
