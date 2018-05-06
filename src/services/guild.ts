@@ -76,7 +76,7 @@ export class GuildService implements BaseService<Guild> {
 
     const index = guild.suggestions.findIndex(x => x.id === suggestionId)
 
-    guild.suggestions[index] = suggestion
+    guild.suggestions[index].description = suggestion.description
 
     return this.guildRepository.save(guild)
   }
@@ -113,7 +113,7 @@ export class GuildService implements BaseService<Guild> {
 
     const index = guild.supportTickets.findIndex(x => x.id === ticketId)
 
-    guild.supportTickets[index] = supportTicket
+    guild.supportTickets[index].description = supportTicket.description
 
     return this.guildRepository.save(guild)
   }
