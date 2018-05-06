@@ -43,7 +43,7 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateLevel (id: string, userLevelBalance: UserLevelBalance) {
-    const user = await this.userRepository.findOne(id)
+    const user = await this.userRepository.findOne(id, { relations: ['level', 'balance'] })
 
     if (!user) {
       return
@@ -61,7 +61,7 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateBalance (id: string, userBalance: UserBalance) {
-    const user = await this.userRepository.findOne(id)
+    const user = await this.userRepository.findOne(id, { relations: ['balance'] })
 
     if (!user) {
       return
@@ -73,7 +73,7 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
-    const user = await this.userRepository.findOne(id)
+    const user = await this.userRepository.findOne(id, { relations: ['profile'] })
 
     if (!user) {
       return
