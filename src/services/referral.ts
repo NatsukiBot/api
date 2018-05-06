@@ -32,10 +32,16 @@ export class ReferralService implements BaseService<Referral> {
   }
 
   public updateById (id: string | number, referral: Referral) {
-    return this.referralRepository.updateById(id, referral)
+    return this.referralRepository.save(referral)
   }
 
-  public deleteById (id: string | number) {
-    return this.referralRepository.deleteById(id)
+  public async deleteById (id: string | number) {
+    const referral = await this.referralRepository.findOne(id)
+
+    if (!referral) {
+      return
+    }
+
+    return this.referralRepository.remove(referral)
   }
 }

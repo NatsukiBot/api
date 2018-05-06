@@ -38,87 +38,34 @@ export class UserService implements BaseService<User> {
   }
 
   public updateById (id: string | number, user: User) {
-    return this.userRepository.updateById(id, user)
+    return this.userRepository.save(user)
   }
 
-  public deleteById (id: string | number) {
-    return this.userRepository.deleteById(id)
+  public async deleteById (id: string | number) {
+    const user = await this.userRepository.findOne(id)
+
+    if (!user) {
+      return
+    }
+
+    return this.userRepository.remove(user)
   }
 
   public async updateLevel (id: string, userLevelBalance: UserLevelBalance) {
-    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
+    userLevelBalance.level.timestamp = new Date()
 
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.level', 'level')
-      .leftJoinAndSelect('user.balance', 'balance')
-      .where('user.id = :id', { id })
-      .getOne()
-
-    if (!user) {
-      return
+    if (userLevelBalance.balance) {
+      this.userBalanceRepository.save(userLevelBalance.balance)
     }
 
-    const userLevel = userLevelBalance.level
-    const userBalance = userLevelBalance.balance
-
-    const level = user.level
-    level.xp = userLevel.xp
-    level.level = userLevel.level
-    level.timestamp = new Date()
-
-    const balance = user.balance
-
-    if (userBalance) {
-      balance.balance = userBalance.balance
-      balance.netWorth = userBalance.netWorth
-    }
-
-    this.userBalanceRepository.updateById(balance.id, balance)
-    return this.userLevelRepository.updateById(level.id, level)
+    return this.userLevelRepository.save(userLevelBalance.level)
   }
 
   public async updateBalance (id: string, userBalance: UserBalance) {
-    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
-
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.balance', 'balance')
-      .where('user.id = :id', { id })
-      .getOne()
-
-    if (!user) {
-      return
-    }
-
-    const balance = user.balance
-
-    balance.balance = userBalance.balance
-    balance.netWorth = userBalance.netWorth
-    balance.dateLastClaimedDailies = userBalance.dateLastClaimedDailies
-
-    return this.userBalanceRepository.updateById(balance.id, balance)
+    return this.userBalanceRepository.save(userBalance)
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
-    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
-
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.profile', 'profile')
-      .where('user.id = :id', { id })
-      .getOne()
-
-    if (!user) {
-      return
-    }
-
-    const profile = user.profile
-
-    profile.background = userProfile.background
-    profile.bio = userProfile.bio
-    profile.title = userProfile.title
-
-    return this.userBalanceRepository.updateById(profile.id, profile)
+    return this.userBalanceRepository.save(userProfile)
   }
 }

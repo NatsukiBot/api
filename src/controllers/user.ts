@@ -97,7 +97,7 @@ export class UserController implements BaseController<User> {
    * PUT /:id
    * @param {Request} request
    * @param {Response} response
-   * @returns Promise<void>
+   * @returns Promise<User>
    * @memberof UserController
    */
   @httpPut('/:id')

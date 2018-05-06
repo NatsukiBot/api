@@ -4,6 +4,6 @@ export interface BaseController<T> {
   getAll: (request: Request, response: Response) => Promise<T[]>
   findById: (request: Request, response: Response) => Promise<T | undefined>
   create: (request: Request, response: Response) => Promise<T>
-  updateById: (request: Request, response: Response) => Promise<void>
-  deleteById: (request: Request, response: Response) => Promise<void>
+  updateById: (request: Request, response: Response) => Promise<T>
+  deleteById: (request: Request, response: Response) => Promise<T | undefined>
 }
