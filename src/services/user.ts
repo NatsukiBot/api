@@ -49,12 +49,15 @@ export class UserService implements BaseService<User> {
       return
     }
 
-    userLevelBalance.level.timestamp = new Date()
+    const { balance, level } = userLevelBalance
 
-    user.level = userLevelBalance.level
+    user.level.timestamp = new Date()
+    user.level.level = level.level
+    user.level.xp = level.xp
 
-    if (userLevelBalance.balance) {
-      user.balance = userLevelBalance.balance
+    if (balance) {
+      user.balance.balance = balance.balance
+      user.balance.netWorth = balance.netWorth
     }
 
     return this.userRepository.save(user)
