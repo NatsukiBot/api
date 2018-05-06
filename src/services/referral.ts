@@ -19,12 +19,7 @@ export class ReferralService implements BaseService<Referral> {
   }
 
   public async findById (id: string | number) {
-    return this.referralRepository
-      .createQueryBuilder('referral')
-      .innerJoinAndSelect('referral.user', 'user')
-      .innerJoinAndSelect('referral.guild', 'guild')
-      .where('referral.id = :id', { id })
-      .getOne()
+    return this.referralRepository.findOne(id, { relations: ['user', 'guild'] })
   }
 
   public create (referral: Referral) {

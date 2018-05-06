@@ -15,18 +15,11 @@ export class GiveawayService implements BaseService<Giveaway> {
   private giveawayRepository = getRepository(Giveaway)
 
   public getAll () {
-    return this.giveawayRepository
-    .createQueryBuilder('giveaway')
-    .innerJoinAndSelect('giveaway.items', 'items')
-    .getMany()
+    return this.giveawayRepository.find({ relations: ['items'] })
   }
 
   public async findById (id: string | number) {
-    return this.giveawayRepository
-      .createQueryBuilder('giveaway')
-      .innerJoinAndSelect('giveaway.items', 'items')
-      .where('giveaway.id = :id', { id })
-      .getOne()
+    return this.giveawayRepository.findOne(id, { relations: ['items'] })
   }
 
   public create (giveaway: Giveaway) {
