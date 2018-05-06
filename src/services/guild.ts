@@ -67,8 +67,18 @@ export class GuildService implements BaseService<Guild> {
     return this.suggestionRepository.remove(suggestion)
   }
 
-  public updateSuggestion (id: string, suggestion: GuildSuggestion) {
-    return this.suggestionRepository.save(suggestion)
+  public async updateSuggestion (id: string, suggestionId: number, suggestion: GuildSuggestion) {
+    const guild = await this.guildRepository.findOne(id, { relations: ['suggestions'] })
+
+    if (!guild) {
+      return
+    }
+
+    const index = guild.suggestions.findIndex(x => x.id === suggestionId)
+
+    guild.suggestions[index] = suggestion
+
+    return this.guildRepository.save(guild)
   }
 
   public getSupportTickets (id: string) {
@@ -94,7 +104,17 @@ export class GuildService implements BaseService<Guild> {
     this.supportTicketRepository.remove(ticket)
   }
 
-  public async updateSupportTicket (id: string, supportTicket: GuildSupportTicket) {
-    return this.supportTicketRepository.save(supportTicket)
+  public async updateSupportTicket (id: string, ticketId: number, supportTicket: GuildSupportTicket) {
+    const guild = await this.guildRepository.findOne(id, { relations: ['supportTickets'] })
+
+    if (!guild) {
+      return
+    }
+
+    const index = guild.supportTickets.findIndex(x => x.id === ticketId)
+
+    guild.supportTickets[index] = supportTicket
+
+    return this.guildRepository.save(guild)
   }
 }
