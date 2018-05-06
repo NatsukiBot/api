@@ -14,8 +14,6 @@ import { UserLevelBalance } from '../models/userLevelBalance.model'
 @provide(Types.UserService)
 export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
-  private userLevelRepository = getRepository(UserLevel)
-  private userBalanceRepository = getRepository(UserBalance)
 
   public getAll () {
     return this.userRepository.find()
@@ -45,22 +43,44 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateLevel (id: string, userLevelBalance: UserLevelBalance) {
-    userLevelBalance.level.timestamp = new Date()
+    const user = await this.userRepository.findOne(id)
 
-    if (userLevelBalance.balance) {
-      this.userBalanceRepository.save(userLevelBalance.balance)
+    if (!user) {
+      return
     }
 
-    return this.userLevelRepository.save(userLevelBalance.level)
+    userLevelBalance.level.timestamp = new Date()
+
+    user.level = userLevelBalance.level
+
+    if (userLevelBalance.balance) {
+      user.balance = userLevelBalance.balance
+    }
+
+    return this.userRepository.save(user)
   }
 
   public async updateBalance (id: string, userBalance: UserBalance) {
-    userBalance.user.id = id
-    return this.userBalanceRepository.save(userBalance)
+    const user = await this.userRepository.findOne(id)
+
+    if (!user) {
+      return
+    }
+
+    user.balance = userBalance
+
+    return this.userRepository.save(user)
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
-    userProfile.user.id = id
-    return this.userBalanceRepository.save(userProfile)
+    const user = await this.userRepository.findOne(id)
+
+    if (!user) {
+      return
+    }
+
+    user.profile = userProfile
+
+    return this.userRepository.save(user)
   }
 }
