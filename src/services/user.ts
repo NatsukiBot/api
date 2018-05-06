@@ -1,4 +1,4 @@
-import { User, UserBalance, UserLevel } from '@natsuki/db'
+import { User, UserBalance, UserLevel, UserProfile } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -27,6 +27,7 @@ export class UserService implements BaseService<User> {
       .innerJoinAndSelect('user.level', 'level')
       .innerJoinAndSelect('user.settings', 'settings')
       .innerJoinAndSelect('user.balance', 'balance')
+      .innerJoinAndSelect('user.profile', 'profile')
       .where('user.id = :id', { id })
       .getOne()
   }
@@ -97,5 +98,27 @@ export class UserService implements BaseService<User> {
     balance.dateLastClaimedDailies = userBalance.dateLastClaimedDailies
 
     return this.userBalanceRepository.updateById(balance.id, balance)
+  }
+
+  public async updateProfile (id: string, userProfile: UserProfile) {
+    // TODO: Fix this when TypeORM makes a Stable Release that fixes the Cascades.
+
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.profile', 'profile')
+      .where('user.id = :id', { id })
+      .getOne()
+
+    if (!user) {
+      return
+    }
+
+    const profile = user.profile
+
+    profile.background = userProfile.background
+    profile.bio = userProfile.bio
+    profile.title = userProfile.title
+
+    return this.userBalanceRepository.updateById(profile.id, profile)
   }
 }
