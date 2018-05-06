@@ -55,10 +55,12 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateBalance (id: string, userBalance: UserBalance) {
+    userBalance.user.id = id
     return this.userBalanceRepository.save(userBalance)
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
+    userProfile.user.id = id
     return this.userBalanceRepository.save(userProfile)
   }
 }
