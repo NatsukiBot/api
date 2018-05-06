@@ -166,7 +166,7 @@ export class GuildController implements BaseController<Guild> {
    */
   @httpPut('/:id/suggestions/:suggestionId')
   async updateSuggestionById (request: Request, response: Response) {
-    const updateResponse = this.guildService.updateSuggestion(request.params.id, request.body)
+    const updateResponse = this.guildService.updateSuggestion(request.params.id, request.params.suggestionId, request.body)
     await updateResponse.then(() => {
       const returnObject: Guild = request.body
       returnObject.id = request.params.id
@@ -249,7 +249,7 @@ export class GuildController implements BaseController<Guild> {
    */
   @httpPut('/:id/support-tickets/:ticketId')
   async updateSupportTicketById (request: Request, response: Response) {
-    const updateResponse = this.guildService.updateSupportTicket(request.params.id, request.body)
+    const updateResponse = this.guildService.updateSupportTicket(request.params.id, request.params.ticketId, request.body)
     await updateResponse.then(() => {
       const returnObject: GuildSupportTicket = request.body
       this.socketService.send(Events.guild.supportTicket.updated, returnObject)
