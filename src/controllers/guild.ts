@@ -5,7 +5,7 @@ import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
-import { Guild } from '@natsuki/db'
+import { Guild, GuildSupportTicket } from '@natsuki/db'
 import { Logger } from '@natsuki/util'
 
 /**
@@ -190,6 +190,88 @@ export class GuildController implements BaseController<Guild> {
     const deleteResponse = this.guildService.deleteSuggestion(request.params.id, request.body)
     await deleteResponse.then(() => {
       this.socketService.send(Events.guild.suggestion.deleted, { guildId: request.params.id, suggestionId: request.body })
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return deleteResponse
+  }
+
+  /**
+   * Gets all support tickets in a Guild
+   *
+   * GET /:id/support-tickets
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/support-tickets')
+  async getSupportTickets (request: Request, response: Response) {
+    return this.guildService.getSupportTickets(request.params.id)
+  }
+
+  /**
+   * Gets a Guild support ticket by ID.
+   *
+   * GET /:id/support-tickets/:ticketId
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/support-tickets/:ticketId')
+  async getSupportTicketById (request: Request, response: Response) {
+    return this.guildService.getSupportTicketById(request.params.id, request.body)
+  }
+
+  /**
+   * Creates a support ticket in a Guild
+   *
+   * POST /:id/support-tickets
+   * @param request
+   * @param response
+   */
+  @httpPost('/:id/support-tickets')
+  async createSupportTicket (request: Request, response: Response) {
+    const postResponse = this.guildService.createSupportTicket(request.params.id, request.body)
+    await postResponse.then(item => {
+      this.socketService.send(Events.guild.supportTicket.created, item)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return postResponse
+  }
+
+  /**
+   * Updates a Guild support ticket by ID.
+   *
+   * PUT /:id/support-tickets/:ticketId
+   * @param request
+   * @param response
+   */
+  @httpPut('/:id/support-tickets/:ticketId')
+  async updateSupportTicketById (request: Request, response: Response) {
+    const updateResponse = this.guildService.updateSupportTicket(request.params.id, request.body)
+    await updateResponse.then(() => {
+      const returnObject: GuildSupportTicket = request.body
+      this.socketService.send(Events.guild.supportTicket.updated, returnObject)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return updateResponse
+  }
+
+  /**
+   * Deletes a Guild support ticket by ID.
+   *
+   * DELETE /:id/support-tickets/:ticketId
+   * @param request
+   * @param response
+   */
+  @httpDelete('/:id/support-tickets/:ticketId')
+  async deleteSupportTicketById (request: Request, response: Response) {
+    const deleteResponse = this.guildService.deleteSupportTicket(request.params.id, request.body)
+    await deleteResponse.then(() => {
+      this.socketService.send(Events.guild.supportTicket.deleted, { guildId: request.params.id, ticketId: request.body })
     }).catch((err: any) => {
       Logger.error(err)
     })
