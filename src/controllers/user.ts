@@ -159,4 +159,27 @@ export class UserController implements BaseController<User> {
 
     return balanceResponse
   }
+
+  /**
+   * Updates a user's profile by ID.
+   *
+   * PUT /:id/profile
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
+  @httpPut('/:id/profile')
+  async updateProfile (request: Request, response: Response) {
+    const profileResponse = this.userService.updateProfile(request.params.id, request.body)
+    await profileResponse.then(() => {
+      const returnObject: any = request.body
+      returnObject.userId = request.params.id
+      this.socketService.send(Events.user.profileUpdated, returnObject)
+    }).catch((err: any) => {
+      Logger.error(err)
+    })
+
+    return profileResponse
+  }
 }
