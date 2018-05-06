@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { Guild, GuildSuggestion } from '@natsuki/db'
+import { Guild, GuildSuggestion, GuildSupportTicket } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -15,6 +15,7 @@ import { BaseService } from '../interfaces/BaseService'
 export class GuildService implements BaseService<Guild> {
   private guildRepository = getRepository(Guild)
   private suggestionRepository = getRepository(GuildSuggestion)
+  private supportTicketRepository = getRepository(GuildSupportTicket)
 
   public getAll () {
     return this.guildRepository.find()
@@ -63,5 +64,28 @@ export class GuildService implements BaseService<Guild> {
 
   public updateSuggestion (id: string, suggestion: GuildSuggestion) {
     return this.suggestionRepository.updateById(suggestion.id, suggestion)
+  }
+
+  public getSupportTickets (id: string) {
+    return this.supportTicketRepository.createQueryBuilder('ticket')
+      .where('ticket.guildId = :id', { id })
+      .getMany()
+  }
+
+  public getSupportTicketById (id: string, ticketId: number) {
+    return this.supportTicketRepository.findOneById(ticketId)
+  }
+
+  public createSupportTicket (id: string, supportTicket: GuildSupportTicket) {
+    supportTicket.dateCreated = new Date()
+    return this.supportTicketRepository.save(supportTicket)
+  }
+
+  public deleteSupportTicket (id: string, ticketId: number) {
+    return this.supportTicketRepository.deleteById(ticketId)
+  }
+
+  public updateSupportTicket (id: string, supportTicket: GuildSupportTicket) {
+    return this.supportTicketRepository.updateById(supportTicket.id, supportTicket)
   }
 }
