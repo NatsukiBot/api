@@ -3,7 +3,7 @@ import { Guild, GuildSuggestion, GuildSupportTicket } from '@natsuki/db'
 import { getRepository, getConnection } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
-import { Logger } from '../utilities'
+import { Logger } from '@natsuki/util'
 import { BaseService } from '../interfaces/BaseService'
 
 /**

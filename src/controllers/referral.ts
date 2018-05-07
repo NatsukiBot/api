@@ -3,7 +3,7 @@ import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-ex
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { SocketService } from '../services/socket'
-import { Logger } from '../utilities'
+import { Logger } from '@natsuki/util'
 import { Referral } from '@natsuki/db'
 import { ReferralService } from '../services/referral'
 import { BaseController } from '../interfaces/BaseController'
