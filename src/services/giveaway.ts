@@ -27,11 +27,11 @@ export class GiveawayService implements BaseService<Giveaway> {
     return this.giveawayRepository.save(giveaway)
   }
 
-  public async updateById (id: string | number, giveaway: Giveaway) {
+  public async update (id: string | number, giveaway: Giveaway) {
     return this.giveawayRepository.save(giveaway)
   }
 
-  public async deleteById (id: string | number) {
+  public async delete (id: string | number) {
     const giveaway = await this.giveawayRepository.findOne(id)
 
     if (!giveaway) {

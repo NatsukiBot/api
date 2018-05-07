@@ -1,9 +1,7 @@
-import { Request, Response } from 'express'
-
 export interface BaseService<T> {
   getAll: () => Promise<T[]>
   findById: (id: string | number) => Promise<T | undefined>
   create: (model: T) => Promise<T>
-  updateById: (id: string, model: T) => Promise<T>
-  deleteById: (id: string | number) => Promise<T | undefined>
+  update: (id: string | number, model: T) => Promise<T>
+  delete: (id: string | number) => Promise<T | undefined>
 }

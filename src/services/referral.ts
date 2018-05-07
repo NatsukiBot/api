@@ -26,11 +26,11 @@ export class ReferralService implements BaseService<Referral> {
     return this.referralRepository.save(referral)
   }
 
-  public updateById (id: string | number, referral: Referral) {
+  public update (id: string | number, referral: Referral) {
     return this.referralRepository.save(referral)
   }
 
-  public async deleteById (id: string | number) {
+  public async delete (id: string | number) {
     const referral = await this.referralRepository.findOne(id)
 
     if (!referral) {

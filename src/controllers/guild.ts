@@ -81,7 +81,7 @@ export class GuildController implements BaseController<Guild> {
    */
   @httpDelete('/:id')
   async deleteById (request: Request, response: Response) {
-    const deleteResponse = this.guildService.deleteById(request.params.id)
+    const deleteResponse = this.guildService.delete(request.params.id)
     await deleteResponse.then(() => {
       this.socketService.send(Events.guild.deleted, request.params.id)
     }).catch((err: any) => {
@@ -102,7 +102,7 @@ export class GuildController implements BaseController<Guild> {
    */
   @httpPut('/:id')
   async updateById (request: Request, response: Response) {
-    const updateResponse = this.guildService.updateById(request.params.id, request.body)
+    const updateResponse = this.guildService.update(request.params.id, request.body)
     await updateResponse.then(() => {
       const returnObject: Guild = request.body
       returnObject.id = request.params.id
