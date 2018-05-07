@@ -4,7 +4,7 @@ import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
-import { Logger } from '../utilities'
+import { Logger } from '@natsuki/util'
 import { UserLevel, User } from '@natsuki/db'
 import { BaseController } from '../interfaces/BaseController'
 
