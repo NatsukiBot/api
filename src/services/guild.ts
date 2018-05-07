@@ -68,15 +68,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async updateSuggestion (id: string, suggestionId: number | string, suggestion: GuildSuggestion) {
-    const dbSuggestion = await this.suggestionRepository.findOne(suggestionId)
-
-    if (!dbSuggestion) {
-      return
-    }
-
-    dbSuggestion.description = suggestion.description
-
-    return this.suggestionRepository.save(dbSuggestion)
+    return this.suggestionRepository.update(suggestionId, suggestion)
   }
 
   public getSupportTickets (id: string) {
@@ -103,14 +95,6 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async updateSupportTicket (id: string, ticketId: number | string, supportTicket: GuildSupportTicket) {
-    const ticket = await this.supportTicketRepository.findOne(ticketId)
-
-    if (!ticket) {
-      return
-    }
-
-    ticket.description = supportTicket.description
-
-    return this.supportTicketRepository.save(ticket)
+    return this.supportTicketRepository.update(ticketId, supportTicket)
   }
 }
