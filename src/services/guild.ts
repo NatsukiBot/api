@@ -68,7 +68,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async updateSuggestion (id: string, suggestionId: number | string, suggestion: GuildSuggestion) {
-    return this.suggestionRepository.update(suggestionId, suggestion)
+    return this.suggestionRepository.update(suggestionId, { description: suggestion.description })
   }
 
   public getSupportTickets (id: string) {
@@ -95,6 +95,6 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async updateSupportTicket (id: string, ticketId: number, supportTicket: GuildSupportTicket) {
-    return this.supportTicketRepository.update(ticketId, supportTicket)
+    return this.supportTicketRepository.update(ticketId, { description: supportTicket.description })
   }
 }
