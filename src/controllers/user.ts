@@ -81,7 +81,7 @@ export class UserController implements BaseController<User> {
    */
   @httpDelete('/:id')
   async deleteById (request: Request, response: Response) {
-    const deleteResponse = this.userService.deleteById(request.params.id)
+    const deleteResponse = this.userService.delete(request.params.id)
     await deleteResponse.then(() => {
       this.socketService.send(Events.user.deleted, request.params.id)
     }).catch((err: any) => {
@@ -102,7 +102,7 @@ export class UserController implements BaseController<User> {
    */
   @httpPut('/:id')
   async updateById (request: Request, response: Response) {
-    const updateResponse = this.userService.updateById(request.params.id, request.body)
+    const updateResponse = this.userService.update(request.params.id, request.body)
     await updateResponse.then(() => {
       const returnObject: User = request.body
       returnObject.id = request.params.id

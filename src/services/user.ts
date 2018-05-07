@@ -28,11 +28,11 @@ export class UserService implements BaseService<User> {
     return this.userRepository.save(user)
   }
 
-  public updateById (id: string | number, user: User) {
+  public update (id: string | number, user: User) {
     return this.userRepository.save(user)
   }
 
-  public async deleteById (id: string | number) {
+  public async delete (id: string | number) {
     const user = await this.userRepository.findOne(id)
 
     if (!user) {

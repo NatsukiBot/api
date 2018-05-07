@@ -81,7 +81,7 @@ export class ReferralController implements BaseController<Referral> {
    */
   @httpDelete('/:id')
   async deleteById (request: Request, response: Response) {
-    const deleteResponse = this.referralService.deleteById(request.params.id)
+    const deleteResponse = this.referralService.delete(request.params.id)
     await deleteResponse.then(() => {
       this.socketService.send(Events.referral.deleted, request.params.id)
     }).catch((err: any) => {
@@ -102,7 +102,7 @@ export class ReferralController implements BaseController<Referral> {
    */
   @httpPut('/:id')
   async updateById (request: Request, response: Response) {
-    const updateResponse = this.referralService.updateById(request.params.id, request.body)
+    const updateResponse = this.referralService.update(request.params.id, request.body)
     await updateResponse.then(() => {
       const returnObject: Referral = request.body
       returnObject.id = request.params.id

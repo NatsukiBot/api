@@ -30,11 +30,11 @@ export class GuildService implements BaseService<Guild> {
     return this.guildRepository.save(guild)
   }
 
-  public updateById (id: string | number, guild: Guild) {
+  public update (id: string | number, guild: Guild) {
     return this.guildRepository.save(guild)
   }
 
-  public async deleteById (id: string | number) {
+  public async delete (id: string | number) {
     const guild = await this.guildRepository.findOne(id)
 
     if (!guild) {

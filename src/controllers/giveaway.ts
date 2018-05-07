@@ -82,7 +82,7 @@ export class GiveawayController implements BaseController<Giveaway> {
    */
   @httpDelete('/:id')
   async deleteById (request: Request, response: Response) {
-    const deleteResponse = this.giveawayService.deleteById(request.params.id)
+    const deleteResponse = this.giveawayService.delete(request.params.id)
     await deleteResponse.then(() => {
       this.socketService.send(Events.giveaway.deleted, request.params.id)
     }).catch((err: any) => {
@@ -103,7 +103,7 @@ export class GiveawayController implements BaseController<Giveaway> {
    */
   @httpPut('/:id')
   async updateById (request: Request, response: Response) {
-    const updateResponse = this.giveawayService.updateById(request.params.id, request.body)
+    const updateResponse = this.giveawayService.update(request.params.id, request.body)
     await updateResponse.then(() => {
       const returnObject: Giveaway = request.body
       returnObject.id = request.params.id
