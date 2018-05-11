@@ -14,6 +14,9 @@ import { UserLevelBalance } from '../models/userLevelBalance.model'
 @provide(Types.UserService)
 export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
+  private userBalanceRepository = getRepository(UserBalance)
+  private userLevelRepository = getRepository(UserLevel)
+  private userProfileRepository = getRepository(UserProfile)
 
   public getAll () {
     return this.userRepository.find()
@@ -64,26 +67,10 @@ export class UserService implements BaseService<User> {
   }
 
   public async updateBalance (id: string, userBalance: UserBalance) {
-    const user = await this.userRepository.findOne(id, { relations: ['balance'] })
-
-    if (!user) {
-      return
-    }
-
-    user.balance = userBalance
-
-    return this.userRepository.save(user)
+    return this.userBalanceRepository.update({ user: { id } }, userBalance)
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
-    const user = await this.userRepository.findOne(id, { relations: ['profile'] })
-
-    if (!user) {
-      return
-    }
-
-    user.profile = userProfile
-
-    return this.userRepository.save(user)
+    return this.userProfileRepository.update({ user: { id } }, userProfile)
   }
 }
