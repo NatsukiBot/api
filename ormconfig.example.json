@@ -23,6 +23,11 @@
     "subscribersDir": "src/subscribers"
   },
   "cache": {
-    "duration": 60000
+    "type": "redis",
+    "duration": 60000,
+    "options": {
+      "host": "localhost",
+      "port": 6379
+    }
   }
 }
