@@ -12,7 +12,7 @@ const { clientSecret, clientId } = require('../../api.json').bot
  *
  * @class AuthenticationService
  */
-@provide(Types.UserService)
+@provide(Types.AuthenticationService)
 export class AuthenticationService {
   public async getDiscordAccessToken (code: string, redirect: string) {
     const creds = btoa(`${clientId}:${clientSecret}`)
