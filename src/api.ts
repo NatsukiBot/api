@@ -89,8 +89,7 @@ export class Api {
           // Special routes I don't want the average user to see :)
           // TODO: Create route-based authentication, decorators would be nice.
           const blacklistedRoutes = [
-            'keys',
-            'auth'
+            'keys'
           ]
 
           if (req.method.toLowerCase() === 'get' && !blacklistedRoutes.some(route => req.path.toLowerCase().includes(route))) {

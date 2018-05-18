@@ -24,8 +24,8 @@ export class AuthenticationController {
    * @param request
    * @param response
    */
-  @httpGet('/token')
+  @httpGet('/token/discord')
   async getToken (request: Request, response: Response) {
-    return this.authenticationService.getToken(request.body)
+    return this.authenticationService.getDiscordAccessToken(request.body)
   }
 }
