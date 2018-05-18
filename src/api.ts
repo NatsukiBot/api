@@ -112,13 +112,7 @@ export class Api {
         if (res.headersSent) {
           return next(err)
         }
-        res.status(500)
-
-        if (debug) {
-          return res.render('error', { error: err })
-        }
-
-        res.send({ error: 'Oof! Something went wrong.' })
+        res.status(500).render('Oof! Something went wrong.')
       })
 
       if (debug) {
