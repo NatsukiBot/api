@@ -121,7 +121,9 @@ export class Api {
         res.send({ error: 'Oof! Something went wrong.' })
       })
 
-      app.use(errorHandler())
+      if (debug) {
+        app.use(errorHandler())
+      }
     })
 
     const app = server.build()
