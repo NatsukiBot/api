@@ -7,10 +7,10 @@ import { SocketService } from '../services/socket'
 import { Logger } from '@natsuki/util'
 
 /**
- * The user controller. Contains all endpoints for handling users and user data.
+ * Authentication controller for authenticating users in the web interface through Discord.
  *
- * /api/users
- * @class UserController
+ * /api/auth
+ * @class AuthenticationController
  */
 @controller('/api/auth')
 export class AuthenticationController {

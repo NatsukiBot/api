@@ -8,9 +8,9 @@ import btoa from 'btoa'
 const { clientSecret, clientId } = require('../../api.json').bot
 
 /**
- * User service that handles storing and modifying user data.
+ * Authentication service to handle authentication through Discord and web interface.
  *
- * @class UserService
+ * @class AuthenticationService
  */
 @provide(Types.UserService)
 export class AuthenticationService {
