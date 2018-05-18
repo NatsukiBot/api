@@ -1,4 +1,5 @@
 export const Types = {
+  AuthenticationService: Symbol('AuthenticationService'),
   UserService: Symbol('UserService'),
   GuildService: Symbol('GuildService'),
   GiveawayService: Symbol('GiveawayService'),
