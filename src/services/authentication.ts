@@ -15,9 +15,11 @@ const { clientSecret, clientId } = require('../../api.json').bot
 export class AuthenticationService {
   public async getDiscordAccessToken (code: string, redirect: string) {
     const creds = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
-    return axios.post(
+    const response = await axios.post(
       `https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`,
       null,
       { headers: { Authorization: `Basic ${creds}` } })
+
+    return response.data
   }
 }
