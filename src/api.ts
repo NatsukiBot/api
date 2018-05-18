@@ -110,10 +110,10 @@ export class Api {
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
         console.error(err)
-        res.status(500).render('Oof! Something went wrong.')
+        res.status(500).send('Oof! Something went wrong.')
       })
 
-      if (debug) {
+      if (debug === true) {
         app.use(errorHandler())
       }
     })
