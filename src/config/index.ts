@@ -1,5 +1,11 @@
 import { Config } from '../models'
 
+declare var process: {
+  env: {
+    NODE_ENV: string
+  }
+}
+
 const env = process.env.NODE_ENV || 'development'
 const isProd = env === 'production'
 
