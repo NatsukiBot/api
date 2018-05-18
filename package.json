@@ -3,7 +3,6 @@
   "version": "0.11.0",
   "description": "API for Natsuki Discord bot.",
   "devDependencies": {
-    "@types/btoa": "^1.2.0",
     "@types/compression": "0.0.35",
     "@types/cors": "^2.8.3",
     "@types/errorhandler": "0.0.32",
@@ -35,7 +34,6 @@
     "@natsuki/util": "github:NatsukiBot/util",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",
-    "btoa": "^1.2.1",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
     "errorhandler": "^1.5.0",
