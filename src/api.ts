@@ -109,9 +109,7 @@ export class Api {
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        if (res.headersSent) {
-          return next(err)
-        }
+        console.error(err)
         res.status(500).render('Oof! Something went wrong.')
       })
 
