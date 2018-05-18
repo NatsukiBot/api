@@ -4,5 +4,6 @@
   "bot": {
     "clientId": "",
     "clientSecret": ""
-  }
+  },
+  "debug": false
 }

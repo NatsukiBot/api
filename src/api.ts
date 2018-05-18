@@ -18,7 +18,7 @@ import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
 import './ioc/loader'
-const { secret, apiServerIp } = require('../api.json')
+const { secret, apiServerIp, debug } = require('../api.json')
 
 /**
  * The API server
@@ -109,8 +109,16 @@ export class Api {
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        err.status = 404
-        next(err)
+        if (res.headersSent) {
+          return next(err)
+        }
+        res.status(500)
+
+        if (debug) {
+          return res.render('error', { error: err })
+        }
+
+        res.send({ error: 'Oof! Something went wrong.' })
       })
 
       app.use(errorHandler())
