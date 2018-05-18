@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { controller, httpGet, httpDelete, httpPut, httpPost, queryParam } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { AuthenticationService } from '../services/authentication'
@@ -24,8 +24,8 @@ export class AuthenticationController {
    * @param request
    * @param response
    */
-  @httpGet('/token/discord')
-  async getToken (request: Request, response: Response) {
-    return this.authenticationService.getDiscordAccessToken(request.body)
+  @httpGet('/token/discord/')
+  async getToken (@queryParam('code') code: string, @queryParam('redirect') redirect: string) {
+    return this.authenticationService.getDiscordAccessToken(code, redirect)
   }
 }
