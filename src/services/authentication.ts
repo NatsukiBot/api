@@ -1,4 +1,4 @@
-import { getRepository, getConnection } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { Logger } from '@natsuki/util'

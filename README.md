@@ -8,6 +8,14 @@
 
 Generated documentation can be found here: https://natsuki.tk/api/docs/
 
+## Installation
+
+1. Clone the repo: `git clone https://github.com/NatsukiBot/api.git`
+2. Run `npm i`
+3. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
+4. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
+5. Run `npm start` to start the API on port 3001. You can do `npm run prod` to start the API in production mode on port 5000.
+
 ## Security
 
 This API does not store any personal information, but it is designed to be as secure as an API that does.
@@ -33,14 +41,6 @@ To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses I
 The current limit is 150 requests per 15 minutes. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.
 
 The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API caches the data on their end to reduce the number of requests made.
-
-## Installation
-
-1. Clone the repo: `git clone https://github.com/NatsukiBot/api.git`
-2. Run `npm i`
-3. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
-4. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
-5. Run `npm start` to start the API on port 5000. You can do `npm run prod` to start the API in production mode on port 3001.
 
 ## Usage
 

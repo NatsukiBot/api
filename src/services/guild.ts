@@ -1,6 +1,6 @@
 // TODO: Replace with Guild models
 import { Guild, GuildSuggestion, GuildSupportTicket } from '@natsuki/db'
-import { getRepository, getConnection } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { Logger } from '@natsuki/util'

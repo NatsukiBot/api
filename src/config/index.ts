@@ -11,6 +11,6 @@ const isProd = env === 'production'
 
 export const config: Config = {
   name: 'api',
-  port: isProd ? 5000 : 5001,
+  port: isProd ? 5000 : 3001,
   env: isProd ? 'prod' : 'dev'
 }
