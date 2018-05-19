@@ -21,8 +21,8 @@ export class AuthenticationController {
 
   /**
    * Gets an access token from Discord.
-   * @param request
-   * @param response
+   * @param code
+   * @param redirect
    */
   @httpGet('/token/discord/')
   async getToken (@queryParam('code') code: string, @queryParam('redirect') redirect: string) {

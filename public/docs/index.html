@@ -69,6 +69,14 @@
 				<p><a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg" alt="Conventional Commits"></a></p>
 				<h2 id="documentation">Documentation</h2>
 				<p>Generated documentation can be found here: <a href="https://natsuki.tk/api/docs/">https://natsuki.tk/api/docs/</a></p>
+				<h2 id="installation">Installation</h2>
+				<ol>
+					<li>Clone the repo: <code>git clone https://github.com/NatsukiBot/api.git</code></li>
+					<li>Run <code>npm i</code></li>
+					<li>Rename the <code>ormconfig.example.json</code> to <code>ormconfig.json</code> and modify the database settings.</li>
+					<li>Rename the <code>api.example.json</code> to <code>api.json</code> and generate a <strong>secure</strong> secret. Use an online password generator if you don&#39;t know how. Also fill in the <code>apiServerIp</code> with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.</li>
+					<li>Run <code>npm start</code> to start the API on port 3001. You can do <code>npm run prod</code> to start the API in production mode on port 5000.</li>
+				</ol>
 				<h2 id="security">Security</h2>
 				<p>This API does not store any personal information, but it is designed to be as secure as an API that does.</p>
 				<p>To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.</p>
@@ -83,14 +91,6 @@
 				<p>To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.</p>
 				<p>The current limit is 150 requests per 15 minutes. Client applications running on the same IP as the API bypass the limits and have unrestricted access to the API.</p>
 				<p>The API will cache data, and only request new data at intervals. It is recommended that anyone that uses the API caches the data on their end to reduce the number of requests made.</p>
-				<h2 id="installation">Installation</h2>
-				<ol>
-					<li>Clone the repo: <code>git clone https://github.com/NatsukiBot/api.git</code></li>
-					<li>Run <code>npm i</code></li>
-					<li>Rename the <code>ormconfig.example.json</code> to <code>ormconfig.json</code> and modify the database settings.</li>
-					<li>Rename the <code>api.example.json</code> to <code>api.json</code> and generate a <strong>secure</strong> secret. Use an online password generator if you don&#39;t know how. Also fill in the <code>apiServerIp</code> with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.</li>
-					<li>Run <code>npm start</code> to start the API on port 5000. You can do <code>npm run prod</code> to start the API in production mode on port 3001.</li>
-				</ol>
 				<h2 id="usage">Usage</h2>
 				<p>In the client application, any request to hit the API will need to include a JWT token generated using the <code>secret</code> you made.</p>
 				<p>There are two ways you can send the token to the API:</p>
@@ -150,6 +150,12 @@
 						<a href="classes/api.html" class="tsd-kind-icon">Api</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/authenticationcontroller.html" class="tsd-kind-icon">Authentication<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/authenticationservice.html" class="tsd-kind-icon">Authentication<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/giveawaycontroller.html" class="tsd-kind-icon">Giveaway<wbr>Controller</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -188,14 +194,14 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/userlevelbalance.html" class="tsd-kind-icon">User<wbr>Level<wbr>Balance</a>
 					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#chatlog" class="tsd-kind-icon">Chat<wbr>Log</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#logger" class="tsd-kind-icon">Logger</a>
-					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#apiserverip" class="tsd-kind-icon">api<wbr>Server<wbr>Ip</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#clientid" class="tsd-kind-icon">client<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#clientsecret" class="tsd-kind-icon">client<wbr>Secret</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#container" class="tsd-kind-icon">container</a>
@@ -216,7 +222,7 @@
 						<a href="globals.html#isprod" class="tsd-kind-icon">is<wbr>Prod</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#logdir" class="tsd-kind-icon">log<wbr>Dir</a>
+						<a href="globals.html#process" class="tsd-kind-icon">process</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#provide" class="tsd-kind-icon">provide</a>
