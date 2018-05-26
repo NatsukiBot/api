@@ -1,12 +1,18 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
-import { inject } from 'inversify'
-import { Types, Events } from '../constants'
-import { GiveawayService } from '../services/giveaway'
-import { SocketService } from '../services/socket'
-import { BaseController } from '../interfaces/BaseController'
-import { Giveaway } from '@natsuki/db'
-import { Logger } from '@natsuki/util'
+import { Request, Response } from 'express';
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { Types, Events } from '../constants';
+import { GiveawayService } from '../services/giveaway';
+import { SocketService } from '../services/socket';
+import { BaseController } from '../interfaces/BaseController';
+import { Giveaway } from '@natsuki/db';
+import { Logger } from '@natsuki/util';
 
 /**
  * The Giveaway controller. Contains all endpoints for handling Giveaways.
@@ -16,7 +22,7 @@ import { Logger } from '@natsuki/util'
  */
 @controller('/api/giveaways')
 export class GiveawayController implements BaseController<Giveaway> {
-  constructor (
+  constructor(
     @inject(Types.GiveawayService) private giveawayService: GiveawayService,
     @inject(Types.SocketService) private socketService: SocketService
   ) {}
@@ -31,8 +37,8 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpGet('/')
-  async getAll (request: Request, response: Response) {
-    return this.giveawayService.getAll()
+  async getAll(request: Request, response: Response) {
+    return this.giveawayService.getAll();
   }
 
   /**
@@ -45,8 +51,8 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpGet('/:id')
-  async findById (request: Request, response: Response) {
-    return this.giveawayService.findById(request.params.id)
+  async findById(request: Request, response: Response) {
+    return this.giveawayService.findById(request.params.id);
   }
 
   /**
@@ -59,16 +65,20 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpPost('/')
-  async create (request: Request, response: Response) {
-    const giveawayResponse = this.giveawayService.create(request.body)
-    await giveawayResponse.then(giveaway => {
+  async create(request: Request, response: Response) {
+    const giveawayResponse = this.giveawayService.create(request.body);
+    await giveawayResponse
+      .then((giveaway) => {
+        this.socketService.send(
+          Events.giveaway.created,
+          this.redactKey(giveaway)
+        );
+      })
+      .catch((err: any) => {
+        Logger.error(err);
+      });
 
-      this.socketService.send(Events.giveaway.created, this.redactKey(giveaway))
-    }).catch((err: any) => {
-      Logger.error(err)
-    })
-
-    return giveawayResponse
+    return giveawayResponse;
   }
 
   /**
@@ -81,15 +91,17 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request, response: Response) {
-    const deleteResponse = this.giveawayService.delete(request.params.id)
-    await deleteResponse.then(() => {
-      this.socketService.send(Events.giveaway.deleted, request.params.id)
-    }).catch((err: any) => {
-      Logger.error(err)
-    })
+  async deleteById(request: Request, response: Response) {
+    const deleteResponse = this.giveawayService.delete(request.params.id);
+    await deleteResponse
+      .then(() => {
+        this.socketService.send(Events.giveaway.deleted, request.params.id);
+      })
+      .catch((err: any) => {
+        Logger.error(err);
+      });
 
-    return deleteResponse
+    return deleteResponse;
   }
 
   /**
@@ -102,28 +114,36 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpPut('/:id')
-  async updateById (request: Request, response: Response) {
-    const updateResponse = this.giveawayService.update(request.params.id, request.body)
-    await updateResponse.then(() => {
-      const returnObject: Giveaway = request.body
-      returnObject.id = request.params.id
-      this.socketService.send(Events.giveaway.updated, this.redactKey(returnObject))
-    }).catch((err: any) => {
-      Logger.error(err)
-    })
+  async updateById(request: Request, response: Response) {
+    const updateResponse = this.giveawayService.update(
+      request.params.id,
+      request.body
+    );
+    await updateResponse
+      .then(() => {
+        const returnObject: Giveaway = request.body;
+        returnObject.id = request.params.id;
+        this.socketService.send(
+          Events.giveaway.updated,
+          this.redactKey(returnObject)
+        );
+      })
+      .catch((err: any) => {
+        Logger.error(err);
+      });
 
-    return updateResponse
+    return updateResponse;
   }
 
-  private redactKey (giveaway: Giveaway) {
+  private redactKey(giveaway: Giveaway) {
     if (giveaway.items) {
-      giveaway.items.forEach(item => {
+      giveaway.items.forEach((item) => {
         if (item.key) {
-          item.key.key = ''
+          item.key.key = '';
         }
-      })
+      });
     }
 
-    return giveaway
+    return giveaway;
   }
 }

@@ -1,10 +1,18 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, queryParam, response } from 'inversify-express-utils'
-import { inject } from 'inversify'
-import { Types, Events } from '../constants'
-import { AuthenticationService } from '../services/authentication'
-import { SocketService } from '../services/socket'
-import { Logger } from '@natsuki/util'
+import { Request, Response } from 'express';
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  queryParam,
+  response
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { Types, Events } from '../constants';
+import { AuthenticationService } from '../services/authentication';
+import { SocketService } from '../services/socket';
+import { Logger } from '@natsuki/util';
 
 /**
  * Authentication controller for authenticating users in the web interface through Discord.
@@ -14,8 +22,9 @@ import { Logger } from '@natsuki/util'
  */
 @controller('/api/auth')
 export class AuthenticationController {
-  constructor (
-    @inject(Types.AuthenticationService) private authenticationService: AuthenticationService,
+  constructor(
+    @inject(Types.AuthenticationService)
+    private authenticationService: AuthenticationService,
     @inject(Types.SocketService) private socketService: SocketService
   ) {}
 
@@ -25,7 +34,13 @@ export class AuthenticationController {
    * @param redirect
    */
   @httpGet('/token/discord/')
-  async getToken (@queryParam('code') code: string, @queryParam('redirect') redirect: string, @response() res: Response) {
-    return this.authenticationService.getDiscordAccessToken(code, redirect).catch(() => res.sendStatus(400))
+  async getToken(
+    @queryParam('code') code: string,
+    @queryParam('redirect') redirect: string,
+    @response() res: Response
+  ) {
+    return this.authenticationService
+      .getDiscordAccessToken(code, redirect)
+      .catch(() => res.sendStatus(400));
   }
 }

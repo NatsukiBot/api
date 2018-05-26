@@ -1,6 +1,6 @@
-import { UserBalance, UserLevel } from '@natsuki/db'
+import { UserBalance, UserLevel } from '@natsuki/db';
 
 export interface UserLevelBalance {
-  level: UserLevel
-  balance?: UserBalance
+  level: UserLevel;
+  balance?: UserBalance;
 }
