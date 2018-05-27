@@ -5,26 +5,26 @@ export interface Config {
    * @type {string}
    * @memberof Config
    */
-  name: string
+  name: string;
   /**
    * Port the API will run on.
    *
    * @type {number}
    * @memberof Config
    */
-  port: number
+  port: number;
   /**
    * Name of the environment.
    *
    * @type {string}
    * @memberof Config
    */
-  env: 'dev' | 'prod'
+  env: 'dev' | 'prod';
   /**
    * API version. (Also probably not used anywhere)
    *
    * @type {string}
    * @memberof Config
    */
-  version?: string
+  version?: string;
 }

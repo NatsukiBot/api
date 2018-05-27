@@ -33,4 +33,4 @@ export const Events = {
     updated: 'referralUpdated'
   },
   info: 'info'
-}
+};

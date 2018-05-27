@@ -7,4 +7,4 @@ export const Types = {
   SocketService: Symbol('SocketService'),
   DatabaseProvider: Symbol('DatabaseProvider'),
   ConfigProvider: Symbol('ConfigProvider')
-}
+};

@@ -21,6 +21,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "husky": "^0.14.3",
+    "prettier": "1.12.1",
     "standard": "^11.0.0",
     "standard-version": "^4.3.0",
     "ts-node": "3.3.0",
@@ -30,8 +31,8 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@natsuki/db": "github:NatsukiBot/db",
-    "@natsuki/util": "github:NatsukiBot/util",
+    "@natsuki/db": "^0.9.3",
+    "@natsuki/util": "^1.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",
     "compression": "^1.7.2",
