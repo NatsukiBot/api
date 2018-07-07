@@ -1,16 +1,14 @@
-# Natsuki API
+# Nightwatch API
 
-> Realtime API for the Natsuki Discord bot and web interface. Secure, fast, and developer-friendly!
-
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+> Realtime API for the Nightwatch Discord bot and web interface. Secure, fast, and developer-friendly!
 
 ## Documentation
 
-Generated documentation can be found here: https://natsuki.tk/api/docs/
+Generated documentation can be found here: https://nightwatch.tk/api/docs/
 
 ## Installation
 
-1. Clone the repo: `git clone https://github.com/NatsukiBot/api.git`
+1. Clone the repo: `git clone https://github.com/NightwatchBot/api.git`
 2. Run `npm i`
 3. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
 4. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
@@ -31,7 +29,7 @@ HTTPS is used by production API and client applications to prevent XSS and CSRF 
 
 JWTs are generated using a secure `secret` which must only be available to the trusted client applications.
 
-This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: https://natsuki.tk/api/users
+This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: https://nightwatch.tk/api/users
 
 ### Rate Limiting
 Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.
@@ -74,13 +72,13 @@ The API itself complies with the Discord TOS; usage of the data must also comply
 Rate limits do apply. See **Security > Rate Limiting** for more information.
 
 
-If you access data from the production API, at https://natsuki.tk/api, you agree that:
+If you access data from the production API, at https://nightwatch.tk/api, you agree that:
  * Your usage of the data will be compliant with the [Discord Developer Terms of Service](https://discordapp.com/developers/docs/legal).
  * You will not use the data for commercial purposes.
  * The application or service that uses this API's data must be provided free of charge and the implementation of the API and/or API data must be open-source.
- * Credit will be given to the Natsuki API project. The project's GitHub and production API URL must be linked where the API data is used.
-    - GitHub: https://github.com/NatsukiBot/api
-    - Production API: https://natsuki.tk/api
+ * Credit will be given to the Nightwatch API project. The project's GitHub and production API URL must be linked where the API data is used.
+    - GitHub: https://github.com/NightwatchBot/api
+    - Production API: https://nightwatch.tk/api
  * You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.
     - It is recommended to cache the data you receive to reduce the number of requests made.
     - The API caches most data automatically, but certain request limit packages can be purchased to always get the latest data.
@@ -94,7 +92,7 @@ If you access data from the production API, at https://natsuki.tk/api, you agree
 
 ## Support
 
- If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. https://github.com/NatsukiBot/api/issues
+ If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. https://github.com/NightwatchBot/api/issues
 
 ## Donate
 

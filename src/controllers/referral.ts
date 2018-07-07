@@ -1,18 +1,12 @@
-import { Request, Response } from 'express';
-import {
-  controller,
-  httpGet,
-  httpDelete,
-  httpPut,
-  httpPost
-} from 'inversify-express-utils';
-import { inject } from 'inversify';
-import { Types, Events } from '../constants';
-import { SocketService } from '../services/socket';
-import { Logger } from '@natsuki/util';
-import { Referral } from '@natsuki/db';
-import { ReferralService } from '../services/referral';
-import { BaseController } from '../interfaces/BaseController';
+import { Request, Response } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { inject } from 'inversify'
+import { Types, Events } from '../constants'
+import { SocketService } from '../services/socket'
+import { Logger } from '@nightwatch/util'
+import { Referral } from '@nightwatch/db'
+import { ReferralService } from '../services/referral'
+import { BaseController } from '../interfaces/BaseController'
 
 /**
  * The referral controller. Contains all endpoints for the referral system.
@@ -22,7 +16,7 @@ import { BaseController } from '../interfaces/BaseController';
  */
 @controller('/api/referrals')
 export class ReferralController implements BaseController<Referral> {
-  constructor(
+  constructor (
     @inject(Types.ReferralService) private referralService: ReferralService,
     @inject(Types.SocketService) private socketService: SocketService
   ) {}
@@ -37,8 +31,8 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpGet('/')
-  async getAll(request: Request, response: Response) {
-    return this.referralService.getAll();
+  async getAll (request: Request, response: Response) {
+    return this.referralService.getAll()
   }
 
   /**
@@ -51,8 +45,8 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpGet('/:id')
-  async findById(request: Request, response: Response) {
-    return this.referralService.findById(request.params.id);
+  async findById (request: Request, response: Response) {
+    return this.referralService.findById(request.params.id)
   }
 
   /**
@@ -65,17 +59,17 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpPost('/')
-  async create(request: Request, response: Response) {
-    const referralResponse = this.referralService.create(request.body);
+  async create (request: Request, response: Response) {
+    const referralResponse = this.referralService.create(request.body)
     await referralResponse
       .then((referral) => {
-        this.socketService.send(Events.referral.created, referral);
+        this.socketService.send(Events.referral.created, referral)
       })
       .catch((err: any) => {
-        Logger.error(err);
-      });
+        Logger.error(err)
+      })
 
-    return referralResponse;
+    return referralResponse
   }
 
   /**
@@ -88,17 +82,17 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpDelete('/:id')
-  async deleteById(request: Request, response: Response) {
-    const deleteResponse = this.referralService.delete(request.params.id);
+  async deleteById (request: Request, response: Response) {
+    const deleteResponse = this.referralService.delete(request.params.id)
     await deleteResponse
       .then(() => {
-        this.socketService.send(Events.referral.deleted, request.params.id);
+        this.socketService.send(Events.referral.deleted, request.params.id)
       })
       .catch((err: any) => {
-        Logger.error(err);
-      });
+        Logger.error(err)
+      })
 
-    return deleteResponse;
+    return deleteResponse
   }
 
   /**
@@ -111,21 +105,18 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpPut('/:id')
-  async updateById(request: Request, response: Response) {
-    const updateResponse = this.referralService.update(
-      request.params.id,
-      request.body
-    );
+  async updateById (request: Request, response: Response) {
+    const updateResponse = this.referralService.update(request.params.id, request.body)
     await updateResponse
       .then(() => {
-        const returnObject: Referral = request.body;
-        returnObject.id = request.params.id;
-        this.socketService.send(Events.referral.updated, returnObject);
+        const returnObject: Referral = request.body
+        returnObject.id = request.params.id
+        this.socketService.send(Events.referral.updated, returnObject)
       })
       .catch((err: any) => {
-        Logger.error(err);
-      });
+        Logger.error(err)
+      })
 
-    return updateResponse;
+    return updateResponse
   }
 }

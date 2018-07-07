@@ -4,12 +4,12 @@
   "port": 5432,
   "username": "postgres",
   "password": "",
-  "database": "natsuki",
+  "database": "nightwatch",
 
   "synchronize": true,
   "logging": false,
   "entities": [
-    "./node_modules/@natsuki/db/dist/entity/**/*.js"
+    "./node_modules/@nightwatch/db/dist/entity/**/*.js"
   ],
   "migrations": [
     "src/migrations/**/*.ts"

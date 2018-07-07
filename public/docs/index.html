@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Natsuki API</title>
+	<title>Nightwatch API</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Natsuki API</a>
+					<a href="index.html" class="title">Nightwatch API</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> Natsuki API</h1>
+			<h1> Nightwatch API</h1>
 		</div>
 	</div>
 </header>
@@ -62,16 +62,15 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="natsuki-api">Natsuki API</h1>
+				<h1 id="nightwatch-api">Nightwatch API</h1>
 				<blockquote>
-					<p>Realtime API for the Natsuki Discord bot and web interface. Secure, fast, and developer-friendly!</p>
+					<p>Realtime API for the Nightwatch Discord bot and web interface. Secure, fast, and developer-friendly!</p>
 				</blockquote>
-				<p><a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg" alt="Conventional Commits"></a></p>
 				<h2 id="documentation">Documentation</h2>
-				<p>Generated documentation can be found here: <a href="https://natsuki.tk/api/docs/">https://natsuki.tk/api/docs/</a></p>
+				<p>Generated documentation can be found here: <a href="https://nightwatch.tk/api/docs/">https://nightwatch.tk/api/docs/</a></p>
 				<h2 id="installation">Installation</h2>
 				<ol>
-					<li>Clone the repo: <code>git clone https://github.com/NatsukiBot/api.git</code></li>
+					<li>Clone the repo: <code>git clone https://github.com/NightwatchBot/api.git</code></li>
 					<li>Run <code>npm i</code></li>
 					<li>Rename the <code>ormconfig.example.json</code> to <code>ormconfig.json</code> and modify the database settings.</li>
 					<li>Rename the <code>api.example.json</code> to <code>api.json</code> and generate a <strong>secure</strong> secret. Use an online password generator if you don&#39;t know how. Also fill in the <code>apiServerIp</code> with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.</li>
@@ -85,7 +84,7 @@
 				<p>The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.</p>
 				<p>HTTPS is used by production API and client applications to prevent XSS and CSRF attacks to hijack the token.</p>
 				<p>JWTs are generated using a secure <code>secret</code> which must only be available to the trusted client applications.</p>
-				<p>This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://natsuki.tk/api/users">https://natsuki.tk/api/users</a></p>
+				<p>This API uses JWTs to authenticate PUT, POST, and DELETE requests. Anyone can make GET requests to this API and use the JSON. Example: <a href="https://nightwatch.tk/api/users">https://nightwatch.tk/api/users</a></p>
 				<h3 id="rate-limiting">Rate Limiting</h3>
 				<p>Although most access to the API is restricted, everyone has access to make GET requests for any data the API stores.</p>
 				<p>To prevent brute-force attacks, DOS attacks, and to prevent spam, the API uses IP-based request limits.</p>
@@ -110,14 +109,14 @@
 				<p>Data used from the API can be used to create websites, analytics, metrics, etc.</p>
 				<p>The API itself complies with the Discord TOS; usage of the data must also comply. </p>
 				<p>Rate limits do apply. See <strong>Security &gt; Rate Limiting</strong> for more information.</p>
-				<p>If you access data from the production API, at <a href="https://natsuki.tk/api">https://natsuki.tk/api</a>, you agree that:</p>
+				<p>If you access data from the production API, at <a href="https://nightwatch.tk/api">https://nightwatch.tk/api</a>, you agree that:</p>
 				<ul>
 					<li>Your usage of the data will be compliant with the <a href="https://discordapp.com/developers/docs/legal">Discord Developer Terms of Service</a>.</li>
 					<li>You will not use the data for commercial purposes.</li>
 					<li>The application or service that uses this API&#39;s data must be provided free of charge and the implementation of the API and/or API data must be open-source.</li>
-					<li>Credit will be given to the Natsuki API project. The project&#39;s GitHub and production API URL must be linked where the API data is used.<ul>
-							<li>GitHub: <a href="https://github.com/NatsukiBot/api">https://github.com/NatsukiBot/api</a></li>
-							<li>Production API: <a href="https://natsuki.tk/api">https://natsuki.tk/api</a></li>
+					<li>Credit will be given to the Nightwatch API project. The project&#39;s GitHub and production API URL must be linked where the API data is used.<ul>
+							<li>GitHub: <a href="https://github.com/NightwatchBot/api">https://github.com/NightwatchBot/api</a></li>
+							<li>Production API: <a href="https://nightwatch.tk/api">https://nightwatch.tk/api</a></li>
 						</ul>
 					</li>
 					<li>You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.<ul>
@@ -131,7 +130,7 @@
 				If approved, we will merge your changes, and you will be added as a contributor! </p>
 				<p> We are open for suggestions, and want the end-product to be awesome. If you have an idea, please share it.</p>
 				<h2 id="support">Support</h2>
-				<p> If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. <a href="https://github.com/NatsukiBot/api/issues">https://github.com/NatsukiBot/api/issues</a></p>
+				<p> If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. <a href="https://github.com/NightwatchBot/api/issues">https://github.com/NightwatchBot/api/issues</a></p>
 				<h2 id="donate">Donate</h2>
 				<p> This API costs money to host. If you would like to support the development of the API, and allow the production API to be publicly available, consider becoming a patron on <a href="https://www.patreon.com/natsukibot">Patreon</a>.</p>
 			</div>

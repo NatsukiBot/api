@@ -1,7 +1,7 @@
 {
-  "name": "@natsuki/api",
+  "name": "@nightwatch/api",
   "version": "0.11.1",
-  "description": "API for Natsuki Discord bot.",
+  "description": "API for Nightwatch Discord bot.",
   "devDependencies": {
     "@types/compression": "0.0.35",
     "@types/cors": "^2.8.3",
@@ -31,8 +31,8 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@natsuki/db": "^0.9.3",
-    "@natsuki/util": "^1.0.1",
+    "@nightwatch/db": "^0.9.3",
+    "@nightwatch/util": "^1.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",
     "compression": "^1.7.2",
@@ -63,12 +63,12 @@
     "dev": "tsc && nodemon --inspect --exec ts-node src/index.ts",
     "prod": "tsc && cross-env NODE_ENV=production nodemon --exec ts-node src/index.ts",
     "clean": "npm cache clear && rimraf -- dist",
-    "docs": "cross-env typedoc --out public/docs src --name \"Natsuki API\" --excludeExternals --mode file --theme public/theme",
+    "docs": "cross-env typedoc --out public/docs src --name \"Nightwatch API\" --excludeExternals --mode file --theme public/theme",
     "release": "standard-version"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NatsukiBot/api.git"
+    "url": "https://github.com/NightwatchBot/api.git"
   },
   "config": {
     "commitizen": {
