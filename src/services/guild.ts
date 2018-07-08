@@ -117,12 +117,12 @@ export class GuildService implements BaseService<Guild> {
     return this.userRepository.findOne(userId)
   }
 
-  public async createUser (user: GuildUser) {
+  public async createUser (id: string, user: GuildUser) {
     user.dateJoined = new Date()
     return this.userRepository.save(user)
   }
 
-  public async deleteUser (userId: number) {
+  public async deleteUser (id: string, userId: number) {
     const user = await this.userRepository.findOne(userId)
 
     if (!user) {
