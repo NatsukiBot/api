@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings } from '@nightwatch/db'
+import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -16,6 +16,7 @@ export class GuildService implements BaseService<Guild> {
   private suggestionRepository = getRepository(GuildSuggestion)
   private supportTicketRepository = getRepository(GuildSupportTicket)
   private settingsRepository = getRepository(GuildSettings)
+  private userRepository = getRepository(GuildUser)
 
   public getAll () {
     return this.guildRepository.find()
@@ -106,5 +107,32 @@ export class GuildService implements BaseService<Guild> {
 
   public async updateSettings (id: string, settings: GuildSettings) {
     return this.settingsRepository.update({ guild: { id } }, settings)
+  }
+
+  public async getUsers (id: string) {
+    return this.userRepository.find({ where: { guild: { id } } })
+  }
+
+  public getUserById (id: string, userId: number) {
+    return this.userRepository.findOne(userId)
+  }
+
+  public async createUser (user: GuildUser) {
+    user.dateJoined = new Date()
+    return this.userRepository.save(user)
+  }
+
+  public async deleteUser (userId: number) {
+    const user = await this.userRepository.findOne(userId)
+
+    if (!user) {
+      return
+    }
+
+    this.userRepository.remove(user)
+  }
+
+  public async updateUser (id: string, userId: number | string, user: GuildUser) {
+    return this.userRepository.update(userId, user)
   }
 }
