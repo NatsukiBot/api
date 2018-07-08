@@ -75,7 +75,7 @@ export class UserService implements BaseService<User> {
   }
 
   public async getProfile (id: string) {
-    return this.userProfileRepository.find({ where: { userId: id } })
+    return this.userProfileRepository.find({ where: { user: { id } } })
   }
 
   public async updateProfile (id: string, userProfile: UserProfile) {
@@ -87,6 +87,6 @@ export class UserService implements BaseService<User> {
   }
 
   public async getSettings (id: string) {
-    return this.userSettingsRepository.find({ where: { userId: id } })
+    return this.userSettingsRepository.find({ where: { user: { id } } })
   }
 }
