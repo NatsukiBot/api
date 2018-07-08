@@ -335,4 +335,16 @@ export class GuildController implements BaseController<Guild> {
         Logger.error(err)
       })
   }
+
+  /**
+   * Gets all users in a Guild.
+   *
+   * GET /:id/users
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/users')
+  async getUsers(request: Request, response: Response) {
+    return this.guildService.getUsers(request.params.id)
+  }
 }
