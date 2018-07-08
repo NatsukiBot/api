@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { Guild, GuildSuggestion, GuildSupportTicket } from '@nightwatch/db'
+import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -15,6 +15,7 @@ export class GuildService implements BaseService<Guild> {
   private guildRepository = getRepository(Guild)
   private suggestionRepository = getRepository(GuildSuggestion)
   private supportTicketRepository = getRepository(GuildSupportTicket)
+  private settingsRepository = getRepository(GuildSettings)
 
   public getAll () {
     return this.guildRepository.find()
@@ -97,5 +98,9 @@ export class GuildService implements BaseService<Guild> {
 
   public async updateSupportTicket (id: string, ticketId: number | string, supportTicket: GuildSupportTicket) {
     return this.supportTicketRepository.update(ticketId, supportTicket)
+  }
+
+  public async updateSettings (id: string, settingsId: string, settings: GuildSettings) {
+    return this.settingsRepository.update(settingsId, settings)
   }
 }

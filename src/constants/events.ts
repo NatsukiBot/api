@@ -20,6 +20,11 @@ export const Events = {
       created: 'guildSupportTicketCreated',
       updated: 'guildSupportTicketUpdated',
       deleted: 'guildSupportTicketDeleted'
+    },
+    settings: {
+      created: 'guildSettingsCreated',
+      updated: 'guildSettingsUpdated',
+      deleted: 'guildSettingsDeleted'
     }
   },
   giveaway: {
@@ -33,4 +38,4 @@ export const Events = {
     updated: 'referralUpdated'
   },
   info: 'info'
-};
+}
