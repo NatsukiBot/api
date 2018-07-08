@@ -62,7 +62,7 @@ export class GuildController implements BaseController<Guild> {
   async create (request: Request, response: Response) {
     const guildResponse = this.guildService.create(request.body)
     await guildResponse
-      .then((guild) => {
+      .then(guild => {
         this.socketService.send(Events.guild.created, guild)
       })
       .catch((err: any) => {
@@ -155,7 +155,7 @@ export class GuildController implements BaseController<Guild> {
   async createSuggestion (request: Request, response: Response) {
     const postResponse = this.guildService.createSuggestion(request.params.id, request.body)
     await postResponse
-      .then((item) => {
+      .then(item => {
         this.socketService.send(Events.guild.suggestion.created, item)
       })
       .catch((err: any) => {
@@ -251,7 +251,7 @@ export class GuildController implements BaseController<Guild> {
   async createSupportTicket (request: Request, response: Response) {
     const postResponse = this.guildService.createSupportTicket(request.params.id, request.body)
     await postResponse
-      .then((item) => {
+      .then(item => {
         this.socketService.send(Events.guild.supportTicket.created, item)
       })
       .catch((err: any) => {
@@ -309,6 +309,11 @@ export class GuildController implements BaseController<Guild> {
       })
 
     return deleteResponse
+  }
+
+  @httpGet('/:id/settings')
+  async getSettingsById (request: Request, response: Response) {
+    return this.guildService.getSettings(request.params.id)
   }
 
   /**

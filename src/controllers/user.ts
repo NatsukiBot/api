@@ -62,7 +62,7 @@ export class UserController implements BaseController<User> {
   async create (request: Request, response: Response) {
     const userResponse = this.userService.create(request.body)
     await userResponse
-      .then((user) => {
+      .then(user => {
         this.socketService.send(Events.user.created, user)
       })
       .catch((err: any) => {
@@ -171,6 +171,16 @@ export class UserController implements BaseController<User> {
   }
 
   /**
+   * Gets the profile for a user by ID.
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/profile')
+  async getProfileById (request: Request, response: Response) {
+    return this.userService.getProfile(request.params.id)
+  }
+
+  /**
    * Updates a user's profile by ID.
    *
    * PUT /:id/profile
@@ -193,5 +203,17 @@ export class UserController implements BaseController<User> {
       })
 
     return profileResponse
+  }
+
+  /**
+   * Gets the settings for a user.
+   * @param request
+   * @param response
+   * @returns Promise<UserSettings>
+   * @memberof UserController
+   */
+  @httpGet('/:id/settings')
+  async getSettingsById (request: Request, response: Response) {
+    return this.userService.getSettings(request.params.id)
   }
 }
