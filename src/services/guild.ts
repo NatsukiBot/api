@@ -74,7 +74,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getSupportTickets (id: string) {
-    return this.supportTicketRepository.find({ where: { guildId: id } })
+    return this.supportTicketRepository.find({ where: { guild: { id } } })
   }
 
   public getSupportTicketById (id: string, ticketId: number) {
@@ -101,7 +101,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async getSettings (id: string) {
-    return this.settingsRepository.find({ where: { guildId: id } })
+    return this.settingsRepository.find({ where: { guild: { id } } })
   }
 
   public async updateSettings (id: string, settings: GuildSettings) {
