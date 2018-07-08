@@ -5,7 +5,7 @@ import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
-import { Guild, GuildSupportTicket } from '@nightwatch/db'
+import { Guild, GuildSupportTicket, GuildSettings } from '@nightwatch/db'
 import { Logger } from '@nightwatch/util'
 
 /**
@@ -309,5 +309,25 @@ export class GuildController implements BaseController<Guild> {
       })
 
     return deleteResponse
+  }
+
+  /**
+   * Updates a Guild's settings by ID.
+   *
+   * DELETE /:id/support-tickets/:ticketId
+   * @param request
+   * @param response
+   */
+  @httpPut('/:id/settings/:settingsId')
+  async updateSettingsById (request: Request, response: Response) {
+    const updateResponse = this.guildService.updateSettings(request.params.id, request.params.settingsId, request.body)
+    await updateResponse
+      .then(() => {
+        const returnObject: GuildSettings = request.body
+        this.socketService.send(Events.guild.settings.updated, returnObject)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
   }
 }
