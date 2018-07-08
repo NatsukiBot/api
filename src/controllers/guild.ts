@@ -62,7 +62,7 @@ export class GuildController implements BaseController<Guild> {
   async create (request: Request, response: Response) {
     const guildResponse = this.guildService.create(request.body)
     await guildResponse
-      .then((guild) => {
+      .then(guild => {
         this.socketService.send(Events.guild.created, guild)
       })
       .catch((err: any) => {
@@ -155,7 +155,7 @@ export class GuildController implements BaseController<Guild> {
   async createSuggestion (request: Request, response: Response) {
     const postResponse = this.guildService.createSuggestion(request.params.id, request.body)
     await postResponse
-      .then((item) => {
+      .then(item => {
         this.socketService.send(Events.guild.suggestion.created, item)
       })
       .catch((err: any) => {
@@ -251,7 +251,7 @@ export class GuildController implements BaseController<Guild> {
   async createSupportTicket (request: Request, response: Response) {
     const postResponse = this.guildService.createSupportTicket(request.params.id, request.body)
     await postResponse
-      .then((item) => {
+      .then(item => {
         this.socketService.send(Events.guild.supportTicket.created, item)
       })
       .catch((err: any) => {
@@ -311,20 +311,25 @@ export class GuildController implements BaseController<Guild> {
     return deleteResponse
   }
 
+  @httpGet('/:id/settings')
+  async getSettingsById (request: Request, response: Response) {
+    return this.guildService.getSettings(request.params.id)
+  }
+
   /**
    * Updates a Guild's settings by ID.
    *
-   * DELETE /:id/support-tickets/:ticketId
+   * PUT /:id/support-tickets
    * @param request
    * @param response
    */
-  @httpPut('/:id/settings/:settingsId')
+  @httpPut('/:id/settings')
   async updateSettingsById (request: Request, response: Response) {
-    const updateResponse = this.guildService.updateSettings(request.params.id, request.params.settingsId, request.body)
+    const updateResponse = this.guildService.updateSettings(request.params.id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: GuildSettings = request.body
-        this.socketService.send(Events.guild.settings.updated, returnObject)
+        this.socketService.send(Events.guild.settingsUpdated, returnObject)
       })
       .catch((err: any) => {
         Logger.error(err)

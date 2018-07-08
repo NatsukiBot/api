@@ -1,4 +1,4 @@
-import { User, UserBalance, UserLevel, UserProfile } from '@nightwatch/db'
+import { User, UserBalance, UserLevel, UserProfile, UserSettings } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -16,6 +16,7 @@ export class UserService implements BaseService<User> {
   private userBalanceRepository = getRepository(UserBalance)
   private userLevelRepository = getRepository(UserLevel)
   private userProfileRepository = getRepository(UserProfile)
+  private userSettingsRepository = getRepository(UserSettings)
 
   public getAll () {
     return this.userRepository.find()
@@ -73,7 +74,19 @@ export class UserService implements BaseService<User> {
     return this.userBalanceRepository.update({ user: { id } }, userBalance)
   }
 
+  public async getProfile (id: string) {
+    return this.userProfileRepository.find({ where: { userId: id } })
+  }
+
   public async updateProfile (id: string, userProfile: UserProfile) {
     return this.userProfileRepository.update({ user: { id } }, userProfile)
+  }
+
+  public async updateSettings (id: string, userSettings: UserSettings) {
+    return this.userSettingsRepository.update({ user: { id } }, userSettings)
+  }
+
+  public async getSettings (id: string) {
+    return this.userSettingsRepository.find({ where: { userId: id } })
   }
 }

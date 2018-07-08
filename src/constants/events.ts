@@ -5,7 +5,8 @@ export const Events = {
     updated: 'userUpdated',
     levelUpdated: 'userLevelUpdated',
     balanceUpdated: 'userBalanceUpdated',
-    profileUpdated: 'userProfileUpdated'
+    profileUpdated: 'userProfileUpdated',
+    settingsUpdated: 'userSettingsUpdated'
   },
   guild: {
     created: 'guildCreated',
@@ -21,11 +22,7 @@ export const Events = {
       updated: 'guildSupportTicketUpdated',
       deleted: 'guildSupportTicketDeleted'
     },
-    settings: {
-      created: 'guildSettingsCreated',
-      updated: 'guildSettingsUpdated',
-      deleted: 'guildSettingsDeleted'
-    }
+    settingsUpdated: 'guildSettingsUpdated'
   },
   giveaway: {
     created: 'giveawayCreated',
