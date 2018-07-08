@@ -104,7 +104,7 @@ export class GuildService implements BaseService<Guild> {
     return this.settingsRepository.find({ where: { guildId: id } })
   }
 
-  public async updateSettings (id: string, settingsId: string, settings: GuildSettings) {
-    return this.settingsRepository.update(settingsId, settings)
+  public async updateSettings (id: string, settings: GuildSettings) {
+    return this.settingsRepository.update({ guild: { id } }, settings)
   }
 }

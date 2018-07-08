@@ -216,4 +216,29 @@ export class UserController implements BaseController<User> {
   async getSettingsById (request: Request, response: Response) {
     return this.userService.getSettings(request.params.id)
   }
+
+  /**
+   * Updates a user's settings by ID.
+   *
+   * PUT /:id/settings
+   * @param {Request} request
+   * @param {Response} response
+   * @returns Promise<void>
+   * @memberof UserController
+   */
+  @httpPut('/:id/settings')
+  async updateSettings (request: Request, response: Response) {
+    const settingsResponse = this.userService.updateSettings(request.params.id, request.body)
+    await settingsResponse
+      .then(() => {
+        const returnObject: any = request.body
+        returnObject.userId = request.params.id
+        this.socketService.send(Events.user.settingsUpdated, returnObject)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return settingsResponse
+  }
 }

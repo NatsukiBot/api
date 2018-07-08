@@ -319,17 +319,17 @@ export class GuildController implements BaseController<Guild> {
   /**
    * Updates a Guild's settings by ID.
    *
-   * DELETE /:id/support-tickets/:ticketId
+   * PUT /:id/support-tickets
    * @param request
    * @param response
    */
-  @httpPut('/:id/settings/:settingsId')
+  @httpPut('/:id/settings')
   async updateSettingsById (request: Request, response: Response) {
-    const updateResponse = this.guildService.updateSettings(request.params.id, request.params.settingsId, request.body)
+    const updateResponse = this.guildService.updateSettings(request.params.id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: GuildSettings = request.body
-        this.socketService.send(Events.guild.settings.updated, returnObject)
+        this.socketService.send(Events.guild.settingsUpdated, returnObject)
       })
       .catch((err: any) => {
         Logger.error(err)
