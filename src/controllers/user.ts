@@ -1,5 +1,14 @@
 import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam, response } from 'inversify-express-utils'
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  request,
+  requestParam,
+  response
+} from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
@@ -25,8 +34,6 @@ export class UserController implements BaseController<User, string> {
    * Gets all users from the database, excluding most user information.
    *
    * GET /
-   * @param {Request} request
-   * @param {Response} response
    * @returns Promise<User[]>
    * @memberof UserController
    */
@@ -39,9 +46,8 @@ export class UserController implements BaseController<User, string> {
    * Gets a user by their ID, including all user information.
    *
    * GET /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<User>
+   * @param {string} id The ID of the user.
+   * @returns Promise<User | undefined>
    * @memberof UserController
    */
   @httpGet('/:id')
@@ -53,8 +59,7 @@ export class UserController implements BaseController<User, string> {
    * Creates a user.
    *
    * POST /
-   * @param {Request} request
-   * @param {Response} response
+   * @param {Request} request The request contained a `User` object.
    * @returns Promise<User>
    * @memberof UserController
    */
@@ -76,9 +81,8 @@ export class UserController implements BaseController<User, string> {
    * Hard deletes a user.
    *
    * DELETE /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {string} id The ID of the user.
+   * @returns Promise<User | undefined>
    * @memberof UserController
    */
   @httpDelete('/:id')
@@ -99,8 +103,8 @@ export class UserController implements BaseController<User, string> {
    * Updates a user by ID.
    *
    * PUT /:id
-   * @param {Request} request
-   * @param {Response} response
+   * @param {string} id The ID of the user.
+   * @param {Request} request The request containing a `User` object.
    * @returns Promise<User>
    * @memberof UserController
    */
@@ -124,9 +128,9 @@ export class UserController implements BaseController<User, string> {
    * Updates a user's level by ID.
    *
    * PUT /:id/level
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {string} id The ID of the user.
+   * @param {Request} request The request containing a `UserLevelBalance` object.
+   * @returns Promise<User | undefined>
    * @memberof UserController
    */
   @httpPut('/:id/level')
@@ -149,9 +153,9 @@ export class UserController implements BaseController<User, string> {
    * Updates a user's balance by ID.
    *
    * PUT /:id/balance
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {string} id The ID of the user.
+   * @param {Request} request The request containing a `UserBalance` object.
+   * @returns Promise<UpdateResult>
    * @memberof UserController
    */
   @httpPut('/:id/balance')
@@ -228,8 +232,9 @@ export class UserController implements BaseController<User, string> {
 
   /**
    * Gets the profile for a user by ID.
-   * @param request
-   * @param response
+   * @param {string} id The ID of the user.
+   * @returns Promise<UserProfile[]>
+   * @memberof UserController
    */
   @httpGet('/:id/profile')
   async getProfileById (@requestParam('id') id: string) {
@@ -240,9 +245,9 @@ export class UserController implements BaseController<User, string> {
    * Updates a user's profile by ID.
    *
    * PUT /:id/profile
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {string} id The ID of the user.
+   * @param {Request} request The request containing a `UserProfile` object.
+   * @returns Promise<UpdateResult>
    * @memberof UserController
    */
   @httpPut('/:id/profile')
@@ -263,9 +268,8 @@ export class UserController implements BaseController<User, string> {
 
   /**
    * Gets the settings for a user.
-   * @param request
-   * @param response
-   * @returns Promise<UserSettings>
+   * @param {string} id The ID of the user.
+   * @returns Promise<UserSettings[]>
    * @memberof UserController
    */
   @httpGet('/:id/settings')
@@ -277,9 +281,9 @@ export class UserController implements BaseController<User, string> {
    * Updates a user's settings by ID.
    *
    * PUT /:id/settings
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {string} id The ID of the user.
+   * @param {Request} request The request containing a `UserSettings` object.
+   * @returns Promise<UpdateResult>
    * @memberof UserController
    */
   @httpPut('/:id/settings')

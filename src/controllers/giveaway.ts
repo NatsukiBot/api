@@ -25,8 +25,6 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * Gets all giveaways from the database.
    *
    * GET /
-   * @param {Request} request
-   * @param {Response} response
    * @returns Promise<Giveaway[]>
    * @memberof GiveawayController
    */
@@ -39,8 +37,7 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * Gets a giveaway by their ID.
    *
    * GET /:id
-   * @param {Request} request
-   * @param {Response} response
+   * @param {number} id The ID of the giveaway.
    * @returns Promise<Giveaway>
    * @memberof GiveawayController
    */
@@ -53,8 +50,7 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * Creates a giveaway.
    *
    * POST /
-   * @param {Request} request
-   * @param {Response} response
+   * @param {Request} request The request containing a `Giveaway` object.
    * @returns Promise<Giveaway>
    * @memberof GiveawayController
    */
@@ -76,9 +72,8 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * Hard deletes a giveaway.
    *
    * DELETE /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {number} id The ID of the giveaway.
+   * @returns Promise<Giveaway | undefined>
    * @memberof GiveawayController
    */
   @httpDelete('/:id')
@@ -99,9 +94,9 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * Updates a giveaway by ID.
    *
    * PUT /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {number} id The ID of the giveaway.
+   * @param {Request} request The request containing a `Giveaway` object.
+   * @returns Promise<Giveaway>
    * @memberof GiveawayController
    */
   @httpPut('/:id')

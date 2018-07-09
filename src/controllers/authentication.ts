@@ -20,8 +20,8 @@ export class AuthenticationController {
 
   /**
    * Gets an access token from Discord.
-   * @param code
-   * @param redirect
+   * @param code The code used to get the access token.
+   * @param redirect Where to redirect after getting the access token.
    */
   @httpGet('/token/discord/')
   async getToken (
