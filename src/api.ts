@@ -91,9 +91,25 @@ export class Api {
         })
       )
       app.use(
-        mongoMorgan(mongodb, 'combined', {
-          collection: 'logs'
-        })
+        mongoMorgan(
+          mongodb,
+          function (tokens: any, req: express.Request, res: express.Response) {
+            const filteredReq = req
+            filteredReq.query = ''
+            return [
+              tokens.method(filteredReq, res),
+              tokens.url(filteredReq, res),
+              tokens.status(filteredReq, res),
+              tokens.res(filteredReq, res, 'content-length'),
+              '-',
+              tokens['response-time'](filteredReq, res),
+              'ms'
+            ].join(' ')
+          },
+          {
+            collection: 'logs'
+          }
+        )
       )
       app.use(
         jwt({
