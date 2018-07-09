@@ -5,7 +5,7 @@ import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
-import { Guild, GuildSupportTicket, GuildSettings } from '@nightwatch/db'
+import { Guild, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
 import { Logger } from '@nightwatch/util'
 
 /**
@@ -319,7 +319,7 @@ export class GuildController implements BaseController<Guild> {
   /**
    * Updates a Guild's settings by ID.
    *
-   * PUT /:id/support-tickets
+   * PUT /:id/settings
    * @param request
    * @param response
    */
@@ -346,5 +346,88 @@ export class GuildController implements BaseController<Guild> {
   @httpGet('/:id/users')
   async getUsers(request: Request, response: Response) {
     return this.guildService.getUsers(request.params.id)
+  }
+
+  /**
+   * Gets a Guild user by ID.
+   *
+   * GET /:id/users/:userId
+   * @param request
+   * @param response
+   */
+  @httpGet('/:id/support-tickets/:userId')
+  async getUserById (request: Request, response: Response) {
+    return this.guildService.getUserById(request.params.id, request.params.userId)
+  }
+
+  /**
+   * Creates a user in a Guild
+   *
+   * POST /:id/users
+   * @param request
+   * @param response
+   */
+  @httpPost('/:id/users')
+  async createUser (request: Request, response: Response) {
+    const postResponse = this.guildService.createUser(request.params.id, request.body)
+    await postResponse
+      .then(item => {
+        this.socketService.send(Events.guild.user.created, item)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return postResponse
+  }
+
+  /**
+   * Updates a Guild user by ID.
+   *
+   * PUT /:id/users/:userId
+   * @param request
+   * @param response
+   */
+  @httpPut('/:id/users/:userId')
+  async updateUserById (request: Request, response: Response) {
+    const updateResponse = this.guildService.updateUser(
+      request.params.id,
+      request.params.userId,
+      request.body
+    )
+    await updateResponse
+      .then(() => {
+        const returnObject: GuildUser = request.body
+        this.socketService.send(Events.guild.user.updated, returnObject)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return updateResponse
+  }
+
+  /**
+   * Deletes a Guild user by ID.
+   *
+   * DELETE /:id/users/:userId
+   * @param request
+   * @param response
+   */
+  @httpDelete('/:id/users/:userId')
+  async deleteUserById (request: Request, response: Response) {
+    const deleteResponse = this.guildService.deleteUser(request.params.id, request.params.userId)
+    await deleteResponse
+      .then(() => {
+        this.socketService.send(Events.guild.user.deleted, {
+          guildId: request.params.id,
+          userId: request.body
+        })
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return deleteResponse
   }
 }
