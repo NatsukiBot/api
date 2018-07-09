@@ -60,7 +60,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async deleteSuggestion (id: string, suggestionId: number) {
-    const suggestion = await this.suggestionRepository.findOne(id)
+    const suggestion = await this.suggestionRepository.findOne(suggestionId)
 
     if (!suggestion) {
       return
