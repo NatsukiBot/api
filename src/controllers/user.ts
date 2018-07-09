@@ -1,5 +1,5 @@
-import { Request } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam } from 'inversify-express-utils'
+import { Request, Response } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam, response } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
@@ -168,6 +168,62 @@ export class UserController implements BaseController<User, string> {
       })
 
     return balanceResponse
+  }
+
+  /**
+   * Transfers a certain amount of a user's credits to another user.
+   *
+   * PUT /:id/balance/transfer/:receiverId
+   * @param {string} id The ID of the user losing credits.
+   * @param {string} receiverId The ID of the user gaining credits.
+   * @param {Request} request The request to the server.
+   * @param {Response} response The response to the client.
+   * @returns Promise<{transferFromResponse: UpdateResult, transferToResponse: UpdateResult} | undefined>
+   * @memberof UserController
+   */
+  @httpPut('/:id/balance/transfer/:receiverId')
+  async transferBalance (
+    @requestParam('id') id: string,
+    @requestParam('receiverId') receiverId: string,
+    @request() request: Request,
+    @response() response: Response
+  ) {
+    const amount = request.body.amount
+
+    const fromUser = await this.userService.findById(id)
+    const toUser = await this.userService.findById(receiverId)
+
+    if (!fromUser || !toUser) {
+      response.status(400).send('User not found')
+      return
+    }
+
+    if (fromUser === toUser) {
+      response.status(400).send('Sender and receiver are the same')
+      return
+    }
+
+    if (amount < 1) {
+      response.status(400).send('Amount must be greater than 0')
+    }
+
+    if (fromUser.balance.balance < amount) {
+      response.status(400).send('Insufficient credits')
+      return
+    }
+
+    fromUser.balance.balance -= amount
+    fromUser.balance.netWorth -= amount
+    toUser.balance.balance += amount
+    toUser.balance.netWorth += amount
+
+    const transferFromResponse = await this.userService.updateBalance(id, fromUser.balance)
+    const transferToResponse = await this.userService.updateBalance(receiverId, toUser.balance)
+
+    return {
+      transferFromResponse,
+      transferToResponse
+    }
   }
 
   /**

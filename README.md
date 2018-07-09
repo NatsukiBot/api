@@ -20,7 +20,7 @@ This API does not store any personal information, but it is designed to be as se
 
 To authenticate requests and only allow trusted client applications to modify data, the API uses JWT.
 
-The API is designed to various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!
+The API is designed to prevent various attacks (e.g. DOS, Brute-force, etc.) using rate-limiting and the production API is secured behind HTTPS to protect all the things!
 
 ### JWT
 The API uses JWTs, or JSON Web Tokens, to authenticate requests. They are used to only allow certain applications to use the API.
