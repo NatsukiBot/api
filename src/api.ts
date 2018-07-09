@@ -17,7 +17,7 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import * as mongooseMorgan from 'mongoose-morgan'
+import * as mongoMorgan from 'mongo-morgan'
 import './ioc/loader'
 const { secret, apiServerIp, debug, mongodb } = require('../api.json')
 
@@ -91,8 +91,8 @@ export class Api {
         })
       )
       app.use(
-        mongooseMorgan({
-          connectionString: mongodb
+        mongoMorgan(mongodb, 'combined', {
+          collection: 'logs'
         })
       )
       app.use(
