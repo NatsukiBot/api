@@ -356,7 +356,7 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpGet('/:id/support-tickets/:userId')
-  async getUserById (request: Request, response: Response) {
+  async getUserById (request: Request) {
     return this.guildService.getUserById(request.params.id, request.params.userId)
   }
 
@@ -368,7 +368,7 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPost('/:id/users')
-  async createUser (request: Request, response: Response) {
+  async createUser (request: Request) {
     const postResponse = this.guildService.createUser(request.params.id, request.body)
     await postResponse
       .then(item => {
@@ -389,7 +389,7 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPut('/:id/users/:userId')
-  async updateUserById (request: Request, response: Response) {
+  async updateUserById (request: Request) {
     const updateResponse = this.guildService.updateUser(
       request.params.id,
       request.params.userId,
@@ -415,7 +415,7 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpDelete('/:id/users/:userId')
-  async deleteUserById (request: Request, response: Response) {
+  async deleteUserById (request: Request) {
     const deleteResponse = this.guildService.deleteUser(request.params.id, request.params.userId)
     await deleteResponse
       .then(() => {
