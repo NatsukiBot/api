@@ -32,7 +32,7 @@ export class Api {
    * Creates an instance of the Api.
    * @memberof Api
    */
-  constructor () {
+  constructor() {
     this.init()
   }
 
@@ -43,11 +43,11 @@ export class Api {
    * @returns {Api}
    * @memberof Api
    */
-  static start (): Api {
+  static start(): Api {
     return new Api()
   }
 
-  private init () {
+  private init() {
     createConnection()
       .then(async () => {
         this.startServer()
@@ -55,7 +55,7 @@ export class Api {
       .catch(err => Logger.error(err))
   }
 
-  private startServer () {
+  private startServer() {
     const server = new InversifyExpressServer(container)
 
     const limiter = new RateLimit({
@@ -63,7 +63,11 @@ export class Api {
       max: 150,
       delayMs: 0,
       skip: (request, response) => {
-        if (apiServerIp === request.ip || request.ip === '::1') {
+        if (
+          apiServerIp === request.ip ||
+          request.ip === '::1' ||
+          request.ip === '::ffff:127.0.0.1'
+        ) {
           return true
         }
 
@@ -94,7 +98,7 @@ export class Api {
       app.use(
         mongoMorgan(
           mongodb,
-          function (tokens: any, req: express.Request, res: express.Response) {
+          function(tokens: any, req: express.Request, res: express.Response) {
             const filteredReq = req
             filteredReq.query = ''
             filteredReq.originalUrl = url.parse(filteredReq.url).pathname!
@@ -119,17 +123,22 @@ export class Api {
           getToken: req => {
             // Special routes I don't want the average user to see :)
             // TODO: Create route-based authentication, decorators would be nice.
-            const blacklistedRoutes = [ 'keys' ]
+            const blacklistedRoutes = ['keys']
 
             if (
               req.method.toLowerCase() === 'get' &&
-              !blacklistedRoutes.some(route => req.path.toLowerCase().includes(route))
+              !blacklistedRoutes.some(route =>
+                req.path.toLowerCase().includes(route)
+              )
             ) {
               // *Hacky* approach to bypass request validation for GET requests, since I want anyone to be able to see the data.
               return jsonwebtoken.sign('GET', secret)
             }
 
-            if (req.headers.authorization && (req.headers.authorization as string).split(' ')[0] === 'Bearer') {
+            if (
+              req.headers.authorization &&
+              (req.headers.authorization as string).split(' ')[0] === 'Bearer'
+            ) {
               return (req.headers.authorization as string).split(' ')[1]
             } else if (req.query && req.query.token) {
               return req.query.token
@@ -141,10 +150,17 @@ export class Api {
 
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
-      app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.error(err)
-        res.status(500).send('Oof! Something went wrong.')
-      })
+      app.use(
+        (
+          err: any,
+          req: express.Request,
+          res: express.Response,
+          next: express.NextFunction
+        ) => {
+          console.error(err)
+          res.status(500).send('Oof! Something went wrong.')
+        }
+      )
 
       if (debug === true) {
         app.use(errorHandler())
