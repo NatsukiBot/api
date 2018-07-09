@@ -1,5 +1,5 @@
 // TODO: Replace with Guild models
-import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings } from '@nightwatch/db'
+import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
@@ -16,6 +16,7 @@ export class GuildService implements BaseService<Guild> {
   private suggestionRepository = getRepository(GuildSuggestion)
   private supportTicketRepository = getRepository(GuildSupportTicket)
   private settingsRepository = getRepository(GuildSettings)
+  private userRepository = getRepository(GuildUser)
 
   public getAll () {
     return this.guildRepository.find()
@@ -93,7 +94,7 @@ export class GuildService implements BaseService<Guild> {
       return
     }
 
-    this.supportTicketRepository.remove(ticket)
+    return this.supportTicketRepository.remove(ticket)
   }
 
   public async updateSupportTicket (id: string, ticketId: number | string, supportTicket: GuildSupportTicket) {
@@ -106,5 +107,32 @@ export class GuildService implements BaseService<Guild> {
 
   public async updateSettings (id: string, settings: GuildSettings) {
     return this.settingsRepository.update({ guild: { id } }, settings)
+  }
+
+  public async getUsers (id: string) {
+    return this.userRepository.find({ where: { guild: { id } } })
+  }
+
+  public getUserById (id: string, userId: string) {
+    return this.userRepository.findOne({ where: { guild: { id }, user: { id: userId } } })
+  }
+
+  public async createUser (id: string, user: GuildUser) {
+    user.dateJoined = new Date()
+    return this.userRepository.save(user)
+  }
+
+  public async deleteUser (id: string, userId: string) {
+    const user = await this.userRepository.findOne({ where: { guild: { id }, user: { id: userId } } })
+
+    if (!user) {
+      return
+    }
+
+    return this.userRepository.remove(user)
+  }
+
+  public async updateUser (id: string, userId: string, user: GuildUser) {
+    return this.userRepository.update({ guild: { id }, user: { id: userId } }, user)
   }
 }

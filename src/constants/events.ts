@@ -22,7 +22,12 @@ export const Events = {
       updated: 'guildSupportTicketUpdated',
       deleted: 'guildSupportTicketDeleted'
     },
-    settingsUpdated: 'guildSettingsUpdated'
+    settingsUpdated: 'guildSettingsUpdated',
+    user: {
+      created: 'guildUserCreated',
+      deleted: 'guildUserDeleted',
+      updated: 'guildUserUpdated'
+    }
   },
   giveaway: {
     created: 'giveawayCreated',
