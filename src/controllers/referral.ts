@@ -25,8 +25,6 @@ export class ReferralController implements BaseController<Referral, number> {
    * Gets all referrals from the database, excluding most related information.
    *
    * GET /
-   * @param {Request} request
-   * @param {Response} response
    * @returns Promise<Referral[]>
    * @memberof ReferralController
    */
@@ -39,8 +37,7 @@ export class ReferralController implements BaseController<Referral, number> {
    * Gets a referral by its ID, including all related information.
    *
    * GET /:id
-   * @param {Request} request
-   * @param {Response} response
+   * @param {number} id The ID of the referral.
    * @returns Promise<Referral>
    * @memberof ReferralController
    */
@@ -53,13 +50,12 @@ export class ReferralController implements BaseController<Referral, number> {
    * Creates a referral.
    *
    * POST /
-   * @param {Request} request
-   * @param {Response} response
+   * @param {Request} request The request containing a `Referral` object.
    * @returns Promise<Referral>
    * @memberof ReferralController
    */
   @httpPost('/')
-  async create (request: Request) {
+  async create (@request() request: Request) {
     const referralResponse = this.referralService.create(request.body)
     await referralResponse
       .then(referral => {
@@ -76,9 +72,8 @@ export class ReferralController implements BaseController<Referral, number> {
    * Hard deletes a referral.
    *
    * DELETE /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {number} id The ID of the referral.
+   * @returns Promise<Referral | undefined>
    * @memberof ReferralController
    */
   @httpDelete('/:id')
@@ -99,9 +94,9 @@ export class ReferralController implements BaseController<Referral, number> {
    * Updates a referral by ID.
    *
    * PUT /:id
-   * @param {Request} request
-   * @param {Response} response
-   * @returns Promise<void>
+   * @param {number} id The ID of the referral.
+   * @param {Request} request The request containing a `Referral` object.
+   * @returns Promise<Referral>
    * @memberof ReferralController
    */
   @httpPut('/:id')
