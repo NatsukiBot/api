@@ -1,6 +1,6 @@
-import 'reflect-metadata';
-import { Api } from './api';
+import 'reflect-metadata'
+import { Api } from './api'
 
-const debug = require('debug')('express:server');
+const debug = require('debug')('express:server')
 
-export const server = Api.start();
+export const server = Api.start()
