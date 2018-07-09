@@ -178,7 +178,7 @@ export class UserController implements BaseController<User, string> {
    * @param {string} receiverId The ID of the user gaining credits.
    * @param {Request} request The request to the server.
    * @param {Response} response The response to the requester.
-   * @returns Promise<UpdateResult>
+   * @returns Promise<{transferFromResponse: UpdateResult, transferToResponse: UpdateResult} | undefined>
    * @memberof UserController
    */
   @httpPut('/:id/balance/transfer/:receiverId')
