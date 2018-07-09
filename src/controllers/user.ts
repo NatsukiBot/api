@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request } from 'inversify-express-utils'
+import { Request } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
@@ -15,7 +15,7 @@ import { BaseController } from '../interfaces/BaseController'
  * @class UserController
  */
 @controller('/api/users')
-export class UserController implements BaseController<User> {
+export class UserController implements BaseController<User, string> {
   constructor (
     @inject(Types.UserService) private userService: UserService,
     @inject(Types.SocketService) private socketService: SocketService
@@ -45,8 +45,8 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpGet('/:id')
-  async findById (request: Request) {
-    return this.userService.findById(request.params.id)
+  async findById (@requestParam('id') id: string) {
+    return this.userService.findById(id)
   }
 
   /**
@@ -82,11 +82,11 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request) {
-    const deleteResponse = this.userService.delete(request.params.id)
+  async deleteById (@requestParam('id') id: string) {
+    const deleteResponse = this.userService.delete(id)
     await deleteResponse
       .then(() => {
-        this.socketService.send(Events.user.deleted, request.params.id)
+        this.socketService.send(Events.user.deleted, id)
       })
       .catch((err: any) => {
         Logger.error(err)
@@ -105,12 +105,12 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id')
-  async updateById (request: Request) {
-    const updateResponse = this.userService.update(request.params.id, request.body)
+  async updateById (@requestParam('id') id: string, @request() request: Request) {
+    const updateResponse = this.userService.update(id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: User = request.body
-        returnObject.id = request.params.id
+        returnObject.id = id
         this.socketService.send(Events.user.updated, returnObject)
       })
       .catch((err: any) => {
@@ -130,12 +130,12 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/level')
-  async updateLevel (request: Request) {
-    const levelResponse = this.userService.updateLevel(request.params.id, request.body)
+  async updateLevel (@requestParam('id') id: string, @request() request: Request) {
+    const levelResponse = this.userService.updateLevel(id, request.body)
     await levelResponse
       .then(() => {
         const returnObject: any = request.body
-        returnObject.userId = request.params.id
+        returnObject.userId = id
         this.socketService.send(Events.user.levelUpdated, returnObject)
       })
       .catch((err: any) => {
@@ -155,12 +155,12 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/balance')
-  async updateBalance (request: Request) {
-    const balanceResponse = this.userService.updateBalance(request.params.id, request.body)
+  async updateBalance (@requestParam('id') id: string, @request() request: Request) {
+    const balanceResponse = this.userService.updateBalance(id, request.body)
     await balanceResponse
       .then(() => {
         const returnObject: any = request.body
-        returnObject.userId = request.params.id
+        returnObject.userId = id
         this.socketService.send(Events.user.balanceUpdated, returnObject)
       })
       .catch((err: any) => {
@@ -176,8 +176,8 @@ export class UserController implements BaseController<User> {
    * @param response
    */
   @httpGet('/:id/profile')
-  async getProfileById (request: Request) {
-    return this.userService.getProfile(request.params.id)
+  async getProfileById (@requestParam('id') id: string) {
+    return this.userService.getProfile(id)
   }
 
   /**
@@ -190,12 +190,12 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/profile')
-  async updateProfile (request: Request) {
-    const profileResponse = this.userService.updateProfile(request.params.id, request.body)
+  async updateProfile (@requestParam('id') id: string, @request() request: Request) {
+    const profileResponse = this.userService.updateProfile(id, request.body)
     await profileResponse
       .then(() => {
         const returnObject: any = request.body
-        returnObject.userId = request.params.id
+        returnObject.userId = id
         this.socketService.send(Events.user.profileUpdated, returnObject)
       })
       .catch((err: any) => {
@@ -213,8 +213,8 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpGet('/:id/settings')
-  async getSettingsById (request: Request) {
-    return this.userService.getSettings(request.params.id)
+  async getSettingsById (@requestParam('id') id: string) {
+    return this.userService.getSettings(id)
   }
 
   /**
@@ -227,12 +227,12 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/settings')
-  async updateSettings (request: Request) {
-    const settingsResponse = this.userService.updateSettings(request.params.id, request.body)
+  async updateSettings (@requestParam('id') id: string, @request() request: Request) {
+    const settingsResponse = this.userService.updateSettings(id, request.body)
     await settingsResponse
       .then(() => {
         const returnObject: any = request.body
-        returnObject.userId = request.params.id
+        returnObject.userId = id
         this.socketService.send(Events.user.settingsUpdated, returnObject)
       })
       .catch((err: any) => {

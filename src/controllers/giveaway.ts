@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { Request } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, request } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { GiveawayService } from '../services/giveaway'
@@ -15,7 +15,7 @@ import { Logger } from '@nightwatch/util'
  * @class GiveawayController
  */
 @controller('/api/giveaways')
-export class GiveawayController implements BaseController<Giveaway> {
+export class GiveawayController implements BaseController<Giveaway, number> {
   constructor (
     @inject(Types.GiveawayService) private giveawayService: GiveawayService,
     @inject(Types.SocketService) private socketService: SocketService
@@ -45,8 +45,8 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpGet('/:id')
-  async findById (request: Request) {
-    return this.giveawayService.findById(request.params.id)
+  async findById (@requestParam('id') id: number) {
+    return this.giveawayService.findById(id)
   }
 
   /**
@@ -82,11 +82,11 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request) {
-    const deleteResponse = this.giveawayService.delete(request.params.id)
+  async deleteById (@requestParam('id') id: number) {
+    const deleteResponse = this.giveawayService.delete(id)
     await deleteResponse
       .then(() => {
-        this.socketService.send(Events.giveaway.deleted, request.params.id)
+        this.socketService.send(Events.giveaway.deleted, id)
       })
       .catch((err: any) => {
         Logger.error(err)
@@ -105,8 +105,8 @@ export class GiveawayController implements BaseController<Giveaway> {
    * @memberof GiveawayController
    */
   @httpPut('/:id')
-  async updateById (request: Request) {
-    const updateResponse = this.giveawayService.update(request.params.id, request.body)
+  async updateById (@requestParam('id') id: number, @request() request: Request) {
+    const updateResponse = this.giveawayService.update(id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: Giveaway = request.body

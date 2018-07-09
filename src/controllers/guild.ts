@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { Request } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, request } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
@@ -15,7 +15,7 @@ import { Logger } from '@nightwatch/util'
  * @class GuildController
  */
 @controller('/api/guilds')
-export class GuildController implements BaseController<Guild> {
+export class GuildController implements BaseController<Guild, string> {
   constructor (
     @inject(Types.GuildService) private guildService: GuildService,
     @inject(Types.SocketService) private socketService: SocketService
@@ -45,8 +45,8 @@ export class GuildController implements BaseController<Guild> {
    * @memberof GuildController
    */
   @httpGet('/:id')
-  async findById (request: Request) {
-    return this.guildService.findById(request.params.id)
+  async findById (@requestParam('id') id: string) {
+    return this.guildService.findById(id)
   }
 
   /**
@@ -82,11 +82,11 @@ export class GuildController implements BaseController<Guild> {
    * @memberof GuildController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request) {
-    const deleteResponse = this.guildService.delete(request.params.id)
+  async deleteById (@requestParam('id') id: string) {
+    const deleteResponse = this.guildService.delete(id)
     await deleteResponse
       .then(() => {
-        this.socketService.send(Events.guild.deleted, request.params.id)
+        this.socketService.send(Events.guild.deleted, id)
       })
       .catch((err: any) => {
         Logger.error(err)
@@ -105,12 +105,12 @@ export class GuildController implements BaseController<Guild> {
    * @memberof GuildController
    */
   @httpPut('/:id')
-  async updateById (request: Request) {
-    const updateResponse = this.guildService.update(request.params.id, request.body)
+  async updateById (@requestParam('id') id: string, @request() request: Request) {
+    const updateResponse = this.guildService.update(id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: Guild = request.body
-        returnObject.id = request.params.id
+        returnObject.id = id
         this.socketService.send(Events.guild.updated, returnObject)
       })
       .catch((err: any) => {
@@ -128,8 +128,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpGet('/:id/suggestions')
-  async getSuggestions (request: Request) {
-    return this.guildService.getSuggestions(request.params.id)
+  async getSuggestions (@requestParam('id') id: string) {
+    return this.guildService.getSuggestions(id)
   }
 
   /**
@@ -140,8 +140,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpGet('/:id/suggestions/:suggestionId')
-  async getSuggestionById (request: Request) {
-    return this.guildService.getSuggestionById(request.params.id, request.body)
+  async getSuggestionById (@requestParam('id') id: string, @requestParam('suggestionId') suggestionId: number) {
+    return this.guildService.getSuggestionById(id, suggestionId)
   }
 
   /**
@@ -152,8 +152,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPost('/:id/suggestions')
-  async createSuggestion (request: Request) {
-    const postResponse = this.guildService.createSuggestion(request.params.id, request.body)
+  async createSuggestion (@requestParam('id') id: string, @request() request: Request) {
+    const postResponse = this.guildService.createSuggestion(id, request.body)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.suggestion.created, item)
@@ -173,16 +173,16 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPut('/:id/suggestions/:suggestionId')
-  async updateSuggestionById (request: Request) {
-    const updateResponse = this.guildService.updateSuggestion(
-      request.params.id,
-      request.params.suggestionId,
-      request.body
-    )
+  async updateSuggestionById (
+    @requestParam('id') id: string,
+    @requestParam('suggestionId') suggestionId: number,
+    @request() request: Request
+  ) {
+    const updateResponse = this.guildService.updateSuggestion(id, suggestionId, request.body)
     await updateResponse
       .then(() => {
         const returnObject: Guild = request.body
-        returnObject.id = request.params.id
+        returnObject.id = id
         this.socketService.send(Events.guild.suggestion.updated, returnObject)
       })
       .catch((err: any) => {
@@ -200,13 +200,13 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpDelete('/:id/suggestions/:suggestionId')
-  async deleteSuggestionById (request: Request) {
-    const deleteResponse = this.guildService.deleteSuggestion(request.params.id, request.body)
+  async deleteSuggestionById (@requestParam('id') id: string, @requestParam('suggestionId') suggestionId: number) {
+    const deleteResponse = this.guildService.deleteSuggestion(id, suggestionId)
     await deleteResponse
       .then(() => {
         this.socketService.send(Events.guild.suggestion.deleted, {
-          guildId: request.params.id,
-          suggestionId: request.body
+          guildId: id,
+          suggestionId
         })
       })
       .catch((err: any) => {
@@ -224,8 +224,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpGet('/:id/support-tickets')
-  async getSupportTickets (request: Request) {
-    return this.guildService.getSupportTickets(request.params.id)
+  async getSupportTickets (@requestParam('id') id: string) {
+    return this.guildService.getSupportTickets(id)
   }
 
   /**
@@ -236,8 +236,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpGet('/:id/support-tickets/:ticketId')
-  async getSupportTicketById (request: Request) {
-    return this.guildService.getSupportTicketById(request.params.id, request.body)
+  async getSupportTicketById (@requestParam('id') id: string, @requestParam('ticketId') ticketId: number) {
+    return this.guildService.getSupportTicketById(id, ticketId)
   }
 
   /**
@@ -248,8 +248,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPost('/:id/support-tickets')
-  async createSupportTicket (request: Request) {
-    const postResponse = this.guildService.createSupportTicket(request.params.id, request.body)
+  async createSupportTicket (@requestParam('id') id: string, request: Request) {
+    const postResponse = this.guildService.createSupportTicket(id, request.body)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.supportTicket.created, item)
@@ -269,12 +269,12 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPut('/:id/support-tickets/:ticketId')
-  async updateSupportTicketById (request: Request) {
-    const updateResponse = this.guildService.updateSupportTicket(
-      request.params.id,
-      request.params.ticketId,
-      request.body
-    )
+  async updateSupportTicketById (
+    @requestParam('id') id: string,
+    @requestParam('ticketId') ticketId: number,
+    @request() request: Request
+  ) {
+    const updateResponse = this.guildService.updateSupportTicket(id, ticketId, request.body)
     await updateResponse
       .then(() => {
         const returnObject: GuildSupportTicket = request.body
@@ -295,13 +295,13 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpDelete('/:id/support-tickets/:ticketId')
-  async deleteSupportTicketById (request: Request) {
-    const deleteResponse = this.guildService.deleteSupportTicket(request.params.id, request.body)
+  async deleteSupportTicketById (@requestParam('id') id: string, @requestParam('ticketId') ticketId: number) {
+    const deleteResponse = this.guildService.deleteSupportTicket(id, ticketId)
     await deleteResponse
       .then(() => {
         this.socketService.send(Events.guild.supportTicket.deleted, {
-          guildId: request.params.id,
-          ticketId: request.body
+          guildId: id,
+          ticketId
         })
       })
       .catch((err: any) => {
@@ -312,8 +312,8 @@ export class GuildController implements BaseController<Guild> {
   }
 
   @httpGet('/:id/settings')
-  async getSettingsById (request: Request) {
-    return this.guildService.getSettings(request.params.id)
+  async getSettingsById (@requestParam('id') id: string) {
+    return this.guildService.getSettings(id)
   }
 
   /**
@@ -324,8 +324,8 @@ export class GuildController implements BaseController<Guild> {
    * @param response
    */
   @httpPut('/:id/settings')
-  async updateSettingsById (request: Request) {
-    const updateResponse = this.guildService.updateSettings(request.params.id, request.body)
+  async updateSettingsById (@requestParam('id') id: string, @request() request: Request) {
+    const updateResponse = this.guildService.updateSettings(id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: GuildSettings = request.body
