@@ -1,4 +1,3 @@
-// TODO: Replace with Guild models
 import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
 import { provide } from '../ioc/ioc'

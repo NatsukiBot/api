@@ -17,8 +17,9 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
+import * as mongooseMorgan from 'mongoose-morgan'
 import './ioc/loader'
-const { secret, apiServerIp, debug } = require('../api.json')
+const { secret, apiServerIp, debug, mongodb } = require('../api.json')
 
 /**
  * The API server
@@ -50,7 +51,7 @@ export class Api {
       .then(async () => {
         this.startServer()
       })
-      .catch((err) => Logger.error(err))
+      .catch(err => Logger.error(err))
   }
 
   private startServer () {
@@ -69,7 +70,7 @@ export class Api {
       }
     })
 
-    server.setConfig((app) => {
+    server.setConfig(app => {
       app.enable('trust proxy')
       app.use(limiter)
       app.use(
@@ -85,21 +86,26 @@ export class Api {
       app.use(
         morgan('tiny', {
           stream: {
-            write: (message) => Logger.info(message.trim())
+            write: message => Logger.info(message.trim())
           }
+        })
+      )
+      app.use(
+        mongooseMorgan({
+          connectionString: mongodb
         })
       )
       app.use(
         jwt({
           secret,
-          getToken: (req) => {
+          getToken: req => {
             // Special routes I don't want the average user to see :)
             // TODO: Create route-based authentication, decorators would be nice.
             const blacklistedRoutes = [ 'keys' ]
 
             if (
               req.method.toLowerCase() === 'get' &&
-              !blacklistedRoutes.some((route) => req.path.toLowerCase().includes(route))
+              !blacklistedRoutes.some(route => req.path.toLowerCase().includes(route))
             ) {
               // *Hacky* approach to bypass request validation for GET requests, since I want anyone to be able to see the data.
               return jsonwebtoken.sign('GET', secret)
