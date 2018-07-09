@@ -1,5 +1,14 @@
 import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam, response } from 'inversify-express-utils'
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  request,
+  requestParam,
+  response
+} from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'

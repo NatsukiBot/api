@@ -371,7 +371,7 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpGet('/:id/users')
-  async getUsers(@requestParam('id') id: string) {
+  async getUsers (@requestParam('id') id: string) {
     return this.guildService.getUsers(id)
   }
 
@@ -423,12 +423,12 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPut('/:id/users/:userId')
-  async updateUserById (@requestParam('id') id: string, @requestParam('userId') userId: string, @request() request: Request) {
-    const updateResponse = this.guildService.updateUser(
-      id,
-      userId,
-      request.body
-    )
+  async updateUserById (
+    @requestParam('id') id: string,
+    @requestParam('userId') userId: string,
+    @request() request: Request
+  ) {
+    const updateResponse = this.guildService.updateUser(id, userId, request.body)
     await updateResponse
       .then(() => {
         const returnObject: GuildUser = request.body
