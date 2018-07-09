@@ -177,7 +177,7 @@ export class UserController implements BaseController<User, string> {
    * @param {string} id The ID of the user losing credits.
    * @param {string} receiverId The ID of the user gaining credits.
    * @param {Request} request The request to the server.
-   * @param {Response} response The response to the requester.
+   * @param {Response} response The response to the client.
    * @returns Promise<{transferFromResponse: UpdateResult, transferToResponse: UpdateResult} | undefined>
    * @memberof UserController
    */
@@ -190,12 +190,21 @@ export class UserController implements BaseController<User, string> {
   ) {
     const amount = request.body.amount
 
-    let fromUser = await this.userService.findById(id)
-    let toUser = await this.userService.findById(receiverId)
+    const fromUser = await this.userService.findById(id)
+    const toUser = await this.userService.findById(receiverId)
 
-    if (!(fromUser && toUser)) {
+    if (!fromUser || !toUser) {
       response.status(400).send('User not found')
       return
+    }
+
+    if (fromUser === toUser) {
+      response.status(400).send('Sender and receiver are the same')
+      return
+    }
+
+    if (amount < 1) {
+      response.status(400).send('Amount must be greater than 0')
     }
 
     if (fromUser.balance.balance < amount) {
