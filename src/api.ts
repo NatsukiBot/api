@@ -18,6 +18,7 @@ import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
 import * as mongoMorgan from 'mongo-morgan'
+import * as url from 'url'
 import './ioc/loader'
 const { secret, apiServerIp, debug, mongodb } = require('../api.json')
 
@@ -96,6 +97,7 @@ export class Api {
           function (tokens: any, req: express.Request, res: express.Response) {
             const filteredReq = req
             filteredReq.query = ''
+            filteredReq.originalUrl = url.parse(filteredReq.url).pathname!
             return [
               tokens.method(filteredReq, res),
               tokens.url(filteredReq, res),
