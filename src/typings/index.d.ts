@@ -1,2 +1,2 @@
 declare module 'express-status-monitor'
-declare module 'mongoose-morgan'
+declare module 'mongo-morgan'
