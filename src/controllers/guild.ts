@@ -344,8 +344,8 @@ export class GuildController implements BaseController<Guild, string> {
    * @param response
    */
   @httpGet('/:id/users')
-  async getUsers(request: Request, response: Response) {
-    return this.guildService.getUsers(request.params.id)
+  async getUsers(@requestParam('id') id: string) {
+    return this.guildService.getUsers(id)
   }
 
   /**
@@ -355,9 +355,9 @@ export class GuildController implements BaseController<Guild, string> {
    * @param request
    * @param response
    */
-  @httpGet('/:id/support-tickets/:userId')
-  async getUserById (request: Request) {
-    return this.guildService.getUserById(request.params.id, request.params.userId)
+  @httpGet('/:id/users/:userId')
+  async getUserById (@requestParam('id') id: string, @requestParam('userId') userId: number) {
+    return this.guildService.getUserById(id, userId)
   }
 
   /**
@@ -368,8 +368,8 @@ export class GuildController implements BaseController<Guild, string> {
    * @param response
    */
   @httpPost('/:id/users')
-  async createUser (request: Request) {
-    const postResponse = this.guildService.createUser(request.params.id, request.body)
+  async createUser (@requestParam('id') id: string, @request() request: Request) {
+    const postResponse = this.guildService.createUser(id, request.body)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.user.created, item)
@@ -389,10 +389,10 @@ export class GuildController implements BaseController<Guild, string> {
    * @param response
    */
   @httpPut('/:id/users/:userId')
-  async updateUserById (request: Request) {
+  async updateUserById (@requestParam('id') id: string, @requestParam('userId') userId: number, @request() request: Request) {
     const updateResponse = this.guildService.updateUser(
-      request.params.id,
-      request.params.userId,
+      id,
+      userId,
       request.body
     )
     await updateResponse
@@ -415,12 +415,12 @@ export class GuildController implements BaseController<Guild, string> {
    * @param response
    */
   @httpDelete('/:id/users/:userId')
-  async deleteUserById (request: Request) {
-    const deleteResponse = this.guildService.deleteUser(request.params.id, request.params.userId)
+  async deleteUserById (@requestParam('id') id: string, @requestParam('userId') userId: number, @request() request: Request) {
+    const deleteResponse = this.guildService.deleteUser(id, userId)
     await deleteResponse
       .then(() => {
         this.socketService.send(Events.guild.user.deleted, {
-          guildId: request.params.id,
+          guildId: id,
           userId: request.body
         })
       })
