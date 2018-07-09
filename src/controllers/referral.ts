@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { Request } from 'express'
+import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { SocketService } from '../services/socket'
@@ -15,7 +15,7 @@ import { BaseController } from '../interfaces/BaseController'
  * @class ReferralController
  */
 @controller('/api/referrals')
-export class ReferralController implements BaseController<Referral> {
+export class ReferralController implements BaseController<Referral, number> {
   constructor (
     @inject(Types.ReferralService) private referralService: ReferralService,
     @inject(Types.SocketService) private socketService: SocketService
@@ -45,8 +45,8 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpGet('/:id')
-  async findById (request: Request) {
-    return this.referralService.findById(request.params.id)
+  async findById (@requestParam('id') id: number) {
+    return this.referralService.findById(id)
   }
 
   /**
@@ -82,11 +82,11 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request) {
-    const deleteResponse = this.referralService.delete(request.params.id)
+  async deleteById (@requestParam('id') id: number) {
+    const deleteResponse = this.referralService.delete(id)
     await deleteResponse
       .then(() => {
-        this.socketService.send(Events.referral.deleted, request.params.id)
+        this.socketService.send(Events.referral.deleted, id)
       })
       .catch((err: any) => {
         Logger.error(err)
@@ -105,12 +105,12 @@ export class ReferralController implements BaseController<Referral> {
    * @memberof ReferralController
    */
   @httpPut('/:id')
-  async updateById (request: Request) {
-    const updateResponse = this.referralService.update(request.params.id, request.body)
+  async updateById (@requestParam('id') id: number, @request() request: Request) {
+    const updateResponse = this.referralService.update(id, request.body)
     await updateResponse
       .then(() => {
         const returnObject: Referral = request.body
-        returnObject.id = request.params.id
+        returnObject.id = id
         this.socketService.send(Events.referral.updated, returnObject)
       })
       .catch((err: any) => {
