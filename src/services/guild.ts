@@ -114,7 +114,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getUserById (id: string, userId: number) {
-    return this.userRepository.findOne(userId)
+    return this.userRepository.findOne({ where: { guild: { id }, id: { userId } } })
   }
 
   public async createUser (id: string, user: GuildUser) {
@@ -123,7 +123,7 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async deleteUser (id: string, userId: number) {
-    const user = await this.userRepository.findOne(userId)
+    const user = await this.userRepository.findOne({ where: { guild: { id }, id: { userId } } })
 
     if (!user) {
       return
@@ -132,7 +132,7 @@ export class GuildService implements BaseService<Guild> {
     this.userRepository.remove(user)
   }
 
-  public async updateUser (id: string, userId: number | string, user: GuildUser) {
-    return this.userRepository.update(userId, user)
+  public async updateUser (id: string, userId: number, user: GuildUser) {
+    return this.userRepository.update({ guild: { id }, id: userId }, user)
   }
 }
