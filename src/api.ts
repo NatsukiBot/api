@@ -63,7 +63,7 @@ export class Api {
       max: 150,
       delayMs: 0,
       skip: (request, response) => {
-        if (apiServerIp === request.ip) {
+        if (apiServerIp === request.ip || request.ip === '::1') {
           return true
         }
 
