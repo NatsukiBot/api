@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost } from 'inversify-express-utils'
+import { controller, httpGet, httpDelete, httpPut, httpPost, request } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
@@ -31,7 +31,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpGet('/')
-  async getAll (request: Request, response: Response) {
+  async getAll () {
     return this.userService.getAll()
   }
 
@@ -45,7 +45,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpGet('/:id')
-  async findById (request: Request, response: Response) {
+  async findById (request: Request) {
     return this.userService.findById(request.params.id)
   }
 
@@ -59,7 +59,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPost('/')
-  async create (request: Request, response: Response) {
+  async create (request: Request) {
     const userResponse = this.userService.create(request.body)
     await userResponse
       .then(user => {
@@ -82,7 +82,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpDelete('/:id')
-  async deleteById (request: Request, response: Response) {
+  async deleteById (request: Request) {
     const deleteResponse = this.userService.delete(request.params.id)
     await deleteResponse
       .then(() => {
@@ -105,7 +105,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id')
-  async updateById (request: Request, response: Response) {
+  async updateById (request: Request) {
     const updateResponse = this.userService.update(request.params.id, request.body)
     await updateResponse
       .then(() => {
@@ -130,7 +130,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/level')
-  async updateLevel (request: Request, response: Response) {
+  async updateLevel (request: Request) {
     const levelResponse = this.userService.updateLevel(request.params.id, request.body)
     await levelResponse
       .then(() => {
@@ -155,7 +155,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/balance')
-  async updateBalance (request: Request, response: Response) {
+  async updateBalance (request: Request) {
     const balanceResponse = this.userService.updateBalance(request.params.id, request.body)
     await balanceResponse
       .then(() => {
@@ -176,7 +176,7 @@ export class UserController implements BaseController<User> {
    * @param response
    */
   @httpGet('/:id/profile')
-  async getProfileById (request: Request, response: Response) {
+  async getProfileById (request: Request) {
     return this.userService.getProfile(request.params.id)
   }
 
@@ -190,7 +190,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/profile')
-  async updateProfile (request: Request, response: Response) {
+  async updateProfile (request: Request) {
     const profileResponse = this.userService.updateProfile(request.params.id, request.body)
     await profileResponse
       .then(() => {
@@ -213,7 +213,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpGet('/:id/settings')
-  async getSettingsById (request: Request, response: Response) {
+  async getSettingsById (request: Request) {
     return this.userService.getSettings(request.params.id)
   }
 
@@ -227,7 +227,7 @@ export class UserController implements BaseController<User> {
    * @memberof UserController
    */
   @httpPut('/:id/settings')
-  async updateSettings (request: Request, response: Response) {
+  async updateSettings (request: Request) {
     const settingsResponse = this.userService.updateSettings(request.params.id, request.body)
     await settingsResponse
       .then(() => {
