@@ -113,7 +113,9 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public getUserById (id: string, userId: string) {
-    return this.userRepository.findOne({ where: { guild: { id }, user: { id: userId } } })
+    return this.userRepository.findOne({
+      where: { guild: { id }, user: { id: userId } }
+    })
   }
 
   public async createUser (id: string, user: GuildUser) {
@@ -122,7 +124,9 @@ export class GuildService implements BaseService<Guild> {
   }
 
   public async deleteUser (id: string, userId: string) {
-    const user = await this.userRepository.findOne({ where: { guild: { id }, user: { id: userId } } })
+    const user = await this.userRepository.findOne({
+      where: { guild: { id }, user: { id: userId } }
+    })
 
     if (!user) {
       return
