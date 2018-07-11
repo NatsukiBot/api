@@ -111,12 +111,21 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#addfriend" class="tsd-kind-icon">add<wbr>Friend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#createfriendrequest" class="tsd-kind-icon">create<wbr>Friend<wbr>Request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#deletefriendrequest" class="tsd-kind-icon">delete<wbr>Friend<wbr>Request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getfriendbyid" class="tsd-kind-icon">get<wbr>Friend<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getfriendrequests" class="tsd-kind-icon">get<wbr>Friend<wbr>Requests</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getfriends" class="tsd-kind-icon">get<wbr>Friends</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getprofilebyid" class="tsd-kind-icon">get<wbr>Profile<wbr>ById</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#getsettingsbyid" class="tsd-kind-icon">get<wbr>Settings<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#removefriend" class="tsd-kind-icon">remove<wbr>Friend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#searchfriendrequests" class="tsd-kind-icon">search<wbr>Friend<wbr>Requests</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#searchfriends" class="tsd-kind-icon">search<wbr>Friends</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#transferbalance" class="tsd-kind-icon">transfer<wbr>Balance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#updatebalance" class="tsd-kind-icon">update<wbr>Balance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="usercontroller.html#updatebyid" class="tsd-kind-icon">update<wbr>ById</a></li>
@@ -140,7 +149,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L27">controllers/user.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L28">controllers/user.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -165,7 +174,7 @@
 					<div class="tsd-signature tsd-kind-icon">socket<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="socketservice.html" class="tsd-signature-type">SocketService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L30">controllers/user.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L31">controllers/user.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,13 +184,51 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="userservice.html" class="tsd-signature-type">UserService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L29">controllers/user.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L30">controllers/user.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addfriend" class="tsd-anchor"></a>
+					<h3>add<wbr>Friend</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Friend<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L444">controllers/user.ts:444</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a friend and deletes the related friend request.</p>
+								</div>
+								<p>POST /:id/friends</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<UserFriend | undefined></p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="create" class="tsd-anchor"></a>
 					<h3>create</h3>
@@ -192,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L67">controllers/user.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L68">controllers/user.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -221,6 +268,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createfriendrequest" class="tsd-anchor"></a>
+					<h3>create<wbr>Friend<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Friend<wbr>Request<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L349">controllers/user.ts:349</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a friend request.</p>
+								</div>
+								<p>POST /:id/friends/requests</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>request: <span class="tsd-signature-type">Request</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<UserFriendRequest | undefined></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="deletebyid" class="tsd-anchor"></a>
 					<h3>delete<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -230,7 +315,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L89">controllers/user.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L90">controllers/user.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -259,6 +344,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deletefriendrequest" class="tsd-anchor"></a>
+					<h3>delete<wbr>Friend<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Friend<wbr>Request<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, requestId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L372">controllers/user.ts:372</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deletes a friend request.</p>
+								</div>
+								<p>DELETE /:id/friends/requests/:requestId</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>requestId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<UserFriendRequest | undefined></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="findbyid" class="tsd-anchor"></a>
 					<h3>find<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -268,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L54">controllers/user.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L55">controllers/user.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -306,7 +429,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L41">controllers/user.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L42">controllers/user.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -326,16 +449,127 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getprofilebyid" class="tsd-anchor"></a>
-					<h3>get<wbr>Profile<wbr>ById</h3>
+					<a name="getfriendbyid" class="tsd-anchor"></a>
+					<h3>get<wbr>Friend<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Profile<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Friend<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, friendId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L240">controllers/user.ts:240</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L430">controllers/user.ts:430</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a user&#39;s friend by a database object ID.</p>
+								</div>
+								<p>GET /:id/friends/:friendId</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>friendId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<UserFriend | undefined></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getfriendrequests" class="tsd-anchor"></a>
+					<h3>get<wbr>Friend<wbr>Requests</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Friend<wbr>Requests<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">"incoming"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"outgoing"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"incoming"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"outgoing"</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L316">controllers/user.ts:316</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all friend requests for a user.</p>
+								</div>
+								<p>GET /:id/friends/requests</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> type: <span class="tsd-signature-type">"incoming"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"outgoing"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"incoming"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"outgoing"</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Map of incoming and outgoing friend requests.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getfriends" class="tsd-anchor"></a>
+					<h3>get<wbr>Friends</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Friends<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L397">controllers/user.ts:397</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all friends for a user.</p>
+								</div>
+								<p>GET /:id/friends</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise&lt;UserFriend[]&gt;</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getprofilebyid" class="tsd-anchor"></a>
+					<h3>get<wbr>Profile<wbr>ById</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Profile<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L241">controllers/user.ts:241</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -357,7 +591,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>Promise&lt;UserProfile[]&gt;</p>
 						</li>
 					</ul>
@@ -366,13 +600,13 @@
 					<a name="getsettingsbyid" class="tsd-anchor"></a>
 					<h3>get<wbr>Settings<wbr>ById</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Settings<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Settings<wbr>ById<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L276">controllers/user.ts:276</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L277">controllers/user.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -394,8 +628,128 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>Promise&lt;UserSettings[]&gt;</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removefriend" class="tsd-anchor"></a>
+					<h3>remove<wbr>Friend</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Friend<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, friendId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L467">controllers/user.ts:467</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deletes a friend.</p>
+								</div>
+								<p>DELETE /:id/friends/:friendId</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>friendId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise<UserFriend | undefined></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="searchfriendrequests" class="tsd-anchor"></a>
+					<h3>search<wbr>Friend<wbr>Requests</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">search<wbr>Friend<wbr>Requests<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, skip<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, take<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L331">controllers/user.ts:331</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a paginated list of friend requests.</p>
+								</div>
+								<p>GET /:id/friends/requests/search</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skip: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> take: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriendRequest</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise&lt;UserFriendRequest[]&gt;</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="searchfriends" class="tsd-anchor"></a>
+					<h3>search<wbr>Friends</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">search<wbr>Friends<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, skip<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, take<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L412">controllers/user.ts:412</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a paginated list of friends for a user.</p>
+								</div>
+								<p>GET /:id/friends/search</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>UserController</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skip: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> take: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserFriend</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Promise&lt;UserFriend[]&gt;</p>
 						</li>
 					</ul>
 				</section>
@@ -409,7 +763,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L189">controllers/user.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L190">controllers/user.ts:190</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -465,7 +819,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L162">controllers/user.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L163">controllers/user.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -509,7 +863,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L112">controllers/user.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L113">controllers/user.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -553,7 +907,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L137">controllers/user.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L138">controllers/user.ts:138</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -597,7 +951,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L254">controllers/user.ts:254</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L255">controllers/user.ts:255</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -641,7 +995,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Nightwatch/api/blob/2b533c3/src/controllers/user.ts#L290">controllers/user.ts:290</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/5c9e37b/src/controllers/user.ts#L291">controllers/user.ts:291</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -738,10 +1092,19 @@
 								<a href="usercontroller.html#userservice" class="tsd-kind-icon">user<wbr>Service</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#addfriend" class="tsd-kind-icon">add<wbr>Friend</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#create" class="tsd-kind-icon">create</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#createfriendrequest" class="tsd-kind-icon">create<wbr>Friend<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#deletebyid" class="tsd-kind-icon">delete<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#deletefriendrequest" class="tsd-kind-icon">delete<wbr>Friend<wbr>Request</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a>
@@ -750,10 +1113,28 @@
 								<a href="usercontroller.html#getall" class="tsd-kind-icon">get<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#getfriendbyid" class="tsd-kind-icon">get<wbr>Friend<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#getfriendrequests" class="tsd-kind-icon">get<wbr>Friend<wbr>Requests</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#getfriends" class="tsd-kind-icon">get<wbr>Friends</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#getprofilebyid" class="tsd-kind-icon">get<wbr>Profile<wbr>ById</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#getsettingsbyid" class="tsd-kind-icon">get<wbr>Settings<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#removefriend" class="tsd-kind-icon">remove<wbr>Friend</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#searchfriendrequests" class="tsd-kind-icon">search<wbr>Friend<wbr>Requests</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="usercontroller.html#searchfriends" class="tsd-kind-icon">search<wbr>Friends</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="usercontroller.html#transferbalance" class="tsd-kind-icon">transfer<wbr>Balance</a>
