@@ -33,6 +33,7 @@
   "dependencies": {
     "@nightwatch/db": "^0.10.1",
     "@nightwatch/util": "^1.0.3",
+    "accesscontrol": "^2.2.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",
     "compression": "^1.7.2",
@@ -69,7 +70,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NightwatchBot/api.git"
+    "url": "https://github.com/Nightwatch/api.git"
   },
   "config": {
     "commitizen": {

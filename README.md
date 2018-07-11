@@ -8,7 +8,7 @@ Generated documentation can be found here: https://nightwatch.tk/api/docs/
 
 ## Installation
 
-1. Clone the repo: `git clone https://github.com/NightwatchBot/api.git`
+1. Clone the repo: `git clone https://github.com/Nightwatch/api.git`
 2. Run `npm i`
 3. Rename the `ormconfig.example.json` to `ormconfig.json` and modify the database settings.
 4. Rename the `api.example.json` to `api.json` and generate a **secure** secret. Use an online password generator if you don't know how. Also fill in the `apiServerIp` with the IP of the server the API is running on, which will be used to prevent local requests from using the API request limit.
@@ -77,7 +77,7 @@ If you access data from the production API, at https://nightwatch.tk/api, you ag
  * You will not use the data for commercial purposes.
  * The application or service that uses this API's data must be provided free of charge and the implementation of the API and/or API data must be open-source.
  * Credit will be given to the Nightwatch API project. The project's GitHub and production API URL must be linked where the API data is used.
-    - GitHub: https://github.com/NightwatchBot/api
+    - GitHub: https://github.com/Nightwatch/api
     - Production API: https://nightwatch.tk/api
  * You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.
     - It is recommended to cache the data you receive to reduce the number of requests made.
@@ -92,7 +92,7 @@ If you access data from the production API, at https://nightwatch.tk/api, you ag
 
 ## Support
 
- If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. https://github.com/NightwatchBot/api/issues
+ If there are any questions or issues, please make a ticket in GitHub and we will respond as soon as we can. https://github.com/Nightwatch/api/issues
 
 ## Donate
 

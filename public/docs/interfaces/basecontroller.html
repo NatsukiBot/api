@@ -57,7 +57,7 @@
 					<a href="basecontroller.html">BaseController</a>
 				</li>
 			</ul>
-			<h1>Interface BaseController&lt;T&gt;</h1>
+			<h1>Interface BaseController&lt;T, IDColumnType&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -69,6 +69,9 @@
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>T</h4>
+					</li>
+					<li>
+						<h4>IDColumnType</h4>
 					</li>
 				</ul>
 			</section>
@@ -114,7 +117,7 @@
 					<div class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/interfaces/BaseController.ts#L6">interfaces/BaseController.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/interfaces/BaseController.ts#L6">interfaces/BaseController.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -148,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">delete<wbr>ById<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/interfaces/BaseController.ts#L8">interfaces/BaseController.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/interfaces/BaseController.ts#L8">interfaces/BaseController.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -156,12 +159,15 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDColumnType</span>, request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
+											<li>
+												<h5>id: <span class="tsd-signature-type">IDColumnType</span></h5>
+											</li>
 											<li>
 												<h5>request: <span class="tsd-signature-type">Request</span></h5>
 											</li>
@@ -182,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">find<wbr>ById<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/interfaces/BaseController.ts#L5">interfaces/BaseController.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/interfaces/BaseController.ts#L5">interfaces/BaseController.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -190,12 +196,15 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDColumnType</span>, request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
+											<li>
+												<h5>id: <span class="tsd-signature-type">IDColumnType</span></h5>
+											</li>
 											<li>
 												<h5>request: <span class="tsd-signature-type">Request</span></h5>
 											</li>
@@ -216,7 +225,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>All<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/interfaces/BaseController.ts#L4">interfaces/BaseController.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/interfaces/BaseController.ts#L4">interfaces/BaseController.ts:4</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -250,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">update<wbr>ById<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/interfaces/BaseController.ts#L7">interfaces/BaseController.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/interfaces/BaseController.ts#L7">interfaces/BaseController.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -258,12 +267,15 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDColumnType</span>, request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Request</span>, response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
+											<li>
+												<h5>id: <span class="tsd-signature-type">IDColumnType</span></h5>
+											</li>
 											<li>
 												<h5>request: <span class="tsd-signature-type">Request</span></h5>
 											</li>
@@ -290,6 +302,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/role.html" class="tsd-kind-icon">Role</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/api.html" class="tsd-kind-icon">Api</a>
 					</li>
@@ -359,6 +377,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="userlevelbalance.html" class="tsd-kind-icon">User<wbr>Level<wbr>Balance</a>
 					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#accesscontrol" class="tsd-kind-icon">access<wbr>Control</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#apiserverip" class="tsd-kind-icon">api<wbr>Server<wbr>Ip</a>
 					</li>
@@ -385,6 +406,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#isprod" class="tsd-kind-icon">is<wbr>Prod</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="../globals.html#mongodb" class="tsd-kind-icon">mongodb</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#process" class="tsd-kind-icon">process</a>
