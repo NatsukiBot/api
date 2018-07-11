@@ -308,25 +308,51 @@ export class UserController implements BaseController<User, string> {
     return this.userService.getFriendRequests(id, type)
   }
 
+  @httpGet('/:id/friends/requests/search')
+  async searchFriendRequests (
+    @requestParam('id') id: string,
+    @queryParam('skip') skip?: number,
+    @queryParam('take') take?: number
+  ) {
+    return this.userService.searchFriendRequests(id, skip, take)
+  }
+
   @httpPost('/:id/friends/requests')
-  async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {}
+  async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {
+    return this.userService.createFriendRequest(id, request.body)
+  }
 
   @httpDelete('/:id/friends/requests/:requestId')
-  async deleteFriendRequest (@requestParam('id') id: string) {}
+  async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
+    return this.userService.deleteFriendRequest(id, requestId)
+  }
 
   @httpGet('/:id/friends')
-  async getFriends (@requestParam('id') id: string) {}
+  async getFriends (@requestParam('id') id: string) {
+    return this.userService.getFriends(id)
+  }
+
+  @httpGet('/:id/friends/search')
+  async searchFriends (
+    @requestParam('id') id: string,
+    @queryParam('skip') skip?: number,
+    @queryParam('take') take?: number
+  ) {
+    return this.userService.searchFriends(id, skip, take)
+  }
 
   @httpGet('/:id/friends/:friendId')
-  async getFriendById (@requestParam('id') id: string, @requestParam('friendId') friendId: string) {}
+  async getFriendById (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
+    return this.userService.getFriendById(id, friendId)
+  }
 
-  @httpPost(':id/friends/:friendId')
-  async addFriend (
-    @requestParam('id') id: string,
-    @requestParam('friendId') friendId: string,
-    @request() request: Request
-  ) {}
+  @httpPost(':id/friends')
+  async addFriend (@requestParam('id') id: string, @request() request: Request) {
+    return this.userService.addFriend(id, request.body)
+  }
 
   @httpDelete('/:id/friends/:friendId')
-  async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: string) {}
+  async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
+    return this.userService.deleteFriend(id, friendId)
+  }
 }
