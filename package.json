@@ -1,6 +1,6 @@
 {
   "name": "@nightwatch/api",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "description": "API for Nightwatch Discord bot.",
   "devDependencies": {
     "@types/compression": "0.0.35",
