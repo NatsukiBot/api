@@ -31,7 +31,7 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@nightwatch/db": "^0.10.2",
+    "@nightwatch/db": "^0.11.0",
     "@nightwatch/util": "^1.0.3",
     "accesscontrol": "^2.2.1",
     "axios": "^0.18.0",
@@ -51,7 +51,7 @@
     "method-override": "^2.3.10",
     "mongo-morgan": "^2.0.3",
     "morgan": "^1.9.0",
-    "nodemon": "^1.18.0",
+    "nodemon": "^1.18.1",
     "pg": "^7.4.1",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.10",
