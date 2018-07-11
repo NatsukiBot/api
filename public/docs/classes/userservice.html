@@ -101,6 +101,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userlevelrepository" class="tsd-kind-icon">user<wbr>Level<wbr>Repository</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userprofilerepository" class="tsd-kind-icon">user<wbr>Profile<wbr>Repository</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#userrepository" class="tsd-kind-icon">user<wbr>Repository</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="userservice.html#usersettingsrepository" class="tsd-kind-icon">user<wbr>Settings<wbr>Repository</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -110,10 +111,13 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#delete" class="tsd-kind-icon">delete</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#findbyid" class="tsd-kind-icon">find<wbr>ById</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#getall" class="tsd-kind-icon">get<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#getprofile" class="tsd-kind-icon">get<wbr>Profile</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#getsettings" class="tsd-kind-icon">get<wbr>Settings</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#update" class="tsd-kind-icon">update</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatebalance" class="tsd-kind-icon">update<wbr>Balance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatelevel" class="tsd-kind-icon">update<wbr>Level</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updateprofile" class="tsd-kind-icon">update<wbr>Profile</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="userservice.html#updatesettings" class="tsd-kind-icon">update<wbr>Settings</a></li>
 							</ul>
 						</section>
 					</div>
@@ -127,7 +131,7 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Balance<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserBalance</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserBalance)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L16">services/user.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L16">services/user.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -137,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Level<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserLevel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserLevel)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L17">services/user.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L17">services/user.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Profile<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserProfile)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L18">services/user.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L18">services/user.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +161,17 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(User)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L15">services/user.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L15">services/user.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="usersettingsrepository" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> user<wbr>Settings<wbr>Repository</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Settings<wbr>Repository<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Repository</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;getRepository(UserSettings)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L19">services/user.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -174,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L30">services/user.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L31">services/user.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L39">services/user.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L40">services/user.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -220,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L24">services/user.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L25">services/user.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -243,10 +257,56 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L20">services/user.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L21">services/user.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getprofile" class="tsd-anchor"></a>
+					<h3>get<wbr>Profile</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Profile<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L77">services/user.ts:77</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserProfile</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsettings" class="tsd-anchor"></a>
+					<h3>get<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Settings<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L89">services/user.ts:89</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -260,7 +320,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L35">services/user.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L36">services/user.ts:36</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -286,7 +346,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L72">services/user.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L73">services/user.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -312,7 +372,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L49">services/user.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L50">services/user.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -338,7 +398,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/054a552/src/services/user.ts#L76">services/user.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L81">services/user.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -348,6 +408,32 @@
 								</li>
 								<li>
 									<h5>userProfile: <span class="tsd-signature-type">UserProfile</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UpdateResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updatesettings" class="tsd-anchor"></a>
+					<h3>update<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Settings<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, userSettings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UserSettings</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UpdateResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NightwatchBot/api/blob/a69e031/src/services/user.ts#L85">services/user.ts:85</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>userSettings: <span class="tsd-signature-type">UserSettings</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UpdateResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -366,6 +452,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/role.html" class="tsd-kind-icon">Role</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="api.html" class="tsd-kind-icon">Api</a>
 					</li>
@@ -416,6 +508,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="userservice.html#userrepository" class="tsd-kind-icon">user<wbr>Repository</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="userservice.html#usersettingsrepository" class="tsd-kind-icon">user<wbr>Settings<wbr>Repository</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="userservice.html#create" class="tsd-kind-icon">create</a>
 							</li>
@@ -429,6 +524,12 @@
 								<a href="userservice.html#getall" class="tsd-kind-icon">get<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="userservice.html#getprofile" class="tsd-kind-icon">get<wbr>Profile</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="userservice.html#getsettings" class="tsd-kind-icon">get<wbr>Settings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="userservice.html#update" class="tsd-kind-icon">update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -439,6 +540,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="userservice.html#updateprofile" class="tsd-kind-icon">update<wbr>Profile</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="userservice.html#updatesettings" class="tsd-kind-icon">update<wbr>Settings</a>
 							</li>
 						</ul>
 					</li>
@@ -455,6 +559,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/userlevelbalance.html" class="tsd-kind-icon">User<wbr>Level<wbr>Balance</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#accesscontrol" class="tsd-kind-icon">access<wbr>Control</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#apiserverip" class="tsd-kind-icon">api<wbr>Server<wbr>Ip</a>
@@ -482,6 +589,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#isprod" class="tsd-kind-icon">is<wbr>Prod</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="../globals.html#mongodb" class="tsd-kind-icon">mongodb</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#process" class="tsd-kind-icon">process</a>
