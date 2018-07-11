@@ -347,7 +347,16 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPost('/:id/friends/requests')
   async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {
-    return this.userService.createFriendRequest(id, request.body)
+    const response = this.userService.createFriendRequest(id, request.body)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.request.created, request.body)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
   }
 
   /**
@@ -361,7 +370,19 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/requests/:requestId')
   async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
-    return this.userService.deleteFriendRequest(id, requestId)
+    const response = this.userService.deleteFriendRequest(id, requestId)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.request.deleted, {
+          userId: id,
+          requestId
+        })
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
   }
 
   /**
@@ -421,7 +442,16 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPost('/:id/friends')
   async addFriend (@requestParam('id') id: string, @request() request: Request) {
-    return this.userService.addFriend(id, request.body)
+    const response = this.userService.addFriend(id, request.body)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.created, request.body)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
   }
 
   /**
@@ -435,6 +465,18 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/:friendId')
   async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
-    return this.userService.deleteFriend(id, friendId)
+    const response = this.userService.deleteFriend(id, friendId)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.deleted, {
+          userId: id,
+          friendId
+        })
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
   }
 }
