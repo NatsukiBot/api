@@ -7,7 +7,8 @@ import {
   httpPost,
   request,
   requestParam,
-  response
+  response,
+  queryParam
 } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
@@ -301,4 +302,31 @@ export class UserController implements BaseController<User, string> {
 
     return settingsResponse
   }
+
+  @httpGet('/:id/friends/requests')
+  async getFriendRequests (@requestParam('id') id: string, @queryParam('type') type?: 'incoming' | 'outgoing') {
+    return this.userService.getFriendRequests(id, type)
+  }
+
+  @httpPost('/:id/friends/requests')
+  async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {}
+
+  @httpDelete('/:id/friends/requests/:requestId')
+  async deleteFriendRequest (@requestParam('id') id: string) {}
+
+  @httpGet('/:id/friends')
+  async getFriends (@requestParam('id') id: string) {}
+
+  @httpGet('/:id/friends/:friendId')
+  async getFriendById (@requestParam('id') id: string, @requestParam('friendId') friendId: string) {}
+
+  @httpPost(':id/friends/:friendId')
+  async addFriend (
+    @requestParam('id') id: string,
+    @requestParam('friendId') friendId: string,
+    @request() request: Request
+  ) {}
+
+  @httpDelete('/:id/friends/:friendId')
+  async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: string) {}
 }
