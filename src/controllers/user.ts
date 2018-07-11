@@ -7,7 +7,8 @@ import {
   httpPost,
   request,
   requestParam,
-  response
+  response,
+  queryParam
 } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
@@ -300,5 +301,182 @@ export class UserController implements BaseController<User, string> {
       })
 
     return settingsResponse
+  }
+
+  /**
+   * Gets all friend requests for a user.
+   *
+   * GET /:id/friends/requests
+   * @param {string} id
+   * @param {('incoming' | 'outgoing')} [type] Optional filter to only get incoming or outgoing friend requests.
+   * @returns Map of incoming and outgoing friend requests.
+   * @memberof UserController
+   */
+  @httpGet('/:id/friends/requests')
+  async getFriendRequests (@requestParam('id') id: string, @queryParam('type') type?: 'incoming' | 'outgoing') {
+    return this.userService.getFriendRequests(id, type)
+  }
+
+  /**
+   * Gets a paginated list of friend requests.
+   *
+   * GET /:id/friends/requests/search
+   * @param {string} id
+   * @param {number} [skip]
+   * @param {number} [take]
+   * @returns Promise<UserFriendRequest[]>
+   * @memberof UserController
+   */
+  @httpGet('/:id/friends/requests/search')
+  async searchFriendRequests (
+    @requestParam('id') id: string,
+    @queryParam('skip') skip?: number,
+    @queryParam('take') take?: number
+  ) {
+    return this.userService.searchFriendRequests(id, skip, take)
+  }
+
+  /**
+   * Creates a friend request.
+   *
+   * POST /:id/friends/requests
+   * @param {string} id
+   * @param {Request} request
+   * @returns Promise<UserFriendRequest | undefined>
+   * @memberof UserController
+   */
+  @httpPost('/:id/friends/requests')
+  async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {
+    const response = this.userService.createFriendRequest(id, request.body)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.request.created, request.body)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
+  }
+
+  /**
+   * Deletes a friend request.
+   *
+   * DELETE /:id/friends/requests/:requestId
+   * @param {string} id
+   * @param {number} requestId
+   * @returns Promise<UserFriendRequest | undefined>
+   * @memberof UserController
+   */
+  @httpDelete('/:id/friends/requests/:requestId')
+  async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
+    const response = this.userService.deleteFriendRequest(id, requestId)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.request.deleted, {
+          userId: id,
+          requestId
+        })
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
+  }
+
+  /**
+   * Gets all friends for a user.
+   *
+   * GET /:id/friends
+   * @param {string} id
+   * @returns Promise<UserFriend[]>
+   * @memberof UserController
+   */
+  @httpGet('/:id/friends')
+  async getFriends (@requestParam('id') id: string) {
+    return this.userService.getFriends(id)
+  }
+
+  /**
+   * Gets a paginated list of friends for a user.
+   *
+   * GET /:id/friends/search
+   * @param {string} id
+   * @param {number} [skip]
+   * @param {number} [take]
+   * @returns Promise<UserFriend[]>
+   * @memberof UserController
+   */
+  @httpGet('/:id/friends/search')
+  async searchFriends (
+    @requestParam('id') id: string,
+    @queryParam('skip') skip?: number,
+    @queryParam('take') take?: number
+  ) {
+    return this.userService.searchFriends(id, skip, take)
+  }
+
+  /**
+   * Gets a user's friend by a database object ID.
+   *
+   * GET /:id/friends/:friendId
+   * @param {string} id
+   * @param {number} friendId
+   * @returns Promise<UserFriend | undefined>
+   * @memberof UserController
+   */
+  @httpGet('/:id/friends/:friendId')
+  async getFriendById (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
+    return this.userService.getFriendById(id, friendId)
+  }
+
+  /**
+   * Creates a friend and deletes the related friend request.
+   *
+   * POST /:id/friends
+   * @param {string} id
+   * @param {Request} request
+   * @returns Promise<UserFriend | undefined>
+   * @memberof UserController
+   */
+  @httpPost('/:id/friends')
+  async addFriend (@requestParam('id') id: string, @request() request: Request) {
+    const response = this.userService.addFriend(id, request.body)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.created, request.body)
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
+  }
+
+  /**
+   * Deletes a friend.
+   *
+   * DELETE /:id/friends/:friendId
+   * @param {string} id
+   * @param {number} friendId
+   * @returns Promise<UserFriend | undefined>
+   * @memberof UserController
+   */
+  @httpDelete('/:id/friends/:friendId')
+  async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
+    const response = this.userService.deleteFriend(id, friendId)
+    await response
+      .then(() => {
+        this.socketService.send(Events.user.friend.deleted, {
+          userId: id,
+          friendId
+        })
+      })
+      .catch((err: any) => {
+        Logger.error(err)
+      })
+
+    return response
   }
 }

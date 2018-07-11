@@ -6,7 +6,15 @@ export const Events = {
     levelUpdated: 'userLevelUpdated',
     balanceUpdated: 'userBalanceUpdated',
     profileUpdated: 'userProfileUpdated',
-    settingsUpdated: 'userSettingsUpdated'
+    settingsUpdated: 'userSettingsUpdated',
+    friend: {
+      request: {
+        created: 'userFriendRequestCreated',
+        deleted: 'userFriendRequestDeleted'
+      },
+      created: 'userFriendCreated',
+      deleted: 'userFriendDeleted'
+    }
   },
   guild: {
     created: 'guildCreated',
