@@ -332,7 +332,7 @@ export class UserController implements BaseController<User, string> {
     @requestParam('id') id: string,
     @queryParam('skip') skip?: number,
     @queryParam('take') take?: number,
-    @queryParam('userId') userId?: string
+    @queryParam('userId') userId?: string,
     @queryParam('name') name?: string
   ) {
     return this.userService.searchFriendRequests(id, skip, take, userId, name)
