@@ -172,15 +172,6 @@ export class UserService implements BaseService<User> {
       return
     }
 
-    existingFriendRequest = await this.userFriendRequestRepository.findOne({
-      where: { receiver: { id: friendRequest.receiver.id }, user: { id } },
-      relations: [ 'user', 'receiver' ]
-    })
-
-    if (existingFriendRequest) {
-      return
-    }
-
     friendRequest.timestamp = new Date()
 
     return this.userFriendRequestRepository.save(friendRequest)
