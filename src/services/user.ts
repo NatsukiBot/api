@@ -147,6 +147,10 @@ export class UserService implements BaseService<User> {
       where: { receiver: { id: friendRequest.user.id }, user: { id } }
     })
 
+    if (existingFriendRequest) {
+      return
+    }
+
     friendRequest.timestamp = new Date()
 
     return this.userFriendRequestRepository.save(friendRequest)
