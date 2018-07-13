@@ -119,17 +119,31 @@ export class UserService implements BaseService<User> {
   }
 
   public async searchFriendRequests (id: string, skip: number = 0, take: number = 10, userId?: string, name?: string) {
-    const where = {
-      user: {
-        name: name ? Like(name) : undefined,
-        id: userId ? Like(userId) : undefined
-      }
+    if (name) {
+      return this.userFriendRequestRepository.find({
+        skip,
+        take,
+        where: {
+          user: {
+            name: Like(name)
+          }
+        }
+      })
+    }
+
+    if (userId) {
+      return this.userFriendRequestRepository.find({
+        skip,
+        take,
+        where: {
+          user: { id: Like(userId) }
+        }
+      })
     }
 
     return this.userFriendRequestRepository.find({
       skip,
-      take,
-      where
+      take
     })
   }
 
