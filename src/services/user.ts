@@ -97,8 +97,14 @@ export class UserService implements BaseService<User> {
 
     const requests: UserFriendRequest[] = []
 
-    const firstColumn = await this.userFriendRequestRepository.find({ where: { user: { id } } })
-    const secondColumn = await this.userFriendRequestRepository.find({ where: { receiver: { id } } })
+    const firstColumn = await this.userFriendRequestRepository.find({
+      where: { user: { id } },
+      relations: [ 'user' ]
+    })
+    const secondColumn = await this.userFriendRequestRepository.find({
+      where: { receiver: { id } },
+      relations: [ 'user' ]
+    })
 
     // if (!type || type === 'incoming') {
     //   const requests = await this.userFriendRequestRepository.find({ where: { receiverId: id } })
