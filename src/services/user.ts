@@ -130,6 +130,8 @@ export class UserService implements BaseService<User> {
       return
     }
 
+    friendRequest.timestamp = new Date()
+
     return this.userFriendRequestRepository.save(friendRequest)
   }
 
@@ -192,6 +194,8 @@ export class UserService implements BaseService<User> {
     if (existingFriend) {
       return
     }
+
+    friend.dateAdded = new Date()
 
     return this.userFriendRepository.save(friend)
   }
