@@ -128,32 +128,23 @@ export class UserService implements BaseService<User> {
   ) {
     const whereReceiving = {
       user: {
-        name: name ? Like(name) : undefined,
-        id: userId ? Like(userId) : undefined
+        name: name ? Like(`%${name}%`) : undefined,
+        id: userId ? Like(`%${userId}%`) : undefined
       },
       receiver: { id }
     }
     const whereSending = {
       receiver: {
-        name: name ? Like(name) : undefined,
-        id: userId ? Like(userId) : undefined
+        name: name ? Like(`%${name}%`) : undefined,
+        id: userId ? Like(`%${userId}%`) : undefined
       },
       user: { id }
-    }
-
-    if (type === 'outgoing') {
-      return this.userFriendRequestRepository.find({
-        skip,
-        take,
-        where: whereSending,
-        relations: [ 'user', 'receiver' ]
-      })
     }
 
     return this.userFriendRequestRepository.find({
       skip,
       take,
-      where: whereReceiving,
+      where: type === 'outgoing' ? whereSending : whereReceiving,
       relations: [ 'user', 'receiver' ]
     })
   }
