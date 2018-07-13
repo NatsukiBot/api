@@ -1,5 +1,5 @@
 import { User, UserBalance, UserLevel, UserProfile, UserSettings, UserFriend, UserFriendRequest } from '@nightwatch/db'
-import { getRepository, Like } from 'typeorm'
+import { getRepository, Like, FindManyOptions } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
@@ -126,27 +126,31 @@ export class UserService implements BaseService<User> {
     name?: string,
     type: 'incoming' | 'outgoing' = 'incoming'
   ) {
-    const whereReceiving = {
-      user: {
-        name: name ? Like(`%${name}%`) : undefined,
-        id: userId ? Like(`%${userId}%`) : undefined
-      },
-      receiver: { id }
-    }
-    const whereSending = {
-      receiver: {
-        name: name ? Like(`%${name}%`) : undefined,
-        id: userId ? Like(`%${userId}%`) : undefined
-      },
-      user: { id }
-    }
+    const likeName = name ? Like(`%${name}%`) : undefined
+    const likeUserId = userId ? Like(`%${userId}%`) : undefined
 
-    return this.userFriendRequestRepository.find({
+    let query: FindManyOptions<UserFriendRequest> = {
       skip,
       take,
-      where: type === 'outgoing' ? whereSending : whereReceiving,
-      relations: [ 'user', 'receiver' ]
-    })
+      relations: [ 'user', 'receiver' ],
+      where: {}
+    }
+
+    const userObj = type === 'incoming' ? { receiver: { id } } : { user: { id } }
+
+    query.where = userObj
+
+    if (userId) {
+      const whereUserId = type === 'incoming' ? { user: { id: likeUserId } } : { receiver: { id: likeUserId } }
+      query.where = { ...query.where, ...whereUserId }
+    }
+
+    if (name) {
+      const whereName = type === 'incoming' ? { user: { name: likeName } } : { receiver: { name: likeName } }
+      query.where = { ...query.where, ...whereName }
+    }
+
+    return this.userFriendRequestRepository.find(query)
   }
 
   public async createFriendRequest (id: string, friendRequest: UserFriendRequest) {
