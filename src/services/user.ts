@@ -103,7 +103,7 @@ export class UserService implements BaseService<User> {
         relations: [ 'receiver' ]
       })
 
-      requests = requests.concat(firstColumn)
+      requests = firstColumn
 
       if (type) {
         return requests
