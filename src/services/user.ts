@@ -93,34 +93,21 @@ export class UserService implements BaseService<User> {
   }
 
   public async getFriendRequests (id: string, type?: 'incoming' | 'outgoing') {
-    // const requestsMap = new Map<'incoming' | 'outgoing', UserFriendRequest[]>()
+    const requestsMap = new Map<'incoming' | 'outgoing', UserFriendRequest[]>()
 
-    const requests: UserFriendRequest[] = []
+    if (!type || type === 'incoming') {
+      const requests = await this.userFriendRequestRepository.find({ where: { receiver: id } })
+      requestsMap.set('incoming', requests)
 
-    const firstColumn = await this.userFriendRequestRepository.find({
-      where: { user: { id } },
-      relations: [ 'receiver' ]
-    })
-    const secondColumn = await this.userFriendRequestRepository.find({
-      where: { receiver: { id } },
-      relations: [ 'user' ]
-    })
+      if (type) {
+        return requestsMap
+      }
+    }
 
-    // if (!type || type === 'incoming') {
-    //   const requests = await this.userFriendRequestRepository.find({ where: { receiverId: id } })
-    //   requestsMap.set('incoming', requests)
+    const requests = await this.userFriendRequestRepository.find({ where: { user: id } })
+    requestsMap.set('outgoing', requests)
 
-    //   if (type) {
-    //     return requestsMap
-    //   }
-    // }
-
-    // const requests = await this.userFriendRequestRepository.find({ where: { userId: id } })
-    // requestsMap.set('outgoing', requests)
-
-    // return requestsMap
-
-    return requests.concat(firstColumn, secondColumn)
+    return requestsMap
   }
 
   public async searchFriendRequests (id: string, skip: number = 0, take: number = 10) {
