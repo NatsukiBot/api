@@ -164,7 +164,8 @@ export class UserService implements BaseService<User> {
     }
 
     let existingFriendRequest = await this.userFriendRequestRepository.findOne({
-      where: { user: { id: friendRequest.user.id }, receiver: { id } }
+      where: { user: { id: friendRequest.user.id }, receiver: { id } },
+      relations: [ 'user', 'receiver' ]
     })
 
     if (existingFriendRequest) {
@@ -172,7 +173,8 @@ export class UserService implements BaseService<User> {
     }
 
     existingFriendRequest = await this.userFriendRequestRepository.findOne({
-      where: { receiver: { id: friendRequest.user.id }, user: { id } }
+      where: { receiver: { id: friendRequest.user.id }, user: { id } },
+      relations: [ 'user', 'receiver' ]
     })
 
     if (existingFriendRequest) {
