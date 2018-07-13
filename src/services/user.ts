@@ -1,5 +1,5 @@
 import { User, UserBalance, UserLevel, UserProfile, UserSettings, UserFriend, UserFriendRequest } from '@nightwatch/db'
-import { getRepository } from 'typeorm'
+import { getRepository, FindManyOptions, Like } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
@@ -118,10 +118,18 @@ export class UserService implements BaseService<User> {
     return requests.concat(secondColumn)
   }
 
-  public async searchFriendRequests (id: string, skip: number = 0, take: number = 10) {
+  public async searchFriendRequests (id: string, skip: number = 0, take: number = 10, userId?: string, name?: string) {
+    const where = {
+      user: {
+        name: name ? Like(name) : undefined,
+        id: userId ? Like(userId) : undefined
+      }
+    }
+
     return this.userFriendRequestRepository.find({
       skip,
-      take
+      take,
+      where
     })
   }
 
