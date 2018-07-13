@@ -118,32 +118,42 @@ export class UserService implements BaseService<User> {
     return requests.concat(secondColumn)
   }
 
-  public async searchFriendRequests (id: string, skip: number = 0, take: number = 10, userId?: string, name?: string) {
-    if (name) {
-      return this.userFriendRequestRepository.find({
-        skip,
-        take,
-        where: {
-          user: {
-            name: Like(name)
-          }
-        }
-      })
+  public async searchFriendRequests (
+    id: string,
+    skip: number = 0,
+    take: number = 10,
+    userId?: string,
+    name?: string,
+    type: 'incoming' | 'outgoing' = 'outgoing'
+  ) {
+    const whereReceiving = {
+      user: {
+        name: name ? Like(name) : undefined,
+        id: userId ? Like(userId) : undefined
+      },
+      receiver: { id }
+    }
+    const whereSending = {
+      receiver: {
+        name: name ? Like(name) : undefined,
+        id: userId ? Like(userId) : undefined
+      },
+      user: { id }
     }
 
-    if (userId) {
+    if (type === 'outgoing') {
       return this.userFriendRequestRepository.find({
         skip,
         take,
-        where: {
-          user: { id: Like(userId) }
-        }
+        where: whereSending,
+        relations: [ 'user', 'receiver' ]
       })
     }
 
     return this.userFriendRequestRepository.find({
       skip,
-      take
+      take,
+      where: whereReceiving
     })
   }
 
