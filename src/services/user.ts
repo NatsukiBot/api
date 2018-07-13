@@ -136,7 +136,7 @@ export class UserService implements BaseService<User> {
     //    This is a completely valid and possible scenario.
     // 2) Save the friend request object.
     const existingFriendRequest = await this.userFriendRequestRepository.findOne({
-      where: { user: { id: friendRequest.user.id }, friend: { id } }
+      where: { user: { id: friendRequest.user.id }, receiver: { id } }
     })
 
     if (existingFriendRequest) {
