@@ -135,13 +135,17 @@ export class UserService implements BaseService<User> {
     // 1) Check if other user already sent a friend request.
     //    This is a completely valid and possible scenario.
     // 2) Save the friend request object.
-    const existingFriendRequest = await this.userFriendRequestRepository.findOne({
+    let existingFriendRequest = await this.userFriendRequestRepository.findOne({
       where: { user: { id: friendRequest.user.id }, receiver: { id } }
     })
 
     if (existingFriendRequest) {
       return
     }
+
+    existingFriendRequest = await this.userFriendRequestRepository.findOne({
+      where: { receiver: { id: friendRequest.user.id }, user: { id } }
+    })
 
     friendRequest.timestamp = new Date()
 
