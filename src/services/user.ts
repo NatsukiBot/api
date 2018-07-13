@@ -124,7 +124,7 @@ export class UserService implements BaseService<User> {
     take: number = 10,
     userId?: string,
     name?: string,
-    type: 'incoming' | 'outgoing' = 'outgoing'
+    type: 'incoming' | 'outgoing' = 'incoming'
   ) {
     const whereReceiving = {
       user: {
@@ -153,7 +153,8 @@ export class UserService implements BaseService<User> {
     return this.userFriendRequestRepository.find({
       skip,
       take,
-      where: whereReceiving
+      where: whereReceiving,
+      relations: [ 'user', 'receiver' ]
     })
   }
 
