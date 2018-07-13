@@ -99,7 +99,7 @@ export class UserService implements BaseService<User> {
 
     const firstColumn = await this.userFriendRequestRepository.find({
       where: { user: { id } },
-      relations: [ 'user' ]
+      relations: [ 'receiver' ]
     })
     const secondColumn = await this.userFriendRequestRepository.find({
       where: { receiver: { id } },
