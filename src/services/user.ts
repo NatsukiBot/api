@@ -96,7 +96,7 @@ export class UserService implements BaseService<User> {
     const requestsMap = new Map<'incoming' | 'outgoing', UserFriendRequest[]>()
 
     if (!type || type === 'incoming') {
-      const requests = await this.userFriendRequestRepository.find({ where: { receiver: { id } } })
+      const requests = await this.userFriendRequestRepository.find({ where: { receiverId: id } })
       requestsMap.set('incoming', requests)
 
       if (type) {
@@ -104,7 +104,7 @@ export class UserService implements BaseService<User> {
       }
     }
 
-    const requests = await this.userFriendRequestRepository.find({ where: { user: { id } } })
+    const requests = await this.userFriendRequestRepository.find({ where: { userId: id } })
     requestsMap.set('outgoing', requests)
 
     return requestsMap
