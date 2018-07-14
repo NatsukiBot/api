@@ -232,12 +232,14 @@ export class UserService implements BaseService<User> {
     //    If this is true, then the developer is probably doing something wrong.
     // 3) Save the friend object.
     let friendRequest = await this.userFriendRequestRepository.findOne({
-      where: { receiver: { id }, user: { id: friend.user.id } }
+      where: { receiver: { id }, user: { id: friend.user.id } },
+      relations: [ 'user', 'receiver' ]
     })
 
     if (!friendRequest) {
       friendRequest = await this.userFriendRequestRepository.findOne({
-        where: { receiver: { id: friend.user.id }, user: { id } }
+        where: { receiver: { id: friend.user.id }, user: { id } },
+        relations: [ 'user', 'receiver' ]
       })
     }
 
@@ -246,7 +248,8 @@ export class UserService implements BaseService<User> {
     }
 
     const existingFriend = await this.userFriendRepository.findOne({
-      where: { user: { id: friend.user.id }, friend: { id } }
+      where: { user: { id: friend.user.id }, friend: { id } },
+      relations: [ 'friend', 'user' ]
     })
 
     if (existingFriend) {
