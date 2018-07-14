@@ -133,28 +133,20 @@ export class UserService implements BaseService<User> {
       where: {}
     }
 
-    if (type === 'incoming') {
-      Object.assign(query.where, { receiver: { id } })
-    } else {
-      Object.assign(query.where, { user: { id } })
-    }
+    const userObj = type === 'incoming' ? { receiver: { id } } : { user: { id } }
+
+    query.where = userObj
 
     if (userId) {
       const likeUserId = Like(`%${userId}%`)
-      if (type === 'incoming') {
-        Object.assign(query.where, { user: { id: likeUserId } })
-      } else {
-        Object.assign(query.where, { receiver: { id: likeUserId } })
-      }
+      const whereUserId = type === 'incoming' ? { user: { id: likeUserId } } : { receiver: { id: likeUserId } }
+      query.where = { ...query.where, ...whereUserId }
     }
 
     if (name) {
       const likeName = Like(`%${name}%`)
-      if (type === 'incoming') {
-        Object.assign(query.where, { user: { name: likeName } })
-      } else {
-        Object.assign(query.where, { receiver: { name: likeName } })
-      }
+      const whereName = type === 'incoming' ? { user: { name: likeName } } : { receiver: { name: likeName } }
+      query.where = { ...query.where, ...whereName }
     }
 
     return this.userFriendRequestRepository.find(query)
