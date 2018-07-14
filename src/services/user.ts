@@ -238,7 +238,7 @@ export class UserService implements BaseService<User> {
 
     if (!friendRequest) {
       friendRequest = await this.userFriendRequestRepository.findOne({
-        where: { receiver: { id: friend.user.id }, user: { id } },
+        where: { receiver: { id: friend.friend.id }, user: { id } },
         relations: [ 'user', 'receiver' ]
       })
     }
