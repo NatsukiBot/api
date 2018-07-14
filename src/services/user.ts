@@ -216,11 +216,61 @@ export class UserService implements BaseService<User> {
     return results.concat(friends, otherFriends)
   }
 
-  public async searchFriends (id: string, skip: number = 0, take: number = 10) {
-    return this.userFriendRepository.find({
+  public async searchFriends (id: string, skip: number = 0, take: number = 10, userId?: string, name?: string) {
+    let acceptedFriends: UserFriend[] = []
+    let requestedFriends: UserFriend[] = []
+
+    const query1: FindManyOptions<UserFriend> = {
       skip,
-      take
-    })
+      take,
+      relations: [ 'user', 'friend' ],
+      where: {}
+    }
+
+    const userObj1 = { receiver: { id } }
+
+    query1.where = userObj1
+
+    if (userId) {
+      const likeUserId = Like(`%${userId}%`)
+      const whereUserId = { user: { id: likeUserId } }
+      query1.where = { ...query1.where, ...whereUserId }
+    }
+
+    if (name) {
+      const likeName = Like(`%${name}%`)
+      const whereName = { user: { name: likeName } }
+      query1.where = { ...query1.where, ...whereName }
+    }
+
+    acceptedFriends = await this.userFriendRepository.find(query1)
+
+    const query2: FindManyOptions<UserFriend> = {
+      skip,
+      take,
+      relations: [ 'user', 'friend' ],
+      where: {}
+    }
+
+    const userObj2 = { user: { id } }
+
+    query2.where = userObj2
+
+    if (userId) {
+      const likeUserId = Like(`%${userId}%`)
+      const whereUserId = { friend: { id: likeUserId } }
+      query2.where = { ...query2.where, ...whereUserId }
+    }
+
+    if (name) {
+      const likeName = Like(`%${name}%`)
+      const whereName = { friend: { name: likeName } }
+      query2.where = { ...query2.where, ...whereName }
+    }
+
+    requestedFriends = await this.userFriendRepository.find(query2)
+
+    return acceptedFriends.concat(requestedFriends)
   }
 
   public async getFriendById (id: string, friendId: number) {
