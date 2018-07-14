@@ -173,7 +173,7 @@ export class UserService implements BaseService<User> {
     }
 
     let existingFriend = await this.userFriendRepository.findOne({
-      where: { user: { id }, friend: { id: friendRequest.user.id } },
+      where: { user: { id }, friend: { id: friendRequest.receiver.id } },
       relations: [ 'user', 'friend' ]
     })
 
@@ -207,8 +207,11 @@ export class UserService implements BaseService<User> {
 
   public async getFriends (id: string) {
     const results: UserFriend[] = []
-    const friends = await this.userFriendRepository.find({ where: { user: { id } } })
-    const otherFriends = await this.userFriendRepository.find({ where: { friend: { id } } })
+    const friends = await this.userFriendRepository.find({ where: { user: { id } }, relations: [ 'user', 'friend' ] })
+    const otherFriends = await this.userFriendRepository.find({
+      where: { friend: { id } },
+      relations: [ 'user', 'friend' ]
+    })
 
     return results.concat(friends, otherFriends)
   }
@@ -235,13 +238,6 @@ export class UserService implements BaseService<User> {
       where: { receiver: { id }, user: { id: friend.user.id } },
       relations: [ 'user', 'receiver' ]
     })
-
-    if (!friendRequest) {
-      friendRequest = await this.userFriendRequestRepository.findOne({
-        where: { receiver: { id: friend.user.id }, user: { id } },
-        relations: [ 'user', 'receiver' ]
-      })
-    }
 
     if (friendRequest) {
       await this.userFriendRequestRepository.remove(friendRequest)
