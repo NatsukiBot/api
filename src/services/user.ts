@@ -153,10 +153,11 @@ export class UserService implements BaseService<User> {
   }
 
   public async createFriendRequest (id: string, friendRequest: UserFriendRequest) {
-    // Creating a friend request is a two step process:
+    // Creating a friend request is a three step process:
     // 1) Check if other user already sent a friend request.
     //    This is a completely valid and possible scenario.
-    // 2) Save the friend request object.
+    // 2) Check if the users are already friends.
+    // 3) Save the friend request object.
 
     if (id === friendRequest.receiver.id) {
       return
@@ -168,6 +169,22 @@ export class UserService implements BaseService<User> {
     })
 
     if (existingFriendRequest) {
+      return
+    }
+
+    let existingFriend = await this.userFriendRepository.findOne({
+      where: { user: { id }, friend: { id: friendRequest.user.id } },
+      relations: [ 'user', 'friend' ]
+    })
+
+    if (!existingFriend) {
+      existingFriend = await this.userFriendRepository.findOne({
+        where: { friend: { id }, user: { id: friendRequest.user.id } },
+        relations: [ 'user', 'friend' ]
+      })
+    }
+
+    if (existingFriend) {
       return
     }
 
