@@ -144,7 +144,7 @@ export class UserService implements BaseService<User> {
       if (type === 'incoming') {
         Object.assign(query.where, { user: { id: likeUserId } })
       } else {
-        Object.assign(query.where, { receiver: { id: likeUserId })
+        Object.assign(query.where, { receiver: { id: likeUserId } })
       }
     }
 
