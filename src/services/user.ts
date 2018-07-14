@@ -126,9 +126,6 @@ export class UserService implements BaseService<User> {
     name?: string,
     type: 'incoming' | 'outgoing' = 'incoming'
   ) {
-    const likeName = name ? Like(`%${name}%`) : undefined
-    const likeUserId = userId ? Like(`%${userId}%`) : undefined
-
     let query: FindManyOptions<UserFriendRequest> = {
       skip,
       take,
@@ -136,18 +133,28 @@ export class UserService implements BaseService<User> {
       where: {}
     }
 
-    const userObj = type === 'incoming' ? { receiver: { id } } : { user: { id } }
-
-    query.where = userObj
+    if (type === 'incoming') {
+      Object.assign(query.where, { receiver: { id } })
+    } else {
+      Object.assign(query.where, { user: { id } })
+    }
 
     if (userId) {
-      const whereUserId = type === 'incoming' ? { user: { id: likeUserId } } : { receiver: { id: likeUserId } }
-      query.where = { ...query.where, ...whereUserId }
+      const likeUserId = Like(`%${userId}%`)
+      if (type === 'incoming') {
+        Object.assign(query.where, { user: { id: likeUserId } })
+      } else {
+        Object.assign(query.where, { receiver: { id: likeUserId })
+      }
     }
 
     if (name) {
-      const whereName = type === 'incoming' ? { user: { name: likeName } } : { receiver: { name: likeName } }
-      query.where = { ...query.where, ...whereName }
+      const likeName = Like(`%${name}%`)
+      if (type === 'incoming') {
+        Object.assign(query.where, { user: { name: likeName } })
+      } else {
+        Object.assign(query.where, { receiver: { name: likeName } })
+      }
     }
 
     return this.userFriendRequestRepository.find(query)
