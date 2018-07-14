@@ -207,10 +207,10 @@ export class UserService implements BaseService<User> {
 
   public async getFriends (id: string) {
     const results: UserFriend[] = []
-    const friends = await this.userFriendRepository.find({ where: { user: { id } }, relations: [ 'user', 'friend' ] })
+    const friends = await this.userFriendRepository.find({ where: { user: { id } }, relations: [ 'friend' ] })
     const otherFriends = await this.userFriendRepository.find({
       where: { friend: { id } },
-      relations: [ 'user', 'friend' ]
+      relations: [ 'user' ]
     })
 
     return results.concat(friends, otherFriends)
