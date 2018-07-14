@@ -227,7 +227,7 @@ export class UserService implements BaseService<User> {
       where: {}
     }
 
-    const userObj1 = { receiver: { id } }
+    const userObj1 = { friend: { id } }
 
     query1.where = userObj1
 
