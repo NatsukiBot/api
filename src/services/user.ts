@@ -1,4 +1,4 @@
-import { User, UserBalance, UserLevel, UserProfile, UserSettings, UserFriend, UserFriendRequest } from '@nightwatch/db'
+import { User, UserBalance, UserProfile, UserSettings, UserFriend, UserFriendRequest } from '@nightwatch/db'
 import { getRepository, Like, FindManyOptions } from 'typeorm'
 import { provide } from '../ioc/ioc'
 import { Types } from '../constants'
