@@ -10,6 +10,7 @@ stages:
 test_lint:
   stage: test
   script:
+   - npm set registry http://51.15.253.55:4873
    - npm install
    - npm install -g typescript
    - tsc
