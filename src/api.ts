@@ -129,8 +129,8 @@ export class Api {
               return jsonwebtoken.sign('GET', secret)
             }
 
-            if (req.headers.authorization && (req.headers.authorization as string).split(' ')[0] === 'Bearer') {
-              return (req.headers.authorization as string).split(' ')[1]
+            if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+              return req.headers.authorization.split(' ')[1]
             } else if (req.query && req.query.token) {
               return req.query.token
             }

@@ -14,7 +14,6 @@ import { UserLevelBalance } from '../models/userLevelBalance.model'
 export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
   private userBalanceRepository = getRepository(UserBalance)
-  private userLevelRepository = getRepository(UserLevel)
   private userProfileRepository = getRepository(UserProfile)
   private userSettingsRepository = getRepository(UserSettings)
   private userFriendRepository = getRepository(UserFriend)
