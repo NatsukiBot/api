@@ -6,7 +6,7 @@ import { GuildService } from '../services/guild'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
 import { Guild, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
-import { Logger } from '@nightwatch/util'
+import * as Logger from 'winston'
 
 /**
  * The Guild controller. Contains all endpoints for handling Guilds and Guild data.

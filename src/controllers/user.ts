@@ -14,9 +14,9 @@ import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
-import { Logger } from '@nightwatch/util'
 import { User } from '@nightwatch/db'
 import { BaseController } from '../interfaces/BaseController'
+import * as Logger from 'winston'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.

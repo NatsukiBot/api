@@ -1,15 +1,14 @@
 import { Referral } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
-import { provide } from '../ioc/ioc'
-import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
+import { injectable } from 'inversify'
 
 /**
  * Referral service to handle referral logic
  *
  * @class ReferralService
  */
-@provide(Types.ReferralService)
+@injectable()
 export class ReferralService implements BaseService<Referral> {
   private referralRepository = getRepository(Referral)
 

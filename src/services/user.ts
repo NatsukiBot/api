@@ -1,16 +1,15 @@
 import { User, UserBalance, UserProfile, UserSettings, UserFriend, UserFriendRequest } from '@nightwatch/db'
 import { getRepository, Like, FindManyOptions } from 'typeorm'
-import { provide } from '../ioc/ioc'
-import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
 import { UserLevelBalance } from '../models/userLevelBalance.model'
+import { injectable } from 'inversify'
 
 /**
  * User service that handles storing and modifying user data.
  *
  * @class UserService
  */
-@provide(Types.UserService)
+@injectable()
 export class UserService implements BaseService<User> {
   private userRepository = getRepository(User)
   private userBalanceRepository = getRepository(UserBalance)

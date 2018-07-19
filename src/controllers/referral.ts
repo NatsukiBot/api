@@ -3,10 +3,10 @@ import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestPar
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { SocketService } from '../services/socket'
-import { Logger } from '@nightwatch/util'
 import { Referral } from '@nightwatch/db'
 import { ReferralService } from '../services/referral'
 import { BaseController } from '../interfaces/BaseController'
+import * as Logger from 'winston'
 
 /**
  * The referral controller. Contains all endpoints for the referral system.
