@@ -10,13 +10,11 @@ import * as morgan from 'morgan'
 import { container } from './ioc/inversify.config'
 import * as cors from 'cors'
 import * as compression from 'compression'
-import * as expressStatusMonitor from 'express-status-monitor'
 import * as errorHandler from 'errorhandler'
 import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import * as mongoMorgan from 'mongo-morgan'
 import * as url from 'url'
 import * as Logger from 'winston'
 import './ioc/loader'
@@ -83,35 +81,12 @@ export class Api {
       app.use(helmet())
       app.use(cors())
       app.use(compression())
-      app.use(expressStatusMonitor())
       app.use(
         morgan('tiny', {
           stream: {
             write: message => Logger.info(message.trim())
           }
         })
-      )
-      app.use(
-        mongoMorgan(
-          mongodb,
-          function (tokens: any, req: express.Request, res: express.Response) {
-            const filteredReq = req
-            filteredReq.query = ''
-            filteredReq.originalUrl = url.parse(filteredReq.url).pathname!
-            return [
-              tokens.method(filteredReq, res),
-              tokens.url(filteredReq, res),
-              tokens.status(filteredReq, res),
-              tokens.res(filteredReq, res, 'content-length'),
-              '-',
-              tokens['response-time'](filteredReq, res),
-              'ms'
-            ].join(' ')
-          },
-          {
-            collection: 'logs'
-          }
-        )
       )
       app.use(
         jwt({
