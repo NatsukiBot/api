@@ -1,5 +1,6 @@
 import { Container } from 'inversify'
 import { Types } from '../constants'
+import './loader'
 import {
   GiveawayService,
   UserService,

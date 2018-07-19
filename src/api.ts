@@ -16,7 +16,6 @@ import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
 import * as Logger from 'winston'
-import './ioc/loader'
 const { secret, apiServerIp, debug } = require('../api.json')
 
 /**
