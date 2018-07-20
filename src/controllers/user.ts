@@ -86,7 +86,6 @@ export class UserController implements BaseController<User, string> {
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: string) {
     const deleteResponse = this.userService.delete(id)
-    const _ = await deleteResponse
 
     if (this.socketService) {
       this.socketService.send(Events.user.deleted, id)
@@ -128,7 +127,6 @@ export class UserController implements BaseController<User, string> {
   @httpPut('/:id/level')
   async updateLevel (@requestParam('id') id: string, @request() request: Request) {
     const levelResponse = this.userService.updateLevel(id, request.body)
-    const _ = await levelResponse
     const returnObject: any = request.body
     returnObject.userId = id
 
@@ -151,7 +149,6 @@ export class UserController implements BaseController<User, string> {
   @httpPut('/:id/balance')
   async updateBalance (@requestParam('id') id: string, @request() request: Request) {
     const balanceResponse = this.userService.updateBalance(id, request.body)
-    const _ = await balanceResponse
 
     const returnObject: any = request.body
     returnObject.userId = id
@@ -242,7 +239,6 @@ export class UserController implements BaseController<User, string> {
   @httpPut('/:id/profile')
   async updateProfile (@requestParam('id') id: string, @request() request: Request) {
     const profileResponse = this.userService.updateProfile(id, request.body)
-    const _ = await profileResponse
 
     const returnObject: any = request.body
     returnObject.userId = id
@@ -277,7 +273,6 @@ export class UserController implements BaseController<User, string> {
   @httpPut('/:id/settings')
   async updateSettings (@requestParam('id') id: string, @request() request: Request) {
     const settingsResponse = this.userService.updateSettings(id, request.body)
-    const _ = await settingsResponse
 
     const returnObject: any = request.body
     returnObject.userId = id
@@ -337,7 +332,6 @@ export class UserController implements BaseController<User, string> {
   @httpPost('/:id/friends/requests')
   async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {
     const response = this.userService.createFriendRequest(id, request.body)
-    const _ = await response
 
     if (this.socketService) {
       this.socketService.send(Events.user.friend.request.created, request.body)
@@ -358,7 +352,6 @@ export class UserController implements BaseController<User, string> {
   @httpDelete('/:id/friends/requests/:requestId')
   async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
     const response = this.userService.deleteFriendRequest(id, requestId)
-    const _ = await response
 
     if (this.socketService) {
       this.socketService.send(Events.user.friend.request.deleted, {
@@ -430,7 +423,6 @@ export class UserController implements BaseController<User, string> {
   @httpPost('/:id/friends')
   async addFriend (@requestParam('id') id: string, @request() request: Request) {
     const response = this.userService.addFriend(id, request.body)
-    const _ = await response
 
     if (this.socketService) {
       this.socketService.send(Events.user.friend.created, request.body)
@@ -451,7 +443,6 @@ export class UserController implements BaseController<User, string> {
   @httpDelete('/:id/friends/:friendId')
   async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
     const response = this.userService.deleteFriend(id, friendId)
-    const _ = await response
 
     if (this.socketService) {
       this.socketService.send(Events.user.friend.deleted, {

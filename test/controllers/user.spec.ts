@@ -2,7 +2,7 @@
 
 import 'reflect-metadata'
 import 'mocha'
-import { assert, expect } from 'chai'
+import { assert } from 'chai'
 import { UserController } from '../../src/controllers/user'
 import { UserService } from '../../src/services/user'
 import { createTestDatabaseConnection } from '..'
