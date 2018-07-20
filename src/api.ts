@@ -48,7 +48,9 @@ export class Api {
       .then(async () => {
         this.startServer()
       })
-      .catch(err => Logger.error(err))
+      .catch(err => {
+        Logger.error(err)
+      })
   }
 
   private startServer () {
