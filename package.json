@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@nightwatch/db": "^0.12.0",
-    "@nightwatch/util": "^1.1.0",
+    "@nightwatch/util": "^1.1.1",
     "accesscontrol": "^2.2.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",

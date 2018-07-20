@@ -6,7 +6,7 @@ import { SocketService } from '../services/socket'
 import { Referral } from '@nightwatch/db'
 import { ReferralService } from '../services/referral'
 import { BaseController } from '../interfaces/BaseController'
-import * as Logger from 'winston'
+import { Logger } from '@nightwatch/util'
 
 /**
  * The referral controller. Contains all endpoints for the referral system.

@@ -15,7 +15,7 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import * as Logger from 'winston'
+import { Logger } from '@nightwatch/util'
 const { secret, apiServerIp, debug } = require('../api.json')
 
 /**

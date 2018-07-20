@@ -16,7 +16,7 @@ import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
 import { User } from '@nightwatch/db'
 import { BaseController } from '../interfaces/BaseController'
-import * as Logger from 'winston'
+import { Logger } from '@nightwatch/util'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.

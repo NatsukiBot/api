@@ -6,7 +6,7 @@ import { GiveawayService } from '../services/giveaway'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
 import { Giveaway } from '@nightwatch/db'
-import * as Logger from 'winston'
+import { Logger } from '@nightwatch/util'
 
 /**
  * The Giveaway controller. Contains all endpoints for handling Giveaways.
