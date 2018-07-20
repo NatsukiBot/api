@@ -1,8 +1,9 @@
 import { Events } from '../constants'
+import * as socketio from 'socket.io'
 
-let io: SocketIO.Server
+let io: socketio.Server
 
-export function init (server: SocketIO.Server) {
+export function init (server: socketio.Server) {
   io = server
 
   io.on('connection', client => {

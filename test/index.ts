@@ -1,8 +1,23 @@
-import 'mocha'
-import { assert } from 'chai'
+import { createConnection } from 'typeorm'
 
-describe('Debug', () => {
-  it('should return true', () => {
-    assert.equal(1, 1)
+export async function createTestDatabaseConnection () {
+  await createConnection({
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'password',
+    database: 'nightwatch',
+
+    synchronize: true,
+    logging: false,
+    entities: [ 'node_modules/@nightwatch/db/dist/entity/**/*.js' ],
+    migrations: [ 'src/migrations/**/*.ts' ],
+    subscribers: [ 'src/subscribers/**/*.ts' ],
+    cli: {
+      entitiesDir: 'src/entities',
+      migrationsDir: 'src/migrations',
+      subscribersDir: 'src/subscribers'
+    }
   })
-})
+}

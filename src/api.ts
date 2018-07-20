@@ -29,7 +29,9 @@ export class Api {
    * @memberof Api
    */
   constructor () {
-    this.init()
+    this.init().catch(err => {
+      console.log(err)
+    })
   }
 
   /**
@@ -43,14 +45,9 @@ export class Api {
     return new Api()
   }
 
-  private init () {
-    createConnection()
-      .then(async () => {
-        this.startServer()
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  private async init () {
+    await createConnection()
+    this.startServer()
   }
 
   private startServer () {

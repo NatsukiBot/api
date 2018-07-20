@@ -9,6 +9,10 @@ import { injectable } from 'inversify'
 @injectable()
 export class SocketService {
   public send (event: string, content: any) {
-    getSocketServer().emit(event, content)
+    try {
+      getSocketServer().emit(event, content)
+    } catch (err) {
+      // swallow
+    }
   }
 }
