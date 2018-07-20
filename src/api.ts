@@ -49,7 +49,7 @@ export class Api {
         this.startServer()
       })
       .catch(err => {
-        Logger.error(err)
+        console.error(err)
       })
   }
 
@@ -133,6 +133,6 @@ export class Api {
     const io = socketIo.listen(instance)
     init(io)
 
-    Logger.info(`Express server listening on port ${port}`)
+    console.info(`Express server listening on port ${port}`)
   }
 }
