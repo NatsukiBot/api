@@ -91,8 +91,6 @@ export class UserService implements BaseService<User> {
   }
 
   public async getFriendRequests (id: string, type?: 'incoming' | 'outgoing') {
-    // const requestsMap = new Map<'incoming' | 'outgoing', UserFriendRequest[]>()
-
     let requests: UserFriendRequest[] = []
 
     if (!type || type === 'outgoing') {

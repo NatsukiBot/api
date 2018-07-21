@@ -1,5 +1,14 @@
 import { Request } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, request } from 'inversify-express-utils'
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  requestParam,
+  request,
+  requestBody
+} from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { GiveawayService } from '../services/giveaway'
@@ -55,11 +64,11 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    * @memberof GiveawayController
    */
   @httpPost('/')
-  async create (request: Request) {
-    const giveawayResponse = this.giveawayService.create(request.body)
+  async create (@requestBody() giveaway: Giveaway) {
+    const giveawayResponse = this.giveawayService.create(giveaway)
     await giveawayResponse
-      .then(giveaway => {
-        this.socketService.send(Events.giveaway.created, this.redactKey(giveaway))
+      .then(g => {
+        this.socketService.send(Events.giveaway.created, this.redactKey(g))
       })
       .catch((err: any) => {
         Logger.error(err)

@@ -2,10 +2,10 @@
 
 import 'reflect-metadata'
 import 'mocha'
-import { assert } from 'chai'
-import { UserController } from '../../src/controllers/user'
-import { UserService } from '../../src/services/user'
+import { expect } from 'chai'
 import { createTestDatabaseConnection } from '..'
+import { container } from '../../src/ioc/inversify.config'
+import * as supertest from 'supertest'
 import {
   User,
   UserVerification,
@@ -16,27 +16,33 @@ import {
   UserBalance
 } from '@nightwatch/db'
 import { getRepository, getConnection } from 'typeorm'
-import { Request } from 'express'
+import { InversifyExpressServer, cleanUpMetadata } from 'inversify-express-utils'
+import * as bodyParser from 'body-parser'
 
 describe('UserController', () => {
-  let controller: UserController
+  let server: InversifyExpressServer
+  let app: supertest.SuperTest<supertest.Test>
 
   before(async () => {
     await createTestDatabaseConnection()
+    server = new InversifyExpressServer(container)
+    server.setConfig(app => {
+      app.use(bodyParser.json())
+    })
+    app = supertest(server.build())
   })
 
-  beforeEach(async () => {
+  afterEach(async () => {
+    cleanUpMetadata()
     const connection = getConnection()
     await connection.dropDatabase()
     await connection.synchronize()
-    controller = new UserController(new UserService())
   })
 
   it('should get all users when no users exist', async () => {
-    const allUsers = await controller.getAll()
-
-    assert.isNotNull(allUsers)
-    assert.equal(allUsers.length, 0)
+    const response = await app.get('/api/users').expect(200)
+    expect(response.body).to.not.be.null
+    expect(response.body).to.have.lengthOf(0)
   })
 
   it('should get all users', async () => {
@@ -48,31 +54,64 @@ describe('UserController', () => {
     await getRepository(User).save(user2)
     await getRepository(User).save(user3)
 
-    const allUsers = await controller.getAll()
+    const response = await app.get('/api/users').expect(200)
 
-    assert.isNotNull(allUsers)
-    assert.equal(allUsers.length, 3)
+    expect(response.body).to.not.be.null
+    expect(response.body).to.have.lengthOf(3)
+  })
+
+  it('should get a user by id', async () => {
+    const user = getTestUser('asdf', 'Test')
+
+    await getRepository(User).save(user)
+
+    const response = await app.get('/api/users/asdf').expect(200)
+
+    expect(response.body).to.haveOwnProperty('id').which.equals('asdf')
+  })
+
+  it('should return undefined when get by id for non existant id', async () => {
+    const response = await app.get('/api/users/asdf').expect(404)
+
+    expect(response.body).to.be.empty
   })
 
   it('should create a user', async () => {
     const user = getTestUser('asdf', 'Test')
 
-    const apiUser = await controller.create({ body: user } as Request)
-    assert.isNotNull(apiUser)
-    assert.equal(apiUser.id, 'asdf')
+    const response = await app.post('/api/users').send(user).expect(200)
 
-    const allUsers = await getRepository(User).find()
+    expect(response.body).to.haveOwnProperty('id').which.equals('asdf')
 
-    assert.isNotNull(allUsers)
-    assert.equal(allUsers.length, 1)
+    const allUserResponse = await getRepository(User).find()
+
+    expect(allUserResponse).to.be.instanceof(Array).with.lengthOf(1)
   })
 
-  it('should fail to create user if id is not provided', async () => {
-    const user = getTestUser(undefined as any, 'Test')
+  it('should error if the same user is created twice', async () => {
+    const user = getTestUser('asdf', 'Test')
 
-    controller.create({ body: user } as Request).catch(err => {
-      assert.exists(err)
-    })
+    const response = await app.post('/api/users').send(user).expect(200)
+    const response2 = await app.post('/api/users').send(user).expect(400)
+
+    expect(response.body).to.haveOwnProperty('id').which.equals('asdf')
+    expect(response2.body).to.not.exist
+  })
+
+  it('should delete a user', async () => {
+    const user = getTestUser('aaa', 'Test1')
+
+    await getRepository(User).save(user)
+
+    let allUsers = await getRepository(User).find()
+
+    expect(allUsers).to.be.instanceof(Array).with.lengthOf(1)
+
+    const response = await app.delete('/api/users/aaa').expect(200)
+
+    allUsers = await getRepository(User).find()
+
+    expect(response.body).to.be.instanceof(Array).with.lengthOf(0)
   })
 })
 

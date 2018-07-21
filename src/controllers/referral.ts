@@ -1,5 +1,14 @@
 import { Request } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam } from 'inversify-express-utils'
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  request,
+  requestParam,
+  requestBody
+} from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { SocketService } from '../services/socket'
@@ -55,11 +64,11 @@ export class ReferralController implements BaseController<Referral, number> {
    * @memberof ReferralController
    */
   @httpPost('/')
-  async create (@request() request: Request) {
-    const referralResponse = this.referralService.create(request.body)
+  async create (@requestBody() referral: Referral) {
+    const referralResponse = this.referralService.create(referral)
     await referralResponse
-      .then(referral => {
-        this.socketService.send(Events.referral.created, referral)
+      .then(r => {
+        this.socketService.send(Events.referral.created, r)
       })
       .catch((err: any) => {
         Logger.error(err)

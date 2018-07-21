@@ -1,5 +1,14 @@
 import { Request } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, request } from 'inversify-express-utils'
+import {
+  controller,
+  httpGet,
+  httpDelete,
+  httpPut,
+  httpPost,
+  requestParam,
+  request,
+  requestBody
+} from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
@@ -55,11 +64,11 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPost('/')
-  async create (request: Request) {
-    const guildResponse = this.guildService.create(request.body)
+  async create (@requestBody() guild: Guild) {
+    const guildResponse = this.guildService.create(guild)
     await guildResponse
-      .then(guild => {
-        this.socketService.send(Events.guild.created, guild)
+      .then(g => {
+        this.socketService.send(Events.guild.created, g)
       })
       .catch((err: any) => {
         Logger.error(err)
