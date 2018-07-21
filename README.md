@@ -4,7 +4,7 @@
 
 ## Documentation
 
-Generated documentation can be found here: https://nightwatch.tk/api/docs/
+Generated documentation can be found here: https://nightwatch.tk/api/docs/ (Currently Unavailable)
 
 ## Installation
 
@@ -55,13 +55,13 @@ To view the available endpoints for the API, view the generated documentation. S
 
 ## Realtime Updates
 
-If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc., you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
+If you use the API (whether it be my production instance, or your local instance) to make a website/dashboard/etc, you can connect to it with Socket.io to get live updates every time a CREATE, POST, or PUT endpoint is hit.
 
 This is perfect for a Discord bot that updates the API, and you want to use the new data immediately in a web interface without having to send another request to the API. The API will just send you the data automatically.
 
 ## Data Policy
 
-All data stored by the API is publicly available and accesible under reasonable limit.
+All data stored by the API is publicly available and accessible under reasonable limit.
 
 Any person has the ability to view the data, but can not modify, create, or delete data from the server.
 
@@ -79,9 +79,8 @@ If you access data from the production API, at https://nightwatch.tk/api, you ag
  * Credit will be given to the Nightwatch API project. The project's GitHub and production API URL must be linked where the API data is used.
     - GitHub: https://github.com/Nightwatch/api
     - Production API: https://nightwatch.tk/api
- * You will not exceed the given request rate limit. Request limit packages can be purchased to increase the request rate limits if needed.
+ * You will not exceed the given request rate limit.
     - It is recommended to cache the data you receive to reduce the number of requests made.
-    - The API caches most data automatically, but certain request limit packages can be purchased to always get the latest data.
 
 ## Contribute
 
