@@ -18,6 +18,8 @@ Generated documentation can be found here: https://nightwatch.tk/api/docs/ (Curr
 
 In the client application, any request to hit the API will need to include a JWT token generated using the `secret` you made.
 
+> GET requests do not need to include the token. Anyone can make a GET request to the API.
+
 There are two ways you can send the token to the API:
  * The token can be included in the request's query string:
 ```ts
