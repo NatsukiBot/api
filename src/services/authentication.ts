@@ -1,6 +1,5 @@
-import { provide } from '../ioc/ioc'
-import { Types } from '../constants'
 import axios from 'axios'
+import { injectable } from 'inversify'
 
 const { clientSecret, clientId } = require('../../api.json').bot
 
@@ -9,7 +8,7 @@ const { clientSecret, clientId } = require('../../api.json').bot
  *
  * @class AuthenticationService
  */
-@provide(Types.AuthenticationService)
+@injectable()
 export class AuthenticationService {
   public async getDiscordAccessToken (code: string, redirect: string) {
     const creds = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')

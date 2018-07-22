@@ -5,6 +5,5 @@
     "clientId": "",
     "clientSecret": ""
   },
-  "mongodb": "mongodb://localhost:27017/api-logs",
-  "debug": false
+  "mongodb": "mongodb://localhost:27017/api-logs"
 }

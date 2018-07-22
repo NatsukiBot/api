@@ -1,16 +1,16 @@
-import * as socketIo from 'socket.io';
-import { Events } from '../constants';
+import { Events } from '../constants'
+import * as socketio from 'socket.io'
 
-let io: SocketIO.Server;
+let io: socketio.Server
 
-export function init(server: SocketIO.Server) {
-  io = server;
+export function init (server: socketio.Server) {
+  io = server
 
-  io.on('connection', (client) => {
-    client.emit(Events.info, 'Successfully connected to the API');
-  });
+  io.on('connection', client => {
+    client.emit(Events.info, 'Successfully connected to the API')
+  })
 }
 
-export function getSocketServer() {
-  return io;
+export function getSocketServer () {
+  return io
 }

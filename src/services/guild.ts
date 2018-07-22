@@ -1,15 +1,14 @@
 import { Guild, GuildSuggestion, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
-import { provide } from '../ioc/ioc'
-import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
+import { injectable } from 'inversify'
 
 /**
  * Guild service that handles storing and modifying guild data
  *
  * @class GuildService
  */
-@provide(Types.GuildService)
+@injectable()
 export class GuildService implements BaseService<Guild> {
   private guildRepository = getRepository(Guild)
   private suggestionRepository = getRepository(GuildSuggestion)

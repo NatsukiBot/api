@@ -1,15 +1,14 @@
 import { Giveaway } from '@nightwatch/db'
 import { getRepository } from 'typeorm'
-import { provide } from '../ioc/ioc'
-import { Types } from '../constants'
 import { BaseService } from '../interfaces/BaseService'
+import { injectable } from 'inversify'
 
 /**
  * Giveaway service that handles storing and modifying giveaway data.
  *
  * @class GiveawayService
  */
-@provide(Types.GiveawayService)
+@injectable()
 export class GiveawayService implements BaseService<Giveaway> {
   private giveawayRepository = getRepository(Giveaway)
 

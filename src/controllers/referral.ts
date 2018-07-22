@@ -1,9 +1,7 @@
-import { Request } from 'express'
-import { controller, httpGet, httpDelete, httpPut, httpPost, request, requestParam } from 'inversify-express-utils'
+import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, requestBody } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { SocketService } from '../services/socket'
-import { Logger } from '@nightwatch/util'
 import { Referral } from '@nightwatch/db'
 import { ReferralService } from '../services/referral'
 import { BaseController } from '../interfaces/BaseController'
@@ -55,15 +53,9 @@ export class ReferralController implements BaseController<Referral, number> {
    * @memberof ReferralController
    */
   @httpPost('/')
-  async create (@request() request: Request) {
-    const referralResponse = this.referralService.create(request.body)
-    await referralResponse
-      .then(referral => {
-        this.socketService.send(Events.referral.created, referral)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async create (@requestBody() referral: Referral) {
+    const referralResponse = await this.referralService.create(referral)
+    this.socketService.send(Events.referral.created, referralResponse)
 
     return referralResponse
   }
@@ -78,14 +70,8 @@ export class ReferralController implements BaseController<Referral, number> {
    */
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: number) {
-    const deleteResponse = this.referralService.delete(id)
-    await deleteResponse
-      .then(() => {
-        this.socketService.send(Events.referral.deleted, id)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const deleteResponse = await this.referralService.delete(id)
+    this.socketService.send(Events.referral.deleted, id)
 
     return deleteResponse
   }
@@ -100,17 +86,9 @@ export class ReferralController implements BaseController<Referral, number> {
    * @memberof ReferralController
    */
   @httpPut('/:id')
-  async updateById (@requestParam('id') id: number, @request() request: Request) {
-    const updateResponse = this.referralService.update(id, request.body)
-    await updateResponse
-      .then(() => {
-        const returnObject: Referral = request.body
-        returnObject.id = id
-        this.socketService.send(Events.referral.updated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateById (@requestParam('id') id: number, @requestBody() referral: Referral) {
+    const updateResponse = await this.referralService.update(id, referral)
+    this.socketService.send(Events.referral.updated, updateResponse)
 
     return updateResponse
   }

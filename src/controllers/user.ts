@@ -1,22 +1,23 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import {
   controller,
   httpGet,
   httpDelete,
   httpPut,
   httpPost,
-  request,
   requestParam,
   response,
-  queryParam
+  queryParam,
+  requestBody
 } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { UserService } from '../services/user'
 import { SocketService } from '../services/socket'
-import { Logger } from '@nightwatch/util'
-import { User } from '@nightwatch/db'
+import { User, UserBalance, UserProfile, UserFriend, UserSettings, UserFriendRequest } from '@nightwatch/db'
 import { BaseController } from '../interfaces/BaseController'
+import { validate } from 'class-validator'
+import { UserLevelBalance } from '../models'
 
 /**
  * The user controller. Contains all endpoints for handling users and user data.
@@ -52,8 +53,15 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpGet('/:id')
-  async findById (@requestParam('id') id: string) {
-    return this.userService.findById(id)
+  async findById (@requestParam('id') id: string, @response() response: Response) {
+    const user = await this.userService.findById(id)
+
+    if (!user) {
+      response.sendStatus(404)
+      return
+    }
+
+    return user
   }
 
   /**
@@ -65,17 +73,16 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPost('/')
-  async create (request: Request) {
-    const userResponse = this.userService.create(request.body)
-    await userResponse
-      .then(user => {
-        this.socketService.send(Events.user.created, user)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async create (@requestBody() user: User, @response() res: Response) {
+    const errors = await validate(user, { validationError: { target: false } })
+    if (errors.length > 0) {
+      res.status(400).send(errors)
+      return
+    }
+    const createdUser = await this.userService.create(user)
+    this.socketService.send(Events.user.created, createdUser)
 
-    return userResponse
+    return createdUser
   }
 
   /**
@@ -88,14 +95,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: string) {
-    const deleteResponse = this.userService.delete(id)
-    await deleteResponse
-      .then(() => {
-        this.socketService.send(Events.user.deleted, id)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const deleteResponse = await this.userService.delete(id)
+    this.socketService.send(Events.user.deleted, id)
 
     return deleteResponse
   }
@@ -110,17 +111,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPut('/:id')
-  async updateById (@requestParam('id') id: string, @request() request: Request) {
-    const updateResponse = this.userService.update(id, request.body)
-    await updateResponse
-      .then(() => {
-        const returnObject: User = request.body
-        returnObject.id = id
-        this.socketService.send(Events.user.updated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateById (@requestParam('id') id: string, @requestBody() user: User) {
+    const updateResponse = await this.userService.update(id, user)
+    this.socketService.send(Events.user.updated, updateResponse)
 
     return updateResponse
   }
@@ -135,17 +128,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPut('/:id/level')
-  async updateLevel (@requestParam('id') id: string, @request() request: Request) {
-    const levelResponse = this.userService.updateLevel(id, request.body)
-    await levelResponse
-      .then(() => {
-        const returnObject: any = request.body
-        returnObject.userId = id
-        this.socketService.send(Events.user.levelUpdated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateLevel (@requestParam('id') id: string, @requestBody() levelBalance: UserLevelBalance) {
+    const levelResponse = await this.userService.updateLevel(id, levelBalance)
+    this.socketService.send(Events.user.levelUpdated, levelResponse)
 
     return levelResponse
   }
@@ -160,17 +145,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPut('/:id/balance')
-  async updateBalance (@requestParam('id') id: string, @request() request: Request) {
-    const balanceResponse = this.userService.updateBalance(id, request.body)
-    await balanceResponse
-      .then(() => {
-        const returnObject: any = request.body
-        returnObject.userId = id
-        this.socketService.send(Events.user.balanceUpdated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateBalance (@requestParam('id') id: string, @requestBody() balance: UserBalance) {
+    const balanceResponse = await this.userService.updateBalance(id, balance)
+    this.socketService.send(Events.user.balanceUpdated, balanceResponse)
 
     return balanceResponse
   }
@@ -190,10 +167,10 @@ export class UserController implements BaseController<User, string> {
   async transferBalance (
     @requestParam('id') id: string,
     @requestParam('receiverId') receiverId: string,
-    @request() request: Request,
+    @requestBody() balance: { amount: number },
     @response() response: Response
   ) {
-    const amount = request.body.amount
+    const amount = balance.amount
 
     const fromUser = await this.userService.findById(id)
     const toUser = await this.userService.findById(receiverId)
@@ -252,17 +229,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPut('/:id/profile')
-  async updateProfile (@requestParam('id') id: string, @request() request: Request) {
-    const profileResponse = this.userService.updateProfile(id, request.body)
-    await profileResponse
-      .then(() => {
-        const returnObject: any = request.body
-        returnObject.userId = id
-        this.socketService.send(Events.user.profileUpdated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateProfile (@requestParam('id') id: string, @requestBody() profile: UserProfile) {
+    const profileResponse = await this.userService.updateProfile(id, profile)
+    this.socketService.send(Events.user.profileUpdated, profileResponse)
 
     return profileResponse
   }
@@ -288,17 +257,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPut('/:id/settings')
-  async updateSettings (@requestParam('id') id: string, @request() request: Request) {
-    const settingsResponse = this.userService.updateSettings(id, request.body)
-    await settingsResponse
-      .then(() => {
-        const returnObject: any = request.body
-        returnObject.userId = id
-        this.socketService.send(Events.user.settingsUpdated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async updateSettings (@requestParam('id') id: string, @requestBody() settings: UserSettings) {
+    const settingsResponse = await this.userService.updateSettings(id, settings)
+    this.socketService.send(Events.user.settingsUpdated, settingsResponse)
 
     return settingsResponse
   }
@@ -349,15 +310,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPost('/:id/friends/requests')
-  async createFriendRequest (@requestParam('id') id: string, @request() request: Request) {
-    const response = this.userService.createFriendRequest(id, request.body)
-    await response
-      .then(() => {
-        this.socketService.send(Events.user.friend.request.created, request.body)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async createFriendRequest (@requestParam('id') id: string, @requestBody() friendRequest: UserFriendRequest) {
+    const response = await this.userService.createFriendRequest(id, friendRequest)
+    this.socketService.send(Events.user.friend.request.created, response)
 
     return response
   }
@@ -373,17 +328,11 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/requests/:requestId')
   async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
-    const response = this.userService.deleteFriendRequest(id, requestId)
-    await response
-      .then(() => {
-        this.socketService.send(Events.user.friend.request.deleted, {
-          userId: id,
-          requestId
-        })
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const response = await this.userService.deleteFriendRequest(id, requestId)
+    this.socketService.send(Events.user.friend.request.deleted, {
+      userId: id,
+      requestId
+    })
 
     return response
   }
@@ -446,15 +395,9 @@ export class UserController implements BaseController<User, string> {
    * @memberof UserController
    */
   @httpPost('/:id/friends')
-  async addFriend (@requestParam('id') id: string, @request() request: Request) {
-    const response = this.userService.addFriend(id, request.body)
-    await response
-      .then(() => {
-        this.socketService.send(Events.user.friend.created, request.body)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+  async addFriend (@requestParam('id') id: string, @requestBody() friend: UserFriend) {
+    const response = await this.userService.addFriend(id, friend)
+    this.socketService.send(Events.user.friend.created, response)
 
     return response
   }
@@ -470,17 +413,11 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/:friendId')
   async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
-    const response = this.userService.deleteFriend(id, friendId)
-    await response
-      .then(() => {
-        this.socketService.send(Events.user.friend.deleted, {
-          userId: id,
-          friendId
-        })
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const response = await this.userService.deleteFriend(id, friendId)
+    this.socketService.send(Events.user.friend.deleted, {
+      userId: id,
+      friendId
+    })
 
     return response
   }

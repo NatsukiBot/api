@@ -2,25 +2,21 @@ import { createConnection } from 'typeorm'
 import * as express from 'express'
 import * as path from 'path'
 import { init } from './utilities'
-import { Logger } from '@nightwatch/util'
 import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 import { config } from './config'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
-import { container } from './ioc/ioc'
+import { container } from './ioc/inversify.config'
 import * as cors from 'cors'
 import * as compression from 'compression'
-import * as expressStatusMonitor from 'express-status-monitor'
 import * as errorHandler from 'errorhandler'
 import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import * as mongoMorgan from 'mongo-morgan'
-import * as url from 'url'
-import './ioc/loader'
-const { secret, apiServerIp, debug, mongodb } = require('../api.json')
+import * as winston from 'winston'
+const { secret, apiServerIp } = require('../api.json')
 
 /**
  * The API server
@@ -33,7 +29,9 @@ export class Api {
    * @memberof Api
    */
   constructor () {
-    this.init()
+    this.init().catch(err => {
+      winston.log(err)
+    })
   }
 
   /**
@@ -47,12 +45,9 @@ export class Api {
     return new Api()
   }
 
-  private init () {
-    createConnection()
-      .then(async () => {
-        this.startServer()
-      })
-      .catch(err => Logger.error(err))
+  private async init () {
+    await createConnection()
+    this.startServer()
   }
 
   private startServer () {
@@ -83,35 +78,12 @@ export class Api {
       app.use(helmet())
       app.use(cors())
       app.use(compression())
-      app.use(expressStatusMonitor())
       app.use(
         morgan('tiny', {
           stream: {
-            write: message => Logger.info(message.trim())
+            write: message => winston.info(message.trim())
           }
         })
-      )
-      app.use(
-        mongoMorgan(
-          mongodb,
-          function (tokens: any, req: express.Request, res: express.Response) {
-            const filteredReq = req
-            filteredReq.query = ''
-            filteredReq.originalUrl = url.parse(filteredReq.url).pathname!
-            return [
-              tokens.method(filteredReq, res),
-              tokens.url(filteredReq, res),
-              tokens.status(filteredReq, res),
-              tokens.res(filteredReq, res, 'content-length'),
-              '-',
-              tokens['response-time'](filteredReq, res),
-              'ms'
-            ].join(' ')
-          },
-          {
-            collection: 'logs'
-          }
-        )
       )
       app.use(
         jwt({
@@ -129,8 +101,8 @@ export class Api {
               return jsonwebtoken.sign('GET', secret)
             }
 
-            if (req.headers.authorization && (req.headers.authorization as string).split(' ')[0] === 'Bearer') {
-              return (req.headers.authorization as string).split(' ')[1]
+            if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+              return req.headers.authorization.split(' ')[1]
             } else if (req.query && req.query.token) {
               return req.query.token
             }
@@ -142,13 +114,11 @@ export class Api {
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.error(err)
+        winston.error(err)
         res.status(500).send('Oof! Something went wrong.')
       })
 
-      if (debug === true) {
-        app.use(errorHandler())
-      }
+      app.use(errorHandler())
     })
 
     const app = server.build()
@@ -158,6 +128,6 @@ export class Api {
     const io = socketIo.listen(instance)
     init(io)
 
-    Logger.info(`Express server listening on port ${port}`)
+    winston.info(`Express server listening on port ${port}`)
   }
 }

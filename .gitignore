@@ -8,3 +8,5 @@ ormconfig.json
 logs/
 api.json
 .npmrc
+coverage
+.nyc*
