@@ -2,8 +2,6 @@
 
 > Realtime API for the Nightwatch Discord bot and web interface. Secure, fast, and developer-friendly!
 
-[![Build Status](https://travis-ci.org/Nightwatch/api.svg?branch=master)](https://travis-ci.org/Nightwatch/api)
-
 ## Documentation
 
 Generated documentation can be found here: https://nightwatch.tk/api/docs/ (Currently Unavailable)
