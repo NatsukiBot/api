@@ -15,8 +15,8 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import { Logger } from '@nightwatch/util'
-const { secret, apiServerIp, debug } = require('../api.json')
+import * as winston from 'winston'
+const { secret, apiServerIp } = require('../api.json')
 
 /**
  * The API server
@@ -30,7 +30,7 @@ export class Api {
    */
   constructor () {
     this.init().catch(err => {
-      console.log(err)
+      winston.log(err)
     })
   }
 
@@ -81,7 +81,7 @@ export class Api {
       app.use(
         morgan('tiny', {
           stream: {
-            write: message => Logger.info(message.trim())
+            write: message => winston.info(message.trim())
           }
         })
       )
@@ -114,13 +114,11 @@ export class Api {
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        console.error(err)
+        winston.error(err)
         res.status(500).send('Oof! Something went wrong.')
       })
 
-      if (debug === true) {
-        app.use(errorHandler())
-      }
+      app.use(errorHandler())
     })
 
     const app = server.build()
@@ -130,6 +128,6 @@ export class Api {
     const io = socketIo.listen(instance)
     init(io)
 
-    console.info(`Express server listening on port ${port}`)
+    winston.info(`Express server listening on port ${port}`)
   }
 }
