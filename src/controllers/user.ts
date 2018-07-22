@@ -80,8 +80,8 @@ export class UserController implements BaseController<User, string> {
       return
     }
     const userResponse = this.userService.create(user)
-    const u = await userResponse
-    this.socketService.send(Events.user.created, u)
+    const createdUser = await userResponse
+    this.socketService.send(Events.user.created, createdUser)
 
     return userResponse
   }
@@ -114,8 +114,8 @@ export class UserController implements BaseController<User, string> {
   @httpPut('/:id')
   async updateById (@requestParam('id') id: string, @requestBody() user: User) {
     const updateResponse = this.userService.update(id, user)
-    const u = await updateResponse
-    this.socketService.send(Events.user.updated, u)
+    const updatedUser = await updateResponse
+    this.socketService.send(Events.user.updated, updatedUser)
 
     return updateResponse
   }
