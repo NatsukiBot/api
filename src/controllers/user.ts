@@ -79,11 +79,10 @@ export class UserController implements BaseController<User, string> {
       res.status(400).send(errors)
       return
     }
-    const userResponse = this.userService.create(user)
-    const createdUser = await userResponse
+    const createdUser = await this.userService.create(user)
     this.socketService.send(Events.user.created, createdUser)
 
-    return userResponse
+    return createdUser
   }
 
   /**
@@ -96,7 +95,7 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: string) {
-    const deleteResponse = this.userService.delete(id)
+    const deleteResponse = await this.userService.delete(id)
     this.socketService.send(Events.user.deleted, id)
 
     return deleteResponse
@@ -113,9 +112,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPut('/:id')
   async updateById (@requestParam('id') id: string, @requestBody() user: User) {
-    const updateResponse = this.userService.update(id, user)
-    const updatedUser = await updateResponse
-    this.socketService.send(Events.user.updated, updatedUser)
+    const updateResponse = await this.userService.update(id, user)
+    this.socketService.send(Events.user.updated, updateResponse)
 
     return updateResponse
   }
@@ -131,10 +129,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPut('/:id/level')
   async updateLevel (@requestParam('id') id: string, @requestBody() levelBalance: UserLevelBalance) {
-    const levelResponse = this.userService.updateLevel(id, levelBalance)
-    const returnObject: any = levelBalance
-    returnObject.userId = id
-    this.socketService.send(Events.user.levelUpdated, returnObject)
+    const levelResponse = await this.userService.updateLevel(id, levelBalance)
+    this.socketService.send(Events.user.levelUpdated, levelResponse)
 
     return levelResponse
   }
@@ -150,11 +146,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPut('/:id/balance')
   async updateBalance (@requestParam('id') id: string, @requestBody() balance: UserBalance) {
-    const balanceResponse = this.userService.updateBalance(id, balance)
-
-    const returnObject: any = balance
-    returnObject.userId = id
-    this.socketService.send(Events.user.balanceUpdated, returnObject)
+    const balanceResponse = await this.userService.updateBalance(id, balance)
+    this.socketService.send(Events.user.balanceUpdated, balanceResponse)
 
     return balanceResponse
   }
@@ -237,11 +230,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPut('/:id/profile')
   async updateProfile (@requestParam('id') id: string, @requestBody() profile: UserProfile) {
-    const profileResponse = this.userService.updateProfile(id, profile)
-
-    const returnObject: any = profile
-    returnObject.userId = id
-    this.socketService.send(Events.user.profileUpdated, returnObject)
+    const profileResponse = await this.userService.updateProfile(id, profile)
+    this.socketService.send(Events.user.profileUpdated, profileResponse)
 
     return profileResponse
   }
@@ -268,11 +258,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPut('/:id/settings')
   async updateSettings (@requestParam('id') id: string, @requestBody() settings: UserSettings) {
-    const settingsResponse = this.userService.updateSettings(id, settings)
-
-    const returnObject: any = settings
-    returnObject.userId = id
-    this.socketService.send(Events.user.settingsUpdated, returnObject)
+    const settingsResponse = await this.userService.updateSettings(id, settings)
+    this.socketService.send(Events.user.settingsUpdated, settingsResponse)
 
     return settingsResponse
   }
@@ -324,8 +311,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPost('/:id/friends/requests')
   async createFriendRequest (@requestParam('id') id: string, @requestBody() friendRequest: UserFriendRequest) {
-    const response = this.userService.createFriendRequest(id, friendRequest)
-    this.socketService.send(Events.user.friend.request.created, friendRequest)
+    const response = await this.userService.createFriendRequest(id, friendRequest)
+    this.socketService.send(Events.user.friend.request.created, response)
 
     return response
   }
@@ -341,7 +328,7 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/requests/:requestId')
   async deleteFriendRequest (@requestParam('id') id: string, @requestParam('requestId') requestId: number) {
-    const response = this.userService.deleteFriendRequest(id, requestId)
+    const response = await this.userService.deleteFriendRequest(id, requestId)
     this.socketService.send(Events.user.friend.request.deleted, {
       userId: id,
       requestId
@@ -409,8 +396,8 @@ export class UserController implements BaseController<User, string> {
    */
   @httpPost('/:id/friends')
   async addFriend (@requestParam('id') id: string, @requestBody() friend: UserFriend) {
-    const response = this.userService.addFriend(id, friend)
-    this.socketService.send(Events.user.friend.created, friend)
+    const response = await this.userService.addFriend(id, friend)
+    this.socketService.send(Events.user.friend.created, response)
 
     return response
   }
@@ -426,7 +413,7 @@ export class UserController implements BaseController<User, string> {
    */
   @httpDelete('/:id/friends/:friendId')
   async removeFriend (@requestParam('id') id: string, @requestParam('friendId') friendId: number) {
-    const response = this.userService.deleteFriend(id, friendId)
+    const response = await this.userService.deleteFriend(id, friendId)
     this.socketService.send(Events.user.friend.deleted, {
       userId: id,
       friendId
