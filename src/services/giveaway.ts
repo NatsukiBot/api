@@ -9,14 +9,14 @@ import { injectable } from 'inversify'
  * @class GiveawayService
  */
 @injectable()
-export class GiveawayService implements BaseService<Giveaway> {
+export class GiveawayService implements BaseService<Giveaway, number> {
   private giveawayRepository = getRepository(Giveaway)
 
   public getAll () {
     return this.giveawayRepository.find({ relations: [ 'items' ] })
   }
 
-  public async findById (id: string | number) {
+  public async findById (id: number) {
     return this.giveawayRepository.findOne(id, { relations: [ 'items' ] })
   }
 
@@ -25,11 +25,11 @@ export class GiveawayService implements BaseService<Giveaway> {
     return this.giveawayRepository.save(giveaway)
   }
 
-  public async update (id: string | number, giveaway: Giveaway) {
+  public async update (_: number, giveaway: Giveaway) {
     return this.giveawayRepository.save(giveaway)
   }
 
-  public async delete (id: string | number) {
+  public async delete (id: number) {
     const giveaway = await this.giveawayRepository.findOne(id)
 
     if (!giveaway) {

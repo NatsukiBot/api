@@ -9,7 +9,7 @@ import { injectable } from 'inversify'
  * @class GuildService
  */
 @injectable()
-export class GuildService implements BaseService<Guild> {
+export class GuildService implements BaseService<Guild, string> {
   private guildRepository = getRepository(Guild)
   private suggestionRepository = getRepository(GuildSuggestion)
   private supportTicketRepository = getRepository(GuildSupportTicket)
@@ -20,7 +20,7 @@ export class GuildService implements BaseService<Guild> {
     return this.guildRepository.find()
   }
 
-  public async findById (id: string | number) {
+  public async findById (id: string) {
     return this.guildRepository.findOne(id, {
       relations: [ 'settings', 'suggestions', 'supportTickets' ]
     })
@@ -31,11 +31,11 @@ export class GuildService implements BaseService<Guild> {
     return this.guildRepository.save(guild)
   }
 
-  public update (id: string | number, guild: Guild) {
+  public update (_: string, guild: Guild) {
     return this.guildRepository.save(guild)
   }
 
-  public async delete (id: string | number) {
+  public async delete (id: string) {
     const guild = await this.guildRepository.findOne(id)
 
     if (!guild) {
@@ -49,16 +49,16 @@ export class GuildService implements BaseService<Guild> {
     return this.suggestionRepository.find({ where: { guildId: id } })
   }
 
-  public getSuggestionById (id: string, suggestionId: number) {
+  public getSuggestionById (_: string, suggestionId: number) {
     return this.suggestionRepository.findOne(suggestionId)
   }
 
-  public createSuggestion (id: string, suggestion: GuildSuggestion) {
+  public createSuggestion (_: string, suggestion: GuildSuggestion) {
     suggestion.dateCreated = new Date()
     return this.suggestionRepository.save(suggestion)
   }
 
-  public async deleteSuggestion (id: string, suggestionId: number) {
+  public async deleteSuggestion (_: string, suggestionId: number) {
     const suggestion = await this.suggestionRepository.findOne(suggestionId)
 
     if (!suggestion) {
@@ -68,7 +68,7 @@ export class GuildService implements BaseService<Guild> {
     return this.suggestionRepository.remove(suggestion)
   }
 
-  public async updateSuggestion (id: string, suggestionId: number | string, suggestion: GuildSuggestion) {
+  public async updateSuggestion (_: string, suggestionId: number, suggestion: GuildSuggestion) {
     return this.suggestionRepository.update(suggestionId, suggestion)
   }
 
@@ -76,16 +76,16 @@ export class GuildService implements BaseService<Guild> {
     return this.supportTicketRepository.find({ where: { guild: { id } } })
   }
 
-  public getSupportTicketById (id: string, ticketId: number) {
+  public getSupportTicketById (_: string, ticketId: number) {
     return this.supportTicketRepository.findOne(ticketId)
   }
 
-  public createSupportTicket (id: string, supportTicket: GuildSupportTicket) {
+  public createSupportTicket (_: string, supportTicket: GuildSupportTicket) {
     supportTicket.dateCreated = new Date()
     return this.supportTicketRepository.save(supportTicket)
   }
 
-  public async deleteSupportTicket (id: string, ticketId: number) {
+  public async deleteSupportTicket (_: string, ticketId: number) {
     const ticket = await this.supportTicketRepository.findOne(ticketId)
 
     if (!ticket) {
@@ -95,7 +95,7 @@ export class GuildService implements BaseService<Guild> {
     return this.supportTicketRepository.remove(ticket)
   }
 
-  public async updateSupportTicket (id: string, ticketId: number | string, supportTicket: GuildSupportTicket) {
+  public async updateSupportTicket (_: string, ticketId: number, supportTicket: GuildSupportTicket) {
     return this.supportTicketRepository.update(ticketId, supportTicket)
   }
 
@@ -117,7 +117,7 @@ export class GuildService implements BaseService<Guild> {
     })
   }
 
-  public async createUser (id: string, user: GuildUser) {
+  public async createUser (_: string, user: GuildUser) {
     user.dateJoined = new Date()
     return this.userRepository.save(user)
   }

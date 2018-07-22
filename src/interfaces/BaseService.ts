@@ -1,7 +1,7 @@
-export interface BaseService<T> {
+export interface BaseService<T, IDColumnType> {
   getAll: () => Promise<T[]>
-  findById: (id: string | number) => Promise<T | undefined>
+  findById: (id: IDColumnType) => Promise<T | undefined>
   create: (model: T) => Promise<T>
-  update: (id: string | number, model: T) => Promise<T>
-  delete: (id: string | number) => Promise<T | undefined>
+  update: (id: IDColumnType, model: T) => Promise<T>
+  delete: (id: IDColumnType) => Promise<T | undefined>
 }

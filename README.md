@@ -6,6 +6,12 @@
 
 Generated documentation can be found here: https://nightwatch.tk/api/docs/ (Currently Unavailable)
 
+## Prerequisites
+
+ * Node.js >= 8.9.0
+ * PostgreSQL > 9.0
+ * Redis
+
 ## Installation
 
 1. Clone the repo: `git clone https://github.com/Nightwatch/api.git`
