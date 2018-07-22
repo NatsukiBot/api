@@ -5,7 +5,6 @@ import { SocketService } from '../services/socket'
 import { Referral } from '@nightwatch/db'
 import { ReferralService } from '../services/referral'
 import { BaseController } from '../interfaces/BaseController'
-import { Logger } from '@nightwatch/util'
 
 /**
  * The referral controller. Contains all endpoints for the referral system.
@@ -55,14 +54,8 @@ export class ReferralController implements BaseController<Referral, number> {
    */
   @httpPost('/')
   async create (@requestBody() referral: Referral) {
-    const referralResponse = this.referralService.create(referral)
-    await referralResponse
-      .then(r => {
-        this.socketService.send(Events.referral.created, r)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const referralResponse = await this.referralService.create(referral)
+    this.socketService.send(Events.referral.created, referralResponse)
 
     return referralResponse
   }
@@ -77,14 +70,8 @@ export class ReferralController implements BaseController<Referral, number> {
    */
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: number) {
-    const deleteResponse = this.referralService.delete(id)
-    await deleteResponse
-      .then(() => {
-        this.socketService.send(Events.referral.deleted, id)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const deleteResponse = await this.referralService.delete(id)
+    this.socketService.send(Events.referral.deleted, id)
 
     return deleteResponse
   }
@@ -100,16 +87,8 @@ export class ReferralController implements BaseController<Referral, number> {
    */
   @httpPut('/:id')
   async updateById (@requestParam('id') id: number, @requestBody() referral: Referral) {
-    const updateResponse = this.referralService.update(id, referral)
-    await updateResponse
-      .then(() => {
-        const returnObject: Referral = referral
-        returnObject.id = id
-        this.socketService.send(Events.referral.updated, returnObject)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const updateResponse = await this.referralService.update(id, referral)
+    this.socketService.send(Events.referral.updated, updateResponse)
 
     return updateResponse
   }

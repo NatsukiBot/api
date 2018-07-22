@@ -5,7 +5,6 @@ import { GiveawayService } from '../services/giveaway'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
 import { Giveaway } from '@nightwatch/db'
-import { Logger } from '@nightwatch/util'
 
 /**
  * The Giveaway controller. Contains all endpoints for handling Giveaways.
@@ -55,14 +54,8 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    */
   @httpPost('/')
   async create (@requestBody() giveaway: Giveaway) {
-    const giveawayResponse = this.giveawayService.create(giveaway)
-    await giveawayResponse
-      .then(g => {
-        this.socketService.send(Events.giveaway.created, this.redactKey(g))
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const giveawayResponse = await this.giveawayService.create(giveaway)
+    this.socketService.send(Events.giveaway.created, this.redactKey(giveawayResponse))
 
     return giveawayResponse
   }
@@ -77,14 +70,8 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    */
   @httpDelete('/:id')
   async deleteById (@requestParam('id') id: number) {
-    const deleteResponse = this.giveawayService.delete(id)
-    await deleteResponse
-      .then(() => {
-        this.socketService.send(Events.giveaway.deleted, id)
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const deleteResponse = await this.giveawayService.delete(id)
+    this.socketService.send(Events.giveaway.deleted, id)
 
     return deleteResponse
   }
@@ -100,16 +87,8 @@ export class GiveawayController implements BaseController<Giveaway, number> {
    */
   @httpPut('/:id')
   async updateById (@requestParam('id') id: number, @requestBody() giveaway: Giveaway) {
-    const updateResponse = this.giveawayService.update(id, giveaway)
-    await updateResponse
-      .then(() => {
-        const returnObject: Giveaway = giveaway
-        returnObject.id = id
-        this.socketService.send(Events.giveaway.updated, this.redactKey(returnObject))
-      })
-      .catch((err: any) => {
-        Logger.error(err)
-      })
+    const updateResponse = await this.giveawayService.update(id, giveaway)
+    this.socketService.send(Events.giveaway.updated, this.redactKey(updateResponse))
 
     return updateResponse
   }
