@@ -1,20 +1,10 @@
-import { Request } from 'express'
-import {
-  controller,
-  httpGet,
-  httpDelete,
-  httpPut,
-  httpPost,
-  requestParam,
-  request,
-  requestBody
-} from 'inversify-express-utils'
+import { controller, httpGet, httpDelete, httpPut, httpPost, requestParam, requestBody } from 'inversify-express-utils'
 import { inject } from 'inversify'
 import { Types, Events } from '../constants'
 import { GuildService } from '../services/guild'
 import { SocketService } from '../services/socket'
 import { BaseController } from '../interfaces/BaseController'
-import { Guild, GuildSupportTicket, GuildSettings, GuildUser } from '@nightwatch/db'
+import { Guild, GuildSupportTicket, GuildSettings, GuildUser, GuildSuggestion } from '@nightwatch/db'
 import { Logger } from '@nightwatch/util'
 
 /**
@@ -109,12 +99,11 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPut('/:id')
-  async updateById (@requestParam('id') id: string, @request() request: Request) {
-    const updateResponse = this.guildService.update(id, request.body)
+  async updateById (@requestParam('id') id: string, @requestBody() guild: Guild) {
+    const updateResponse = this.guildService.update(id, guild)
     await updateResponse
       .then(() => {
-        const returnObject: Guild = request.body
-        returnObject.id = id
+        const returnObject: Guild = guild
         this.socketService.send(Events.guild.updated, returnObject)
       })
       .catch((err: any) => {
@@ -161,8 +150,8 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPost('/:id/suggestions')
-  async createSuggestion (@requestParam('id') id: string, @request() request: Request) {
-    const postResponse = this.guildService.createSuggestion(id, request.body)
+  async createSuggestion (@requestParam('id') id: string, @requestBody() suggestion: GuildSuggestion) {
+    const postResponse = this.guildService.createSuggestion(id, suggestion)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.suggestion.created, item)
@@ -188,13 +177,12 @@ export class GuildController implements BaseController<Guild, string> {
   async updateSuggestionById (
     @requestParam('id') id: string,
     @requestParam('suggestionId') suggestionId: number,
-    @request() request: Request
+    @requestBody() suggestion: GuildSuggestion
   ) {
-    const updateResponse = this.guildService.updateSuggestion(id, suggestionId, request.body)
+    const updateResponse = this.guildService.updateSuggestion(id, suggestionId, suggestion)
     await updateResponse
       .then(() => {
-        const returnObject: Guild = request.body
-        returnObject.id = id
+        const returnObject: GuildSuggestion = suggestion
         this.socketService.send(Events.guild.suggestion.updated, returnObject)
       })
       .catch((err: any) => {
@@ -267,8 +255,8 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPost('/:id/support-tickets')
-  async createSupportTicket (@requestParam('id') id: string, request: Request) {
-    const postResponse = this.guildService.createSupportTicket(id, request.body)
+  async createSupportTicket (@requestParam('id') id: string, @requestBody() supportTicket: GuildSupportTicket) {
+    const postResponse = this.guildService.createSupportTicket(id, supportTicket)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.supportTicket.created, item)
@@ -294,12 +282,12 @@ export class GuildController implements BaseController<Guild, string> {
   async updateSupportTicketById (
     @requestParam('id') id: string,
     @requestParam('ticketId') ticketId: number,
-    @request() request: Request
+    @requestBody() supportTicket: GuildSupportTicket
   ) {
-    const updateResponse = this.guildService.updateSupportTicket(id, ticketId, request.body)
+    const updateResponse = this.guildService.updateSupportTicket(id, ticketId, supportTicket)
     await updateResponse
       .then(() => {
-        const returnObject: GuildSupportTicket = request.body
+        const returnObject: GuildSupportTicket = supportTicket
         this.socketService.send(Events.guild.supportTicket.updated, returnObject)
       })
       .catch((err: any) => {
@@ -358,11 +346,11 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPut('/:id/settings')
-  async updateSettingsById (@requestParam('id') id: string, @request() request: Request) {
-    const updateResponse = this.guildService.updateSettings(id, request.body)
+  async updateSettingsById (@requestParam('id') id: string, @requestBody() settings: GuildSettings) {
+    const updateResponse = this.guildService.updateSettings(id, settings)
     await updateResponse
       .then(() => {
-        const returnObject: GuildSettings = request.body
+        const returnObject: GuildSettings = settings
         this.socketService.send(Events.guild.settingsUpdated, returnObject)
       })
       .catch((err: any) => {
@@ -408,8 +396,8 @@ export class GuildController implements BaseController<Guild, string> {
    * @memberof GuildController
    */
   @httpPost('/:id/users')
-  async createUser (@requestParam('id') id: string, @request() request: Request) {
-    const postResponse = this.guildService.createUser(id, request.body)
+  async createUser (@requestParam('id') id: string, @requestBody() user: GuildUser) {
+    const postResponse = this.guildService.createUser(id, user)
     await postResponse
       .then(item => {
         this.socketService.send(Events.guild.user.created, item)
@@ -435,12 +423,12 @@ export class GuildController implements BaseController<Guild, string> {
   async updateUserById (
     @requestParam('id') id: string,
     @requestParam('userId') userId: string,
-    @request() request: Request
+    @requestBody() user: GuildUser
   ) {
-    const updateResponse = this.guildService.updateUser(id, userId, request.body)
+    const updateResponse = this.guildService.updateUser(id, userId, user)
     await updateResponse
       .then(() => {
-        const returnObject: GuildUser = request.body
+        const returnObject: GuildUser = user
         this.socketService.send(Events.guild.user.updated, returnObject)
       })
       .catch((err: any) => {

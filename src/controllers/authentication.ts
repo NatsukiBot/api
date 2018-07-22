@@ -25,6 +25,8 @@ export class AuthenticationController {
     @queryParam('redirect') redirect: string,
     @response() res: Response
   ) {
-    return this.authenticationService.getDiscordAccessToken(code, redirect).catch(() => res.sendStatus(400))
+    return this.authenticationService.getDiscordAccessToken(code, redirect).catch(() => {
+      res.sendStatus(400)
+    })
   }
 }
