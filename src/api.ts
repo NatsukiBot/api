@@ -15,7 +15,6 @@ import * as jwt from 'express-jwt'
 import * as jsonwebtoken from 'jsonwebtoken'
 import * as RateLimit from 'express-rate-limit'
 import * as socketIo from 'socket.io'
-import * as winston from 'winston'
 const { secret, apiServerIp } = require('../api.json')
 
 /**
@@ -30,7 +29,7 @@ export class Api {
    */
   constructor () {
     this.init().catch(err => {
-      winston.log(err)
+      console.error(err)
     })
   }
 
@@ -81,7 +80,7 @@ export class Api {
       app.use(
         morgan('tiny', {
           stream: {
-            write: message => winston.info(message.trim())
+            write: message => console.info(message.trim())
           }
         })
       )
@@ -114,7 +113,7 @@ export class Api {
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
       app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        winston.error(err)
+        console.error(err)
         res.status(500).send('Oof! Something went wrong.')
       })
 
@@ -128,6 +127,6 @@ export class Api {
     const io = socketIo.listen(instance)
     init(io)
 
-    winston.info(`Express server listening on port ${port}`)
+    console.info(`Express server listening on port ${port}`)
   }
 }
