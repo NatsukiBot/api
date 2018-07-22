@@ -56,7 +56,7 @@ export class Api {
       windowMs: 15 * 60 * 1000, // 15 minutes
       max: 150,
       delayMs: 0,
-      skip: (request, response) => {
+      skip: (request, _) => {
         if (apiServerIp === request.ip || request.ip === '::1' || request.ip === '::ffff:127.0.0.1') {
           return true
         }
@@ -112,7 +112,7 @@ export class Api {
 
       app.use('/api', express.static(path.join(__dirname, '../public')))
 
-      app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      app.use((err: any, _: express.Request, res: express.Response, __: express.NextFunction) => {
         console.error(err)
         res.status(500).send('Oof! Something went wrong.')
       })

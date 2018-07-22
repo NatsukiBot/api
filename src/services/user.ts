@@ -10,7 +10,7 @@ import { injectable } from 'inversify'
  * @class UserService
  */
 @injectable()
-export class UserService implements BaseService<User> {
+export class UserService implements BaseService<User, string> {
   private userRepository = getRepository(User)
   private userBalanceRepository = getRepository(UserBalance)
   private userProfileRepository = getRepository(UserProfile)
@@ -22,7 +22,7 @@ export class UserService implements BaseService<User> {
     return this.userRepository.find()
   }
 
-  public async findById (id: string | number) {
+  public async findById (id: string) {
     return this.userRepository.findOne(id, {
       relations: [ 'level', 'settings', 'balance', 'profile' ]
     })
@@ -33,11 +33,11 @@ export class UserService implements BaseService<User> {
     return this.userRepository.save(user)
   }
 
-  public update (id: string | number, user: User) {
+  public update (_: string, user: User) {
     return this.userRepository.save(user)
   }
 
-  public async delete (id: string | number) {
+  public async delete (id: string) {
     const user = await this.userRepository.findOne(id)
 
     if (!user) {
@@ -189,7 +189,7 @@ export class UserService implements BaseService<User> {
     return this.userFriendRequestRepository.save(friendRequest)
   }
 
-  public async deleteFriendRequest (id: string, requestId: number) {
+  public async deleteFriendRequest (_: string, requestId: number) {
     const friendRequest = await this.userFriendRequestRepository.findOne({
       where: { id: requestId }
     })
@@ -269,7 +269,7 @@ export class UserService implements BaseService<User> {
     return acceptedFriends.concat(requestedFriends)
   }
 
-  public async getFriendById (id: string, friendId: number) {
+  public async getFriendById (_: string, friendId: number) {
     return this.userFriendRepository.findOne(friendId)
   }
 
@@ -303,7 +303,7 @@ export class UserService implements BaseService<User> {
     return this.userFriendRepository.save(friend)
   }
 
-  public async deleteFriend (id: string, friendId: number) {
+  public async deleteFriend (_: string, friendId: number) {
     const friend = await this.userFriendRepository.findOne(friendId)
 
     if (!friend) {
