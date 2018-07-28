@@ -37,7 +37,7 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@nightwatch/db": "^0.12.2",
+    "@nightwatch/db": "^0.13.0",
     "accesscontrol": "^2.2.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.1",
